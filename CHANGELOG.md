@@ -1,5 +1,11 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.6.0 — 26 Kasım 2026
+
+- **Uzaylı +1 yasası** (`AlienSucc.lean`): `alien_succ_law` ve `alien_add_law`. Ayrıca aritmetiğin temel teoreminin varlık yarısı (`eval_vec`); teklik yarısı AlienBridge'de olduğundan sayılar ile harf vektörleri arasındaki eşleme artık tam.
+- **Uzaylı toplama makinesi** (`code/sigma/alien_adder.py`): indis tablosuyla n+1'in küçük harflerini doğrusal formlarla buluyor; n < 10⁵ için hatasız.
+- **Belge** `docs/06-toplama.md`: Canon Arithmeticus benzetmesi ve zorluğun korunumu. Harf notasyonunda +1'in zorluğu, çarpanlara ayırmanın zorluğuyla aynı.
+
 ## v1.5.0 — 26 Kasım 2026
 
 - **Uzaylı notasyonu Lean'de** (`AlienNotation.lean`): sayılar harf üs vektörü; çarpma = toplama, σ = kaydırma. Çarpımsallık, tek sayı yasası, birebirlik, çok-mükemmel sayının yokluğu ve "her sayı yalnızdır" teoremlerinin her biri 1–4 satır.

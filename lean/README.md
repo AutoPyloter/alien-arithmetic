@@ -142,6 +142,16 @@ Aynı teoremler ConcreteSigma.lean'de insan notasyonuyla 40–70 satır tutuyor.
 
 **Ölçüm:** Köprü yaklaşık 220 satır; bir kez yazılıyor. Aktarım bölümü 4 teorem için yaklaşık 35 satır. Yeni bir çarpımsal teorem için gereken iş artık yalnızca uzaylı ispatı (1–4 satır) ve köprüden geçiş (3–5 satır).
 
+## AlienSucc.lean — uzaylının +1 yasası (v1.6.0)
+
+| Teorem | İçerik |
+|---|---|
+| `eval_vec` | Aritmetiğin temel teoremi, varlık: n = ∏ (P i)^(vec n i) |
+| `alien_succ_law` | p ∣ n+1 ⇔ ∏ (P i mod p)^(vᵢ) ≡ p−1 (mod p) |
+| `alien_add_law` | p ∣ a+b ⇔ kalıntı(a) + kalıntı(b) ≡ 0 (mod p) |
+
+Ayrıntı: [`docs/06-toplama.md`](../docs/06-toplama.md).
+
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
 - `Ascent.lean`: Tırmanış yasası. T^L(2^L·u − 1) = 3^L·u − 1 (u tek), burada T(n) = (3n+1)/2 ya da n/2.

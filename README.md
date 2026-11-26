@@ -73,6 +73,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [3. σ-ikizleri](docs/03-sigma-ikizleri.md) | 22 terimin çarpanlarıyla tam tablosu, yöntem, model |
 | [4. Aliquot dizileri](docs/04-aliquot.md) | İnsan/uzaylı karşılaştırması, döngüler, dinamik |
 | [5. Açık problemler](docs/05-acik-problemler.md) | Katkıya açık sorular ve "duvar merdiveni" |
+| [6. Uzaylı toplama (+1)](docs/06-toplama.md) | İndis tabloları, doğrusal +1 yasası, zorluğun korunumu |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents
