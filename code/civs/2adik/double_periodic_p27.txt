@@ -1,0 +1,14 @@
+p <= 27: cift periyodik donguler
+ p= 1 m= 0 kelime=0 payda=1 x=0  Q(x)=0  Q(Q(x)) paydasi 1 haneli
+ p= 1 m= 1 kelime=1 payda=1 x=-1  Q(x)=-1  Q(Q(x)) paydasi 1 haneli
+ p= 2 m= 1 kelime=01 payda=1 x=2  Q(x)=-2/3  Q(Q(x)) paydasi 1 haneli
+ p= 3 m= 2 kelime=011 payda=1 x=-10  Q(x)=-6/7  Q(Q(x)) paydasi 1 haneli
+ p=11 m= 7 kelime=00011110111 payda=1 x=-136  Q(x)=-1912/2047  Q(Q(x)) paydasi 60 haneli
+ p=12 m= 6 kelime=000001101111 payda=91 x=800/91  Q(x)=-1312/1365  Q(Q(x)) paydasi 14 haneli
+ p=12 m= 6 kelime=001010110101 payda=91 x=236/91  Q(x)=-44/65  Q(Q(x)) paydasi 7 haneli
+ p=20 m= 8 kelime=00000000101100110111 payda=41 x=256/41  Q(x)=-323328/349525  Q(Q(x)) paydasi 138 haneli
+ p=24 m=12 kelime=000000101011100101011111 payda=455 x=6592/455  Q(x)=-5474752/5592405  Q(Q(x)) paydasi 145 haneli
+ p=24 m=15 kelime=000011110011111101101101 payda=13 x=2096/13  Q(x)=-11992304/16777215  Q(Q(x)) paydasi 135 haneli
+ p=24 m=12 kelime=000100110011111000110011 payda=65 x=232/65  Q(x)=-1489032/1864135  Q(Q(x)) paydasi 145 haneli
+ p=27 m=12 kelime=000000101111011000100011101 payda=511 x=1472/511  Q(x)=-96759616/134217727  Q(Q(x)) paydasi 8762 haneli
+ p=27 m=12 kelime=000001011001001011000101111 payda=511 x=3296/511  Q(x)=-128141728/134217727  Q(Q(x)) paydasi 8777 haneli

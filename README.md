@@ -76,6 +76,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [6. Uzaylı toplama (+1)](docs/06-toplama.md) | İndis tabloları, doğrusal +1 yasası, zorluğun korunumu |
 | [7. Altın uygarlık](docs/07-altin-uygarlik.md) | Fibonacci notasyonu, ×φ kaydırması, altın Sophie Germain çiftleri |
 | [8. Yankı ve ritim](docs/08-yanki-ritim.md) | Kalıntı sistemi, Goldbach eleği, yalnız koşucu taraması |
+| [9. 2-adik uygarlık](docs/09-2adik.md) | Collatz'ın sonsuz-sol görünümü, parite vektörü bijeksiyonu (Lean) |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents
