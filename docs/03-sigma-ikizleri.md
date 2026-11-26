@@ -39,7 +39,14 @@ Tüm liste: [`data/shift_twins_to_1e11.txt`](../data/shift_twins_to_1e11.txt)
 2. **Kesin kontrol:** Adaylar iki büyük asal modül (2³¹−1 ve 2147483629) üzerinden tam hesapla doğrulanır. Sonraki asal, Miller–Rabin ile bulunur.
 3. **Altyapı:** Google Colab, Numba.
 
-Lean'de ayrıca kontrol edildi: `twins_ok` (22 terim) ve `twins_complete_3000` (3000'e kadar liste tam).
+## Tamlığın doğrulanması
+
+| Aralık | Yöntem | Güvence |
+|---|---|---|
+| 10⁶ | Lean: doğruluğu ispatlı hızlı σ (`sigmaFast_eq`) + `twins_complete_1e6` | makinece denetlenmiş algoritma, derlenmiş hesap |
+| 10¹¹ | İki bağımsız uygulama (Numba/float log; C/tam sayı aralıkları) | aynı 22 terim |
+
+Ayrıntılar: [`code/verify/README.md`](../code/verify/README.md).
 
 ## Model ve sanı
 

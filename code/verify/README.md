@@ -34,6 +34,20 @@ Orijinal Numba taramasından farklı bir yöntem kullanıyor:
 
 **G varsayımı:** q < 10¹¹ için ardışık asallar arasındaki en büyük boşluk 464'tür (Nicely'nin maksimal asal boşluk tabloları). Güvenlik payı olarak G = 1000 kullanılıyor. Bu varsayım yalnızca filtreyi etkiliyor.
 
+### Sonuç
+
+| Aralık | Aday | İkiz | Orijinal tarama ile |
+|---|---|---|---|
+| 10⁸ | 524 875 | 18 | aynı |
+| 10⁹ | 1 441 576 | 20 | aynı |
+| 10¹¹ | 13 733 530 | 22 | **aynı (22 terim, birebir)** |
+
+10¹¹ taraması Google Colab'de 8 çekirdekte yaklaşık 55 dakika sürdü. Çıktı: [`data/twins_c_1e11_output.txt`](../../data/twins_c_1e11_output.txt). Birbirinden farklı yöntemlerle çalışan iki uygulama aynı listeyi veriyor:
+- Orijinal tarama: Numba, kayan noktalı log filtresi, iki büyük asal modülde kontrol.
+- Bağımsız tarama: C, tam sayı aralıkları, Miller–Rabin ve deneme bölmesi.
+
+Ayrıca 10⁶'ya kadar Lean sertifikası da aynı 15 terimi veriyor.
+
 ```bash
 gcc -O3 -march=native -fopenmp twins_c.c -o twins_c -lm
 ./twins_c 100000000000

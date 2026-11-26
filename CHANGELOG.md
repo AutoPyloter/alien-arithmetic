@@ -1,5 +1,12 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.3.0 — 26 Kasım 2026
+
+- **σ-ikizi tamlık sertifikası (Katman 1, Lean):**
+  - `FastSigma.lean`: hızlı σ'nın gerçek σ'ya eşit olduğu koşulsuz ispatlandı (`sigmaFast_eq`). Kareköke kadar asallık testi, en küçük bölen ve sınırlı arama yapan sonraki asal kullanılıyor.
+  - `TwinCertificate.lean`: `twins_complete_1e6`, yani 1 ≤ n ≤ 10⁶ için gerçek σ'nın ikizleri tam olarak 15 sayı.
+- **Bağımsız tekrar üretim (Katman 2):** `code/verify/twins_c.c`, kayan nokta kullanmayan tam sayı aralıklı bir C tarayıcısı. 10¹¹'e kadar orijinal taramayla aynı 22 terimi buldu (13,7 milyon aday, 8 çekirdekte 55 dakika).
+
 ## v1.2.0 — 26 Kasım 2026
 
 - **Her sayı yalnızdır** Lean'de ispatlandı: `sigma_ratio_inj`, yani σ(a)·b = σ(b)·a ⇒ a = b. Karşıt yönüyle birlikte `sigma_ratio_iff`.

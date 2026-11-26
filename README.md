@@ -32,7 +32,7 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 6 | σ(n+1)/σ(n) her ε için pozitif yoğunlukta (1−ε, 1+ε) içinde | İspat (analitik) |
 | 7 | σ(n) mod q, (Z/q)* üzerinde eşit dağılır (p ∤ n) | İspat (Halász) |
 | 8 | (σ(n), σ(n+1)) mod q ortak dağılımı | Hipotez H'ye koşullu (Tao 2016) |
-| 9 | σ-ikizleri σ(n+1) = σ(n) + 2: 10¹¹'e kadar tam 22 tane | Hesap (formal değil); 3000'e kadar tamlık Lean'de (native_decide) |
+| 9 | σ-ikizleri σ(n+1) = σ(n) + 2: 10¹¹'e kadar tam 22 tane | 10⁶'ya kadar Lean sertifikası; 10¹¹'e kadar iki bağımsız uygulama (Numba + C) aynı listeyi veriyor |
 | 10 | s(n) = σ(n) − n: sabit nokta ve 2-döngü yok, her döngü çift uzunlukta | İspat + Lean |
 | 11 | 10⁷'ye kadar yalnız iki döngü: (12, 33, 32, 211) ve bir 12-döngü | Hesap |
 | 12 | σ(n)/n ortalaması ≈ 4,128; d{σ(n) > 2n} ≈ 0,536 | Hesap / sezgisel |
