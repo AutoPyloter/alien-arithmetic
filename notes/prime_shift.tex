@@ -13,11 +13,11 @@
 
 \title{Neighbouring values and aliquot dynamics of the prime shift map}
 \author{Abdulkadir \"Ozcan}
-\date{November 26, 2026}
+\date{November 26, 2026 (v1.4.0)}
 
 \begin{document}
 \begin{abstract}
-Let $\s$ be the completely multiplicative function that replaces every prime factor of $n$ by the next prime (OEIS A003961). We study $\s$ at consecutive integers and the aliquot-type map $s(n)=\s(n)-n$. We prove that $\s(n+1)-\s(n)$ is always even and never divisible by $3$, that $\s$ and $n\mapsto \s(n)/n$ are injective, and that $n\mid \s(n)$ only for $n=1$. The set of $n$ with $\s(n+1)>\s(n)$ has natural density exactly $1/2$, and for every $\varepsilon>0$ the ratio $\s(n+1)/\s(n)$ lies in $(1-\varepsilon,1+\varepsilon)$ on a set of positive density. For a prime $p$ with next prime $q$, the residues of $\s(n)$ modulo $q$ are equidistributed in $(\mathbb Z/q)^\times$ over $p\nmid n$. The joint distribution of $(\s(n),\s(n+1))$ modulo $q$, in logarithmic density, follows from Tao's two-point logarithmic Elliott theorem conditionally on a hypothesis on residue changes of consecutive primes. We list all $22$ solutions of $\s(n+1)=\s(n)+2$ below $10^{11}$. For $s$ we show that there are no fixed points or $2$-cycles and that every cycle has even length. Up to $10^7$ every orbit reaches $1$ or one of two cycles, of lengths $4$ and $12$. The algebraic core of the structural results is formally verified in Lean~4.
+Let $\s$ be the completely multiplicative function that replaces every prime factor of $n$ by the next prime (OEIS A003961). We study $\s$ at consecutive integers and the aliquot-type map $s(n)=\s(n)-n$. We prove that $\s(n+1)-\s(n)$ is always even and never divisible by $3$, that $\s$ and $n\mapsto \s(n)/n$ are injective, and that $n\mid \s(n)$ only for $n=1$. The set of $n$ with $\s(n+1)>\s(n)$ has natural density exactly $1/2$, and for every $\varepsilon>0$ the ratio $\s(n+1)/\s(n)$ lies in $(1-\varepsilon,1+\varepsilon)$ on a set of positive density. For a prime $p$ with next prime $q$, the residues of $\s(n)$ modulo $q$ are equidistributed in $(\mathbb Z/q)^\times$ over $p\nmid n$. The joint distribution of $(\s(n),\s(n+1))$ modulo $q$, in logarithmic density, follows from Tao's two-point logarithmic Elliott theorem conditionally on a hypothesis on residue changes of consecutive primes. We list all $22$ solutions of $\s(n+1)=\s(n)+2$ below $10^{11}$. For $s$ we show that there are no fixed points or $2$-cycles and that every cycle has even length. Up to $10^7$ every orbit reaches $1$ or one of two cycles, of lengths $4$ and $12$. All structural results are formally verified in Lean~4 for the actual function $\s$. So are the finite core of the density theorem (exactly half of the up-steps at every even truncation level) and the completeness of the twin list up to $10^6$. The density theorem itself has an elementary proof via the Littlewood--Offord lemma, which avoids L\'evy's purity law.
 \end{abstract}
 
 \maketitle
@@ -65,18 +65,41 @@ For the classical divisor sum, the existence of odd perfect numbers and the soli
 
 \section{Neighbouring values}
 
-\begin{theorem}\label{thm:half}
-The pair $(F(n),F(n+1))$ has a limiting distribution, and the distribution of $F(n+1)-F(n)$ is symmetric and atomless. Consequently:
-\begin{enumerate}
-\item[(a)] $\{n:\s(n+1)>\s(n)\}$ has natural density $1/2$;
-\item[(b)] for every $\varepsilon>0$, $\{n: |\s(n+1)/\s(n)-1|<\varepsilon\}$ has positive natural density.
-\end{enumerate}
-\end{theorem}
-\begin{proof}[Sketch]
-Truncate at $y$. The contribution of primes $\le y$ to $(F(n),F(n+1))$ depends only on $n$ modulo $W=\prod_{\ell\le y}\ell^{k}$. By \eqref{eq:tail} the tail has mean $\le 4/y$ and is negligible. By the Chinese remainder theorem the truncated difference is a sum of independent variables $X_\ell$. The involution $n\mapsto -n-1$ of $\mathbb Z/W$ swaps the conditions $d\mid n$ and $d\mid n+1$, so the law is symmetric. Since $\Pr(X_\ell\ne0)\asymp 2/\ell$ and $\sum 2/\ell=\infty$, L\'evy's purity law shows that the limit has no atoms. This gives (a), because $\log(1+1/n)\to0$.
-
-For (b), take a residue class with $n\equiv2\pmod 4$. In this class each prime of a finite set $S$ of odd primes divides $n+1$ exactly once, where $|\sum_{\ell\in S}F(\ell)-\log\frac32|<\varepsilon/4$; this is possible because $\sum F(\ell)$ diverges with terms tending to $0$. All other primes $\le y$ divide neither $n$ nor $n+1$. Markov's inequality controls the tail on half of the class.
+\begin{lemma}[finite symmetry; Lean]\label{lem:finite}
+Let $W$ be even and $R_W(n)=\s(g)/g$ with $g=\gcd(n,W)$. Then
+\[
+\#\{0\le r<W:\ R_W(r+1)>R_W(r)\}=\#\{0\le r<W:\ R_W(r+1)<R_W(r)\}=W/2 .
+\]
+\end{lemma}
+\begin{proof}
+The involution $r\mapsto W-1-r$ of $\{0,\dots,W-1\}$ satisfies $\gcd(W-1-r,W)=\gcd(r+1,W)$ and $\gcd(W-r,W)=\gcd(r,W)$, so it exchanges up-steps and down-steps. There are no ties: $\gcd(r,W)$ and $\gcd(r+1,W)$ are coprime, so by Theorem~\ref{thm:inj}(c) equal ratios would force both to be $1$; but one of $r,r+1$ is even and $2\mid W$.
 \end{proof}
+
+The same argument gives $\s(n+1)/(n+1)\neq\s(n)/n$ for every $n\ge1$.
+
+\begin{theorem}\label{thm:half}
+\begin{enumerate}
+\item[(a)] $\{n:\s(n+1)>\s(n)\}$ has natural density $1/2$.
+\item[(b)] For every $\varepsilon>0$, $\{n: |\s(n+1)/\s(n)-1|<\varepsilon\}$ has positive natural density.
+\end{enumerate}
+More precisely, with $Z(n)=\log\s(n+1)-\log\s(n)$, the upper density of $\{n:|Z(n)|<\eta\}$ is $\ll(\log\log(1/\eta))^{-1/2}$ as $\eta\to0$.
+\end{theorem}
+\begin{proof}
+Fix $y$ and $k$ and put $W=\prod_{\ell\le y}\ell^k$. Write $Z(n)=Z_W(n)+T(n)+\log\frac{n+1}{n}$. Here $Z_W(n)=\log R_W(n+1)-\log R_W(n)$ depends only on $n\bmod W$, and the tail $T(n)$ collects primes $>y$ and the parts of exponents beyond $k$.
+
+\emph{Tail.} By \eqref{eq:tail}, $T$ has mean $O(1/y+2^{-k})$, so Markov's inequality gives $\overline{d}\{|T|\ge\eta\}=O\bigl((1/y+2^{-k})/\eta\bigr)$.
+
+\emph{Anti-concentration.} By the Chinese remainder theorem, the distribution of $Z_W$ over one period equals that of $\sum_{\ell\le y}X_\ell$ with independent $X_\ell$. Each $X_\ell$ is symmetric: $\ell^v\,\|\,n$ and $\ell^v\,\|\,n+1$ have the same density. Conditional on the set of active primes ($X_\ell\neq0$) and their magnitudes, the signs are independent fair coins. Let $m$ be the number of active $\ell$ with $|X_\ell|\ge 2\eta$. By Erd\H{o}s's Littlewood--Offord lemma (Sperner's theorem), the conditional probability that the sum lies in an interval of length $4\eta$ is at most $\binom{m}{\lfloor m/2\rfloor}2^{-m}\le m^{-1/2}$. Primes $\ell\le 1/\eta$ satisfy $\log(\nx\ell/\ell)\ge 2\eta$ up to a constant factor, and are active with probability $\asymp 1/\ell$. So $m$ is a sum of independent indicators with mean $\asymp\log\log(1/\eta)$, and
+\[
+d\{|Z_W|<2\eta\}\ll \mathbb E\min(1,m^{-1/2})\ll(\log\log(1/\eta))^{-1/2}.
+\]
+
+\emph{Conclusion.} The truth of $Z(n)>0$ differs from that of $Z_W(n)>0$ only if $|T(n)|\ge\eta$ or $|Z_W(n)|<\eta+1/n$. By Lemma~\ref{lem:finite}, the density of $\{Z_W>0\}$ is exactly $1/2$. Letting $y,k\to\infty$ and then $\eta\to0$ proves (a) and the quantitative bound.
+
+For (b), take a residue class with $n\equiv2\pmod 4$. Let $S$ be a finite set of odd primes with $|\sum_{\ell\in S}F(\ell)-\log\frac32|<\varepsilon/4$; this exists because $\sum F(\ell)$ diverges with terms tending to $0$. In the class, each prime of $S$ divides $n+1$ exactly once, and all other primes $\le y$ divide neither $n$ nor $n+1$. Markov's inequality controls the tail on half of the class.
+\end{proof}
+
+Compared with the usual route (Erd\H{o}s--Wintner joint distribution plus L\'evy's purity law), this proof uses only the Chinese remainder theorem, Bertrand's postulate, Markov's inequality and the Littlewood--Offord lemma. The absence of ties comes from Theorem~\ref{thm:inj}(c).
 
 Numerically, the proportion in (a) is $0.49997$, $0.49997$ and $0.50005$ on blocks of $4\cdot10^6$ consecutive integers near $10^4$, $10^6$ and $10^8$. The proportion in (b) for $\varepsilon=0.01$ is $0.0052$--$0.0054$.
 
@@ -132,7 +155,13 @@ Call $n$ a \emph{shift twin} if $\s(n+1)=\s(n)+2$. An exhaustive search up to $1
 \begin{quote}
 1, 2, 14, 25, 94, 142, 214, 445, 574, 1131, 2596, 39224, 142708, 145863, 181234, 6915166, 17768443, 79906755, 107246955, 811937494, 2573316475, 76516058733.
 \end{quote}
-For example, $\s(14)=3\cdot11=33$ and $\s(15)=5\cdot7=35$. The search used a rigorous logarithmic filter. Candidate pairs were then checked exactly modulo two primes near $2^{31}$, with an in-kernel Miller--Rabin \emph{nextprime}.
+For example, $\s(14)=3\cdot11=33$ and $\s(15)=5\cdot7=35$. Completeness is supported at three levels:
+\begin{itemize}
+\item \emph{Up to $10^6$, formally:} a fast $\s$ is proved equal to $\s$ in Lean, and the scan is run with \texttt{native\_decide} (theorem \texttt{twins\_complete\_1e6}).
+\item \emph{Up to $10^{11}$, original search:} a floating-point logarithmic filter, followed by exact checks modulo two primes near $2^{31}$.
+\item \emph{Up to $10^{11}$, independent search:} a C program using exact integer intervals $\s(n)\in[S(q+1),S(q+G)]$. Here $S$ is the smooth part and $G=1000$ exceeds the maximal prime gap below $10^{11}$. Its $13.7$ million candidates were resolved with deterministic Miller--Rabin.
+\end{itemize}
+Both searches return the same $22$ terms.
 
 The singular-series model of Theorem~\ref{thm:twopt} gives a local factor $\mathfrak S\approx1.905$ for $d=2$. Combined with the density $f(0)$ of $F(n+1)-F(n)$ at $0$, it predicts $\#\{n\le N\}\sim c\log N$ with $c\approx0.55$. The model predicts $7.6\pm2.8$ twins in $[10^5,10^{11}]$; $10$ are observed.
 
@@ -167,7 +196,13 @@ Two related constants: the mean value of $\s(n)/n$ is $\prod_\ell(1-1/\ell)/(1-\
 
 \section{Formal verification}
 
-Lemma~\ref{lem:div}, Theorems~\ref{thm:W1}, \ref{thm:inj}(a,b) and~\ref{thm:aliq}, the symmetry step and the Bertrand step in the proof of Theorem~\ref{thm:half} are proved in core Lean~4.15, without Mathlib and without \texttt{sorry}. The proofs are stated for any completely multiplicative function taking each prime to the next prime. The list of twins up to $3000$, the $22$ twins and the two cycles are checked by \texttt{native\_decide}. The analytic inputs (Hal\'asz, Maynard, Tao, L\'evy) are not formalized.
+All Lean files use core Lean~4.15, without Mathlib and without \texttt{sorry}. Except where \texttt{native\_decide} is mentioned, the theorems listed below depend only on the standard axioms \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}.
+\begin{itemize}
+\item \texttt{ConcreteSigma.lean}: defines the actual $\s$ via least prime factor and next prime, with Euclid's bound $p!+1$. It proves complete multiplicativity (the key lemma: $\s(n)=\nx p\,\s(n/p)$ for \emph{every} prime $p\mid n$), hence \texttt{Shift sigma nextP}. Lemma~\ref{lem:div}, Theorems~\ref{thm:W1}, \ref{thm:inj}(a,b,c) and~\ref{thm:aliq} are thereby established for the actual function.
+\item \texttt{FastSigma.lean}, \texttt{TwinCertificate.lean}: a fast $\s$ proved equal to $\s$, and twin completeness up to $10^6$. The last step uses \texttt{native\_decide}, i.e.\ it trusts the compiler.
+\item \texttt{DensitySymmetry.lean}: Lemma~\ref{lem:finite} and $\s(n+1)/(n+1)\ne\s(n)/n$.
+\end{itemize}
+Not formalized: the limiting steps of Theorem~\ref{thm:half}, and Theorems~\ref{thm:onept} and~\ref{thm:twopt} (Hal\'asz, Maynard, Tao).
 
 \section{Open problems}
 \begin{enumerate}
