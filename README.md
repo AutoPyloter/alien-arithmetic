@@ -32,7 +32,7 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 6 | σ(n+1)/σ(n) her ε için pozitif yoğunlukta (1−ε, 1+ε) içinde | İspat (analitik) |
 | 7 | σ(n) mod q, (Z/q)* üzerinde eşit dağılır (p ∤ n) | İspat (Halász) |
 | 8 | (σ(n), σ(n+1)) mod q ortak dağılımı | Hipotez H'ye koşullu (Tao 2016) |
-| 9 | σ-ikizleri σ(n+1) = σ(n) + 2: 10¹¹'e kadar tam 22 tane | Hesap |
+| 9 | σ-ikizleri σ(n+1) = σ(n) + 2: 10¹¹'e kadar tam 22 tane | Hesap (formal değil); 3000'e kadar tamlık Lean'de (native_decide) |
 | 10 | s(n) = σ(n) − n: sabit nokta ve 2-döngü yok, her döngü çift uzunlukta | İspat + Lean |
 | 11 | 10⁷'ye kadar yalnız iki döngü: (12, 33, 32, 211) ve bir 12-döngü | Hesap |
 | 12 | σ(n)/n ortalaması ≈ 4,128; d{σ(n) > 2n} ≈ 0,536 | Hesap / sezgisel |
@@ -77,8 +77,10 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 
 ## İçerik / Contents
 
-- `lean/` — Lean 4.15 (core, Mathlib yok) formal ispatlar. `Sigma.lean` σ teoremlerini içerir; `sorry` yok.
-  Derleme: `lean Sigma.lean`
+- `lean/` — Lean 4.15 (core, Mathlib yok) formal ispatlar, `sorry` yok.
+  - `Sigma.lean`: soyut `Shift` yapısı için teoremler.
+  - `ConcreteSigma.lean`: **gerçek σ'nın** bu yapıyı sağladığının ispatı (`shift_sigma`). "İspat + Lean" etiketli sonuçlar gerçek σ için kernel tarafından denetleniyor.
+  - Ayrıntı: [`lean/README.md`](lean/README.md)
 - `docs/` — ayrıntılı Türkçe belgeler (yukarıdaki tablo)
 - `code/sigma/` — σ-ikizi aramaları, aliquot taramaları, uzaylı işlemleri (⊛, ∂); bkz. [`code/README.md`](code/README.md)
 - `code/exploration/` — ilk keşif betikleri (Collatz, Goldbach, parite, Liouville vb.)

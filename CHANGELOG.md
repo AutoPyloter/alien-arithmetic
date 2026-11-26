@@ -1,5 +1,12 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.1.0 — 26 Kasım 2026
+
+- **Lean köprüsü:** `lean/ConcreteSigma.lean` eklendi. Gerçek σ tanımlandı (`minFac`, `nextP`, `sigma`) ve `Shift sigma nextP` ispatlandı. Soyut teoremler (W1, TA, birebirlik, mükemmel/dost sayı yokluğu, döngü uzunluğu) artık gerçek σ için kernel tarafından denetleniyor.
+- Aksiyom denetimi: yalnızca `propext`, `Classical.choice`, `Quot.sound`.
+- `sig_agrees_3000` ve `twins_complete_3000_real` (native_decide): hızlı uygulama ile gerçek σ 3000'e kadar aynı.
+- README: σ-ikizi tamlığının 10¹¹'e kadar hesaba, 3000'e kadar Lean'e dayandığı açıkça yazıldı.
+
 ## v1.0.0 — 26 Kasım 2026
 
 İlk herkese açık sürüm.

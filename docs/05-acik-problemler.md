@@ -8,7 +8,8 @@ Katkılara açık. Bir ilerleme kaydederseniz lütfen bir issue açın.
 4. **Her s-yörüngesi sınırlı mı?**
 5. **f(0) sabiti:** F(n+1) − F(n) dağılımının 0'daki yoğunluğu kesin olarak hesaplanabilir mi? Bu, σ-ikizi sabiti c'yi verir.
 6. **Formalizasyon:**
-   - Gerçek σ'nın (eşsiz çarpanlara ayırma ile) `Shift` yapısını sağladığının Lean ispatı.
+   - ~~Gerçek σ'nın `Shift` yapısını sağladığının Lean ispatı.~~ **Tamamlandı (v1.1.0, `ConcreteSigma.lean`).**
+   - σ-ikizi listesinin 10¹¹'e kadar tamlığının formal sertifikası (şu an 3000'e kadar).
    - Teorem 2.5'in (her sayı yalnızdır) Lean ispatı.
    - Mathlib ile Teorem 3.1'in tam formalizasyonu.
 

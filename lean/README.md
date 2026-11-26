@@ -7,7 +7,8 @@
 
 ```bash
 # Lean 4.15.0 kurulu olmalı (elan ile: elan default leanprover/lean4:v4.15.0)
-lean Sigma.lean
+lean -o Sigma.olean Sigma.lean                                   # soyut teoremler
+LEAN_PATH=.:$(lean --print-prefix)/lib/lean lean ConcreteSigma.lean   # gerçek σ köprüsü
 ```
 
 Çıktının sonunda her teoremin kullandığı aksiyomlar yazdırılır (`#print axioms`).
@@ -32,9 +33,41 @@ lean Sigma.lean
 | `twins_ok`, `twins_complete_3000` | 22 σ-ikizi doğru; 3000'e kadar liste tam | Lean.ofReduceBool (native_decide) |
 | `cycle4_ok`, `cycle12_ok` | iki aliquot döngüsü doğru | Lean.ofReduceBool |
 
-**Kapsam notu:**
-- Gerçek σ'nın `Shift` yapısını sağladığı (eşsiz çarpanlara ayırma) burada ispatlanmadı.
-- `native_decide` ile yapılan kontroller derleyiciye güvenir; çekirdek ispatı değildir.
+**Kapsam notu:** `native_decide` ile yapılan kontroller derleyiciye güvenir; çekirdek ispatı değildir.
+
+## ConcreteSigma.lean — gerçek σ ve Shift köprüsü (v1.1.0)
+
+Sigma.lean'deki teoremler soyut `Shift S sh` yapısı için ispatlanmıştı. Bu dosya, **gerçek** asal kaydırma fonksiyonunu tanımlar ve yapıyı sağladığını kanıtlar. Böylece bütün soyut teoremler doğrudan gerçek σ için geçerli olur.
+
+**Tanımlar** (hepsi hesaplanabilir; aksiyom ya da `noncomputable` yok):
+
+| Tanım | İçerik |
+|---|---|
+| `minFac n` | 2'den yukarı tarayarak bulunan en küçük bölen |
+| `nextP p` | p'den büyük en küçük asal. Tarama sınırı p! + 1, varlığı Öklid argümanıyla ispatlı (`exists_prime_gt`) |
+| `sigma n` | σ(0) = 0, σ(1) = 1; n ≥ 2 için σ(n) = nextP(minFac n) · σ(n / minFac n) |
+
+**İspat zinciri:**
+
+| Teorem | İçerik |
+|---|---|
+| `primeB_iff` | Karar verilebilir asallık testi ↔ `Prime` |
+| `nextP_prime`, `nextP_gt`, `nextP_min` | nextP p asal, p'den büyük ve p'den büyük asalların en küçüğü |
+| `minFac_prime` | n ≥ 2 için minFac n asal |
+| `sigma_extract` | **Anahtar lemma:** n'yi bölen HER asal p için σ(n) = nextP(p)·σ(n/p). Tanım, hangi asalın önce çekildiğinden bağımsız. |
+| `sigma_mul` | σ(a·b) = σ(a)·σ(b) (tamamen çarpımsal) |
+| `sigma_prime` | asal p için σ(p) = nextP(p) |
+| **`shift_sigma`** | **Shift sigma nextP** |
+
+**Gerçek σ'ya aktarılan teoremler:** `W1_real`, `odd_real`, `TA_real`, `inj_real`, `no_multiperfect_real`, `no_perfect_real`, `no_amicable_real`, `cycle_even_real`, `no_fixed_real`, `no_cycle2_real`.
+
+**Aksiyom denetimi:** Yukarıdaki bütün teoremler yalnızca Lean'in standart aksiyomlarına dayanır: `propext`, `Classical.choice`, `Quot.sound`. `sorryAx` ve `Lean.ofReduceBool` yok. Dosyalarda `axiom`, `unsafe`, `opaque`, `implemented_by`, `extern`, `sorry`, `admit` ve `set_option` geçmiyor (grep ile kontrol edildi).
+
+**Kernel örnekleri** (native_decide yok): σ(12) = 45 ve σ(15) = σ(14) + 2, çarpımsallık ve kernel hesabıyla.
+
+**Hesaplama köprüsü** (ayrı tutuldu, `native_decide`):
+- `sig_agrees_3000`: hızlı `sig` ile gerçek `sigma`, 1 ≤ n ≤ 3000 için aynı değerleri veriyor.
+- `twins_complete_3000_real`: 3000'e kadar σ-ikizi listesi gerçek σ için tam.
 
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
