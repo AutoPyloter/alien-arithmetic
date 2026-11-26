@@ -1,0 +1,12 @@
+islem   deneme  hata  komut (min-max)
+add         60     0        6-6
+sub         60     0        8-8
+mean        60     0        4-4
+neg         60     0        2-2
+conj        60     0        0-2
+abs         60     0        1-1
+rot90       60     0        6-6
+mul         60     0       30-30
+inv         60     0        3-7
+div         60     0       33-43
+sqrt        60     0       10-16

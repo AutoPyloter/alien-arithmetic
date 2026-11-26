@@ -1,0 +1,30 @@
+== 1. Cebir ==
+cos3t - (4cos^3 t - 3cos t) = 0
+rasyonel kok adaylari (p|1, q|8): [-1, -1/2, -1/4, -1/8, 1/8, 1/4, 1/2, 1]
+degerler: [-3, 1, 3/8, -17/64, -111/64, -19/8, -3, 1] -> hicbiri 0 degil
+Q uzerinde carpanlar: (1, [(8*x**3 - 6*x - 1, 1)])
+minpoly(cos 20 derece) = 8*x**3 - 6*x - 1
+derece 3; 3 ikinin kuvveti degil -> cos20 cizilemez.
+
+ 360/n acisinin uclenebilmesi (n<=1000, n cizilebilir): uclenebilir <=> 3 n'yi bolmez
+   cizilebilir n<=1000: 54 tane, kural ihlali: 0
+
+== 3. Kirisi uce bolmek ==
+60 derece kirisi 3 esit parca -> acilar: [19.106605, 21.786789, 19.106605]  toplam 60.000000
+   bolum noktasi 1: cos(aci) = 5*sqrt(7)/14  derece 2
+   bolum noktasi 2: cos(aci) = 2*sqrt(7)/7  derece 2
+   kucuk theta icin dis parca = th/3 - th**3/81 - th**5/972 + O(th**6)
+   orta - dis = th**3/27 + th**5/324 + O(th**6)
+   theta= 30: dis 9.8961, orta 10.2078
+   theta= 60: dis 19.1066, orta 21.7868
+   theta= 90: dis 26.5651, orta 36.8699
+   theta=120: dis 30.0000, orta 60.0000
+   theta=150: dis 23.7940, orta 102.4120
+   theta=179: dis 0.9997, orta 177.0006
+
+== 2b. Rastgele derin insalar (60 derece baslangici) ==
+400 yuruyus x 5 adim = 2000 kesisim, 2245 yeni nokta, en derin kule 6  (207s)
+yeni koordinat derecesi histogrami: {1: 665, 2: 1454, 4: 1223, 8: 726, 16: 315, 32: 93, 64: 14}
+hepsi 2^k: True ; 3'e bolunen derece sayisi: 0
+20/40 (mod 60) derecelik iki-nokta yonu bulundu mu: 0
+sure 207s

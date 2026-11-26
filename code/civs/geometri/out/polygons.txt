@@ -1,0 +1,13 @@
+5-gen: 5 kose dogru (60 basamak)=True; yeni nokta sayisi=26; komut: {'line': 9, 'circle': 22}; kule derinligi=3 ([K:Q]=2^3)
+   koordinat derecesi histogrami {1: 27, 2: 19, 4: 6}; hepsi 2^k=True
+   V1: minpoly(cos) = x**2 + x/2 - 1/4
+       deg sin = 4
+   radikandlar (sayisal): [192.0, 5.0, 4.145898033750315]
+  sure 0.0s
+17-gen: 17 kose dogru (60 basamak)=True; yeni nokta sayisi=78; komut: {'line': 21, 'circle': 67}; kule derinligi=5 ([K:Q]=2^5)
+   koordinat derecesi histogrami {1: 57, 2: 24, 4: 28, 8: 29, 16: 18}; hepsi 2^k=True
+   V1: minpoly(cos) = x**8 + x**7/2 - 7*x**6/4 - 3*x**5/4 + 15*x**4/16 + 5*x**3/16 - 5*x**2/32 - x/32 + 1/256
+       deg sin = 16
+   radikandlar (sayisal): [192.0, 17.0, 6.43844718719117, 2.823770172255693, 5.446389843220188]
+  2cos(2pi/17) minimal polinomu: x**8 + x**7 - 7*x**6 - 6*x**5 + 15*x**4 + 10*x**3 - 10*x**2 - 4*x + 1
+  sure 0.8s

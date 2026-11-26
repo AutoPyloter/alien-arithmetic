@@ -82,6 +82,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [12. Ağaç ve oyun](docs/12-agac-oyun.md) | Matula ağaçları, sürreal sayılar, nimber cisimleri, ağaç ↔ Hackenbush köprüsü |
 | [13. Kesir-merdiveni ve yol](docs/13-kesir-yol.md) | Sürekli kesirler, Stern–Brocot (Lean), Zaremba, kübik sayıların katsayıları |
 | [14. Harmoni](docs/14-harmoni.md) | Asallar frekans olarak, zeta sıfırlarından asal sayma, Euler'in uyum ölçüsü, Collatz = koma |
+| [15. Geometri](docs/15-geometri.md) | Pergel–cetvel makinesi, 17-gen, açı üçlemenin imkânsızlığı (Lean), origami, Fermat asalları |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents

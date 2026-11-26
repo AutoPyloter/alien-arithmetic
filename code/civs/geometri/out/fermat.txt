@@ -1,0 +1,56 @@
+== Pepin testi ==
+  F0: ASAL  (1 basamak, 0.0s)
+  F1: ASAL  (1 basamak, 0.0s)
+  F2: ASAL  (2 basamak, 0.0s)
+  F3: ASAL  (3 basamak, 0.0s)
+  F4: ASAL  (5 basamak, 0.0s)
+  F5: bilesik  (10 basamak, 0.0s)
+  F6: bilesik  (20 basamak, 0.0s)
+  F7: bilesik  (39 basamak, 0.0s)
+  F8: bilesik  (78 basamak, 0.0s)
+  F9: bilesik  (155 basamak, 0.0s)
+  F10: bilesik  (309 basamak, 0.0s)
+  F11: bilesik  (617 basamak, 0.0s)
+  F12: bilesik  (1234 basamak, 0.1s)
+  F13: bilesik  (2467 basamak, 1.1s)
+  F14: bilesik  (4933 basamak, 8.1s)
+
+== Bilinen carpanlar (k*2^m+1 | F_n kontrolu: 2^(2^n) = -1 mod p) ==
+  641 | F5: True; p asal: True
+  6700417 | F5: True; p asal: True
+  274177 | F6: True; p asal: True
+  67280421310721 | F6: True; p asal: True
+  59649589127497217 | F7: True; p asal: True
+  1238926361552897 | F8: True; p asal: True
+  2424833 | F9: True; p asal: True
+  45592577 | F10: True; p asal: True
+  319489 | F11: True; p asal: True
+  974849 | F11: True; p asal: True
+  114689 | F12: True; p asal: True
+  26017793 | F12: True; p asal: True
+  63766529 | F12: True; p asal: True
+  2710954639361 | F13: True; p asal: True
+  1214251009 | F15: True; p asal: True
+  825753601 | F16: True; p asal: True
+  13631489 | F18: True; p asal: True
+  70525124609 | F19: True; p asal: True
+  167772161 | F23: True; p asal: True
+  2748779069441 | F36: True; p asal: True
+  6597069766657 | F38: True; p asal: True
+  F5 = 641 * 6700417: True
+  Ikili aralarinda asallik (Goldbach): gcd(F_i,F_j)=1, i<j<=12: True
+  F_n = F_0 F_1 ... F_{n-1} + 2 (n<=12): True
+
+== Sezgisel: kac Fermat asali beklenir? ==
+  model, n>=0 toplami: 5.7708 ; n>=33 icin beklenen asal sayisi: 6.718e-10
+
+== Origami uygarligi: Pierpont asallari 2^u 3^v + 1 ==
+  <= 10^10: 72 Pierpont asali
+  <= 10^20: 157 Pierpont asali
+  <= 10^40: 314 Pierpont asali
+  <= 10^60: 465 Pierpont asali
+  <= 10^80: 611 Pierpont asali
+  <= 10^100: 795 Pierpont asali
+
+  Tek cizilebilir n (bilinen Fermat asallarinin farkli carpimlari): 32 tane (1 dahil); Pascal ucgeni mod 2'nin ilk 32 satiri (ikili okunur) ile ayni: True; en buyuk = 2^32-1: True
+  karsilastirma: Fermat asallari (bilinen) = 5, hepsi <= 65537

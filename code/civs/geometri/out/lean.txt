@@ -1,0 +1,5 @@
+'no_rat_root' depends on axioms: [propext, Quot.sound]
+'cos20_not_rational' depends on axioms: [propext, Quot.sound]
+'fermat_prime_0_4' depends on axioms: [propext, Quot.sound]
+'F5_composite' depends on axioms: [propext, Quot.sound]
+exit 0
