@@ -80,6 +80,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [10. Altın uygarlık (derin)](docs/10-altin-derin.md) | Li–Pan bağlantısı, 5·10⁸'e kadar test, altın Cunningham zincirleri, Zeckendorf yazısı Lean'de |
 | [11. Su, kum, hücre](docs/11-su-kum-hucre.md) | Frobenius ve dökme dizileri, Buffon ve π'nin normalliği, Collatz hücresel otomatı (Lean) |
 | [12. Ağaç ve oyun](docs/12-agac-oyun.md) | Matula ağaçları, sürreal sayılar, nimber cisimleri, ağaç ↔ Hackenbush köprüsü |
+| [13. Kesir-merdiveni ve yol](docs/13-kesir-yol.md) | Sürekli kesirler, Stern–Brocot (Lean), Zaremba, kübik sayıların katsayıları |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents
