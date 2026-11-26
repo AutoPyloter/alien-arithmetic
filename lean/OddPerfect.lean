@@ -405,6 +405,105 @@ theorem no_odd_perfect_two_primes (p q a b : Nat) (hp : Prime p) (hq : Prime q)
   · have e3 : 4 * c ≤ c * d := by rw [Nat.mul_comm c d]; exact Nat.mul_le_mul_right c h5
     generalize c * d = X at *; omega
 
+/-! ## 9. Touchard (1953): tek mükemmel n ≡ 1 (mod 12) veya n ≡ 9 (mod 36) -/
+
+/-- p ≡ 2 (mod 3) için (p^a, 1+…+p^a) mod 3 ikilisi (1,1) ile (2,0) arasında gidip gelir. -/
+theorem pg3 (p : Nat) (hp : p % 3 = 2) : ∀ a,
+    (p ^ a % 3 = 1 ∧ geo p a % 3 = 1) ∨ (p ^ a % 3 = 2 ∧ geo p a % 3 = 0)
+  | 0 => by simp [geo]
+  | a + 1 => by
+    rw [Nat.pow_succ, Nat.mul_mod (p ^ a) p 3, hp]
+    simp only [geo]
+    rw [Nat.add_mod, Nat.mul_mod p (geo p a) 3, hp]
+    rcases pg3 p hp a with ⟨h1, h2⟩ | ⟨h1, h2⟩ <;> rw [h1, h2] <;> decide
+
+theorem pow_mod3 (p : Nat) : ∀ a, p ^ a % 3 = 2 → p % 3 = 2 := by
+  have h0 : ∀ a, p % 3 = 0 → p ^ a % 3 ≠ 2 := by
+    intro a hp; cases a with
+    | zero => simp
+    | succ a => rw [Nat.pow_succ, Nat.mul_mod, hp]; simp
+  have h1 : ∀ a, p % 3 = 1 → p ^ a % 3 = 1 := by
+    intro a hp; induction a with
+    | zero => simp
+    | succ a ih => rw [Nat.pow_succ, Nat.mul_mod, ih, hp]
+  intro a h
+  rcases (show p % 3 = 0 ∨ p % 3 = 1 ∨ p % 3 = 2 by omega) with e | e | e
+  · exact absurd h (h0 a e)
+  · rw [h1 a e] at h; omega
+  · exact e
+
+theorem mul_mod3_two (x y : Nat) (h : x * y % 3 = 2) :
+    (x % 3 = 2 ∧ y % 3 = 1) ∨ (x % 3 = 1 ∧ y % 3 = 2) := by
+  rw [Nat.mul_mod] at h
+  have key : ∀ a, a < 3 → ∀ b, b < 3 → a * b % 3 = 2 →
+      (a = 2 ∧ b = 1) ∨ (a = 1 ∧ b = 2) := by decide
+  exact key _ (Nat.mod_lt _ (by decide)) _ (Nat.mod_lt _ (by decide)) h
+
+/-- n ≡ 2 (mod 3) ise 3 ∣ σ(n). (İnsan dilinde: bölen çiftleri d + n/d ≡ 0 (mod 3);
+    harf dilinde: bir harf ≡ 2 (mod 3) ve tek üslü olmalı, onun geometrik toplamı 3'e bölünür.) -/
+theorem dsum_mod3 : ∀ r, r % 3 = 2 → dsum r % 3 = 0 := by
+  intro r
+  induction r using Nat.strongRecOn with
+  | ind r ih =>
+    intro hr
+    obtain ⟨p, hp, hpr⟩ := exists_prime_dvd r (by omega)
+    obtain ⟨a, s, hrs, hps⟩ := split_pow p hp.1 r (by omega)
+    have hd : dsum r = geo p a * dsum s := by rw [hrs]; exact dsum_geo p s hp hps a
+    rw [hd, Nat.mul_mod]
+    have hr' := hr; rw [hrs] at hr'
+    rcases mul_mod3_two _ _ hr' with ⟨h1, _⟩ | ⟨h1, h2⟩
+    · have e := pow_mod3 p a h1
+      rcases pg3 p e a with ⟨h3, _⟩ | ⟨_, h4⟩
+      · omega
+      · rw [h4]; simp
+    · have ha : 1 ≤ a := by
+        rcases Nat.eq_zero_or_pos a with h0 | h0
+        · subst h0; simp at hrs; subst hrs; exact absurd hpr hps
+        · exact h0
+      have hs1 : 1 ≤ s := by
+        rcases Nat.eq_zero_or_pos s with h0 | h0
+        · subst h0; exact absurd (Nat.dvd_zero p) hps
+        · exact h0
+      have hsr : s < r := by
+        have e1 : p ^ 1 ≤ p ^ a := Nat.pow_le_pow_right (by have := hp.1; omega) ha
+        have e2 : p * s ≤ p ^ a * s := Nat.mul_le_mul_right s (by simpa using e1)
+        have e3 : 2 * s ≤ p * s := Nat.mul_le_mul_right s hp.1
+        omega
+      rw [ih s hsr h2]; simp
+
+theorem prime_three : Prime 3 := by
+  refine ⟨by decide, fun d hd => ?_⟩
+  have := Nat.le_of_dvd (by decide) hd
+  have hd0 : d ≠ 0 := by rintro rfl; simp at hd
+  by_cases h2 : d = 2
+  · subst h2; exact absurd hd (by decide)
+  · omega
+
+/-- **Touchard (1953):** tek mükemmel sayı ≡ 1 (mod 12) ya da ≡ 9 (mod 36). -/
+theorem touchard (n : Nat) (hn : n % 2 = 1) (h : dsum n = 2 * n) :
+    n % 12 = 1 ∨ n % 36 = 9 := by
+  have h4 := odd_perfect_mod4 n hn h
+  have h3 : n % 3 ≠ 2 := by
+    intro e
+    have := dsum_mod3 n e
+    rw [h] at this; omega
+  rcases (show n % 3 = 0 ∨ n % 3 = 1 by omega) with e | e
+  · right
+    obtain ⟨p, k, m, hp, hp4, _, _, hnm⟩ := euler_odd_perfect n hn h
+    have h3n : 3 ∣ n := Nat.dvd_of_mod_eq_zero e
+    rw [hnm] at h3n
+    rcases euclid prime_three h3n with h' | h'
+    · have := prime_dvd_prime prime_three hp (prime_dvd_pow prime_three k h')
+      omega
+    · have h3m : 3 ∣ m := by rcases euclid prime_three h' with h'' | h'' <;> exact h''
+      have h9 : 9 ∣ n := by
+        rw [hnm]
+        exact Nat.dvd_trans (Nat.mul_dvd_mul h3m h3m) (Nat.dvd_mul_left _ _)
+      have := Nat.mod_eq_zero_of_dvd h9
+      omega
+  · left; omega
+
 #print axioms euler_odd_perfect
 #print axioms odd_perfect_mod4
 #print axioms no_odd_perfect_two_primes
+#print axioms touchard

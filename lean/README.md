@@ -160,6 +160,8 @@ Ayrıntı: [`docs/06-toplama.md`](../docs/06-toplama.md).
 | `euler_odd_perfect` | Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4), p ∤ m |
 | `odd_perfect_mod4` | tek mükemmel n ≡ 1 (mod 4) |
 | `no_odd_perfect_two_primes` | en fazla iki asallı tek mükemmel sayı yok |
+| `touchard` | tek mükemmel n ≡ 1 (mod 12) veya ≡ 9 (mod 36) |
+| `euler_alien` (OddPerfectAlien.lean) | Euler harf vektörü dilinde |
 
 Derleme: `lean -o OddPerfect.olean OddPerfect.lean` (Sigma.olean gerekli). Ayrıntı: [`docs/16-tek-mukemmel.md`](../docs/16-tek-mukemmel.md).
 

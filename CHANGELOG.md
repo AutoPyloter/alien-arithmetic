@@ -1,5 +1,10 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.8.0 — 27 Kasım 2026
+
+- **Touchard teoremi** (`touchard`): tek mükemmel n ≡ 1 (mod 12) veya ≡ 9 (mod 36). Ara sonuç `dsum_mod3`: n ≡ 2 (mod 3) ⇒ 3 ∣ σ(n). Bölen eşlemesi yerine harf ayrıştırmasıyla ispatlandı.
+- **Euler harf dilinde** (`OddPerfectAlien.lean`, `euler_alien`): tek mükemmel sayının harf vektöründe tam bir tek üs var, o da ≡ 1 (mod 4) ve 4k+1 biçimli bir asalda.
+
 ## v1.7.0 — 27 Kasım 2026
 
 - **Tek mükemmel sayı problemi** (`lean/OddPerfect.lean`, Mathlib yok):

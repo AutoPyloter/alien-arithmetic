@@ -11,7 +11,7 @@ Bir sayının harf vektörü (v₂, v₃, v₅, …) olsun. Bölen toplamı çar
 
 Mükemmellik koşulu σ(n) = 2n vektör üzerinde bir **çarpım denklemi**. Harf uygarlığının duvarı +1'di; burada +1 yalnızca her harfin geometrik toplamının içinde, kontrollü biçimde görünüyor. Bu yüzden problem harf diline doğal olarak oturuyor.
 
-## Lean'de ispatlananlar (`lean/OddPerfect.lean`, 410 satır, Mathlib yok)
+## Lean'de ispatlananlar (`lean/OddPerfect.lean` + `lean/OddPerfectAlien.lean`, Mathlib yok)
 
 | Teorem | İçerik |
 |---|---|
@@ -20,6 +20,9 @@ Mükemmellik koşulu σ(n) = 2n vektör üzerinde bir **çarpım denklemi**. Har
 | `euler_odd_perfect` | **Euler (1747):** tek mükemmel n = p^k·m², p asal, p ≡ k ≡ 1 (mod 4), p ∤ m |
 | `odd_perfect_mod4` | tek mükemmel n ≡ 1 (mod 4) |
 | `no_odd_perfect_two_primes` | en fazla iki farklı asal çarpanı olan tek mükemmel sayı yok |
+| `dsum_mod3` | n ≡ 2 (mod 3) ⇒ 3 ∣ σ(n) |
+| `touchard` | **Touchard (1953):** tek mükemmel n ≡ 1 (mod 12) veya n ≡ 9 (mod 36) |
+| `euler_alien` | Euler harf dilinde: ∃ j, P j ≡ 1 (mod 4), vec n j ≡ 1 (mod 4), diğer her i için vec n i çift |
 
 Aksiyomlar: yalnızca `propext`, `Classical.choice`, `Quot.sound` (native_decide yok).
 
@@ -57,5 +60,10 @@ Gözlem: en yakın adayların hepsinde **birden fazla tek üslü harf** var, yan
 ## Sonraki adımlar
 
 1. **En az 3 → en az 4, 5, … farklı asal.** Sylvester'in bolluk sınırları; bunlar sonlu vaka analizi gerektiriyor.
-2. **Touchard:** n ≡ 1 (mod 12) veya n ≡ 9 (mod 36). Mod 3 sayımıyla benzer bir ispat mümkün.
-3. **Uzaylı köprüsü:** Euler teoremini AlienBridge'in `vec` diliyle yeniden ifade etmek: "tam bir i için vec n i tek".
+2. ~~Touchard~~ ve ~~uzaylı köprüsü~~: yapıldı (v1.8.0).
+
+### Touchard'ın harf dilinde ispatı
+
+İnsan dilindeki klasik ispat bölen çiftlerini kullanıyor: n ≡ 2 (mod 3) ise d·(n/d) ≡ 2, dolayısıyla d + n/d ≡ 0 (mod 3) ve 3 ∣ σ(n) = 2n. Bu çelişki.
+Harf dilinde aynı şey şöyle görünüyor: n ≡ 2 (mod 3) ise harflerin mod 3 çarpımı 2. O halde bir harf ≡ 2 (mod 3) ve tek üslü. O harfin geometrik toplamı 1 − 1 + 1 − … çift sayıda terimden oluşuyor, yani 3'e bölünüyor. Lean ispatı (`dsum_mod3`) bu ikinci yolu izliyor; bölen eşleme (bijeksiyon) hiç gerekmiyor.
+n ≡ 0 (mod 3) durumunda Euler'den 3 özel harf olamaz (3 ≢ 1 mod 4), dolayısıyla 3'ün üssü çift ve 9 ∣ n. 4 ile birleşince n ≡ 9 (mod 36).
