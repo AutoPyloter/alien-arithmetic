@@ -1,0 +1,191 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,amsmath,booktabs,hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\s}{\sigma}
+\newcommand{\nx}[1]{#1'}
+
+\title{Neighbouring values and aliquot dynamics of the prime shift map}
+\author{Abdulkadir \"Ozcan}
+\date{November 26, 2026}
+
+\begin{document}
+\begin{abstract}
+Let $\s$ be the completely multiplicative function that replaces every prime factor of $n$ by the next prime (OEIS A003961). We study $\s$ at consecutive integers and the aliquot-type map $s(n)=\s(n)-n$. We prove that $\s(n+1)-\s(n)$ is always even and never divisible by $3$, that $\s$ and $n\mapsto \s(n)/n$ are injective, and that $n\mid \s(n)$ only for $n=1$. The set of $n$ with $\s(n+1)>\s(n)$ has natural density exactly $1/2$, and for every $\varepsilon>0$ the ratio $\s(n+1)/\s(n)$ lies in $(1-\varepsilon,1+\varepsilon)$ on a set of positive density. For a prime $p$ with next prime $q$, the residues of $\s(n)$ modulo $q$ are equidistributed in $(\mathbb Z/q)^\times$ over $p\nmid n$. The joint distribution of $(\s(n),\s(n+1))$ modulo $q$, in logarithmic density, follows from Tao's two-point logarithmic Elliott theorem conditionally on a hypothesis on residue changes of consecutive primes. We list all $22$ solutions of $\s(n+1)=\s(n)+2$ below $10^{11}$. For $s$ we show that there are no fixed points or $2$-cycles and that every cycle has even length. Up to $10^7$ every orbit reaches $1$ or one of two cycles, of lengths $4$ and $12$. The algebraic core of the structural results is formally verified in Lean~4.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and notation}
+
+Write $p_1=2,p_2=3,\dots$ for the primes and, for a prime $\ell$, $\nx\ell$ for the next prime. For $n=\prod p_i^{e_i}$ put
+\[
+\s(n)=\prod p_{i+1}^{e_i},
+\]
+so that $\s$ shifts the exponent vector of $n$ one place to the right (A003961). Thus $\s$ is completely multiplicative with $\s(\ell)=\nx\ell$. Put $F(n)=\log(\s(n)/n)$, a completely additive function with $F(\ell)=\log(\nx\ell/\ell)\le g_\ell/\ell$, where $g_\ell=\nx\ell-\ell$. Since $\nx\ell<2\ell$ (Bertrand),
+\begin{equation}\label{eq:tail}
+\sum_{\ell>y} \frac{g_\ell}{\ell^2}\le 2\int_y^\infty\frac{dt}{t^2}=\frac 2y .
+\end{equation}
+Hence $\sum F(\ell)/\ell$ and $\sum F(\ell)^2/\ell$ converge, and by the Erd\H{o}s--Wintner theorem $F$ has a limiting distribution. It is continuous because $\sum_{F(\ell)\neq0}1/\ell=\infty$. We write $D(n)=\s(n+1)-\s(n)$ and $s(n)=\s(n)-n$.
+
+Related OEIS entries are A252748 ($\s(n)-2n$), A246282 ($\s(n)>2n$) and A275717 ($\s(n)>\s(n-1)$). None of them contains the density results below or the iteration of $s$.
+
+\section{Structural results}
+
+\begin{lemma}\label{lem:div}
+If a prime $\ell$ divides $\s(n)$, then $\ell=\nx r$ for some prime $r\mid n$. In particular $\s(n)$ is odd, and for a prime $p$ with $q=\nx p$ we have $q\mid\s(n)\iff p\mid n$.
+\end{lemma}
+\begin{proof}
+$\s(n)$ is a product of primes $\nx r$ with $r\mid n$, and $\ell\mapsto\nx\ell$ is injective on primes and never takes the value $2$.
+\end{proof}
+
+\begin{theorem}\label{thm:W1}
+For every $n\ge1$, $D(n)$ is even and $3\nmid D(n)$.
+\end{theorem}
+\begin{proof}
+Both $\s(n)$ and $\s(n+1)$ are odd. By Lemma~\ref{lem:div}, $3\mid\s(m)\iff 2\mid m$, and exactly one of $n,n+1$ is even.
+\end{proof}
+
+\begin{theorem}\label{thm:inj}
+(a) $\s$ is injective. (b) If $n\mid\s(n)$ then $n=1$; in particular $\s(n)\ne 2n$. (c) $n\mapsto\s(n)/n$ is injective.
+\end{theorem}
+\begin{proof}
+(a) If $\s(a)=\s(b)$ and $\ell\mid a$, Lemma~\ref{lem:div} gives $\ell\mid b$; cancel and induct. (b) Let $\ell$ be the least prime factor of $n$. Since $\ell\mid\s(n)$, $\ell=\nx r$ with $r\mid n$ and $r<\ell$, a contradiction. (c) We have $\s(n)/n=\prod_i p_i^{e_{i-1}(n)-e_i(n)}$ with $e_0:=0$. If $f=e(n)-e(m)$ and the ratios agree, then $f_{i-1}=f_i$ for all $i\ge1$. Since $f_0=0$, every $f_i$ vanishes.
+\end{proof}
+
+\begin{remark}
+For the classical divisor sum, the existence of odd perfect numbers and the solitude of $10$ are open problems. Their shift analogues are settled by parity and Theorem~\ref{thm:inj}.
+\end{remark}
+
+\section{Neighbouring values}
+
+\begin{theorem}\label{thm:half}
+The pair $(F(n),F(n+1))$ has a limiting distribution, and the distribution of $F(n+1)-F(n)$ is symmetric and atomless. Consequently:
+\begin{enumerate}
+\item[(a)] $\{n:\s(n+1)>\s(n)\}$ has natural density $1/2$;
+\item[(b)] for every $\varepsilon>0$, $\{n: |\s(n+1)/\s(n)-1|<\varepsilon\}$ has positive natural density.
+\end{enumerate}
+\end{theorem}
+\begin{proof}[Sketch]
+Truncate at $y$. The contribution of primes $\le y$ to $(F(n),F(n+1))$ depends only on $n$ modulo $W=\prod_{\ell\le y}\ell^{k}$. By \eqref{eq:tail} the tail has mean $\le 4/y$ and is negligible. By the Chinese remainder theorem the truncated difference is a sum of independent variables $X_\ell$. The involution $n\mapsto -n-1$ of $\mathbb Z/W$ swaps the conditions $d\mid n$ and $d\mid n+1$, so the law is symmetric. Since $\Pr(X_\ell\ne0)\asymp 2/\ell$ and $\sum 2/\ell=\infty$, L\'evy's purity law shows that the limit has no atoms. This gives (a), because $\log(1+1/n)\to0$.
+
+For (b), take a residue class with $n\equiv2\pmod 4$. In this class each prime of a finite set $S$ of odd primes divides $n+1$ exactly once, where $|\sum_{\ell\in S}F(\ell)-\log\frac32|<\varepsilon/4$; this is possible because $\sum F(\ell)$ diverges with terms tending to $0$. All other primes $\le y$ divide neither $n$ nor $n+1$. Markov's inequality controls the tail on half of the class.
+\end{proof}
+
+Numerically, the proportion in (a) is $0.49997$, $0.49997$ and $0.50005$ on blocks of $4\cdot10^6$ consecutive integers near $10^4$, $10^6$ and $10^8$. The proportion in (b) for $\varepsilon=0.01$ is $0.0052$--$0.0054$.
+
+\begin{theorem}\label{thm:onept}
+Let $p$ be a prime, $q=\nx p$ and $\chi$ a non-principal character modulo $q$. Then $\frac1x\sum_{n\le x}\chi(\s(n))\to0$. Hence $\s(n)\bmod q$ is equidistributed in $(\mathbb Z/q)^\times$ over $n$ with $p\nmid n$.
+\end{theorem}
+\begin{proof}
+$g=\chi\circ\s$ is completely multiplicative with $g(\ell)=\chi(\nx\ell)$. By Hal\'asz's theorem it suffices that $\sum_\ell(1-\mathrm{Re}\,\chi(\nx\ell)\ell^{-it})/\ell=\infty$ for every $t$. Replacing $\ell$ by $\nx\ell$ in the weight and in $\ell^{-it}$ changes the sum by $O_t(\sum g_\ell/\ell^2)=O_t(1)$. The resulting sum $\sum_{\ell}(1-\mathrm{Re}\,\chi(\ell)\ell^{-it})/\ell$ diverges since $L(1+it,\chi)\neq0$.
+\end{proof}
+
+\begin{hypothesis}[H($\chi$)]
+$\sum_{\ell}\bigl(1-\mathrm{Re}\,\chi(\nx\ell)\overline{\chi}(\ell)\bigr)/\ell=\infty$. Equivalently, the sum of $1/\ell$ over primes $\ell$ with $\chi(\nx\ell)\ne\chi(\ell)$ diverges.
+\end{hypothesis}
+
+\begin{theorem}[conditional]\label{thm:twopt}
+Assume H($\chi$) for all non-principal $\chi$ modulo $q$. Then, in logarithmic density, the residues of $\s(n)$ and $\s(n+1)$ modulo $q$ are asymptotically independent and uniform on nonzero classes, given $p\nmid n(n+1)$. In particular
+\[
+\delta_{\log}\{n: D(n)\equiv d \ (q)\}=
+\begin{cases}
+\left(1-\frac2p\right)\frac{q-2}{(q-1)^2}+\frac{2}{p(q-1)}, & q\nmid d,\\[1mm]
+\left(1-\frac2p\right)\frac{1}{q-1}, & q\mid d.
+\end{cases}
+\]
+\end{theorem}
+\begin{proof}[Sketch]
+We apply Tao's two-point logarithmic Elliott theorem \cite{Tao}. This requires that $g=\chi\circ\s$ does not pretend to be $\psi(n)n^{it}$, uniformly for $|t|\le x$. There are three cases.
+\begin{itemize}
+\item $\chi\bar\psi$ non-principal, $t$ small: by Maynard \cite{Maynard}, a positive proportion of primes satisfy $\ell\equiv\nx\ell\equiv a\pmod{qr}$, where $r$ is the modulus of $\psi$. Choosing $a$ with $\chi\bar\psi(a)\ne1$ gives $\mathbb D(g,\psi;x)^2\gg\log\log x$.
+\item Large $t$: the values of $g$ are $(q-1)$-th roots of unity or $0$. With $m=\mathrm{lcm}(q-1,\mathrm{ord}\,\psi)$ we get $g^m\bar\psi^m=1$ on almost all primes. The inequality $1-\mathrm{Re}\,z^m\le m^2(1-\mathrm{Re}\,z)$ then gives $\mathbb D(g,\psi n^{it})\ge \mathbb D(1,n^{imt})/m$. The right side tends to infinity uniformly for $C/\log x\le|t|\le x$ by the Vinogradov--Korobov zero-free region. Small $|t|$ follows from the triangle inequality.
+\item $\psi$ induced by $\chi$: this is exactly H($\chi$).
+\end{itemize}
+\end{proof}
+
+\begin{remark}
+If H($\chi$) failed, $g$ would be pretentious, and its correlations would be given by Klurman-type formulas. These are generically non-zero, which suggests that Theorem~\ref{thm:twopt} and H are essentially equivalent. Numerically, H is strongly supported: up to $10^9$ the changes are \emph{more} frequent than under independence (Table~\ref{tab:H}), in line with the Lemke Oliver--Soundararajan bias \cite{LOS}. Proving H seems to require the distribution of primes modulo $q$ in intervals of length $(\log x)^{1+o(1)}$, beyond the $(\log x)^{2+\varepsilon}$ scale accessible under GRH. Patterns of residues of consecutive primes beyond the known ones are open \cite{Lau}.
+\end{remark}
+
+\begin{table}[h]
+\caption{$\sum 1/\ell$ over $\ell\le10^9$ with $\chi(\nx\ell)\neq\chi(\ell)$, versus the independent model $(1-1/k)\sum_{\ell\le10^9}1/\ell$, where $k=\mathrm{ord}\,\chi$.}\label{tab:H}
+\begin{tabular}{lccccc}
+\toprule
+$(q,k)$ & $(5,4)$ & $(5,2)$ & $(7,6)$ & $(7,3)$ & $(11,10)$\\
+\midrule
+observed & 2.057 & 1.448 & 2.019 & 1.667 & 1.995\\
+model & 1.695 & 1.130 & 1.764 & 1.411 & 1.823\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Shift twins}
+
+Call $n$ a \emph{shift twin} if $\s(n+1)=\s(n)+2$. An exhaustive search up to $10^{11}$ finds exactly $22$ of them:
+\begin{quote}
+1, 2, 14, 25, 94, 142, 214, 445, 574, 1131, 2596, 39224, 142708, 145863, 181234, 6915166, 17768443, 79906755, 107246955, 811937494, 2573316475, 76516058733.
+\end{quote}
+For example, $\s(14)=3\cdot11=33$ and $\s(15)=5\cdot7=35$. The search used a rigorous logarithmic filter. Candidate pairs were then checked exactly modulo two primes near $2^{31}$, with an in-kernel Miller--Rabin \emph{nextprime}.
+
+The singular-series model of Theorem~\ref{thm:twopt} gives a local factor $\mathfrak S\approx1.905$ for $d=2$. Combined with the density $f(0)$ of $F(n+1)-F(n)$ at $0$, it predicts $\#\{n\le N\}\sim c\log N$ with $c\approx0.55$. The model predicts $7.6\pm2.8$ twins in $[10^5,10^{11}]$; $10$ are observed.
+
+\begin{conjecture}
+There are infinitely many shift twins, and $\#\{n\le N: \s(n+1)=\s(n)+2\}\sim c\log N$.
+\end{conjecture}
+
+\section{Shift aliquot dynamics}
+
+\begin{theorem}\label{thm:aliq}
+For $n\ge2$, $s(n)>0$ and $s(n)\not\equiv n\pmod 2$. The map $s$ has no fixed points and no $2$-cycles. Every cycle of $s$ avoiding $1$ has even length, so its length is at least $4$.
+\end{theorem}
+\begin{proof}
+$\s(n)>n$ for $n\ge2$, and $\s(n)$ is odd, so parity alternates along orbits. A fixed point means $\s(n)=2n$, which is excluded by Theorem~\ref{thm:inj}(b). A $2$-cycle means $\s(a)=\s(b)=a+b$, so $a=b$ by Theorem~\ref{thm:inj}(a), which again gives a fixed point.
+\end{proof}
+
+All orbits starting at $n\le 10^7$ reach $1$ or one of the following cycles:
+\begin{align*}
+&12\to33\to32\to211\to12,\\
+&11500\to78023\to22038\to33117\to79468\to99533\to68888\to184345\\
+&\quad\to335944\to2470409\to125582\to62821\to11500.
+\end{align*}
+For example, $\s(12)=3^2\cdot5=45$ and $\s(211)=223$. About $10.8\%$ of starting values up to $10^7$ fall into the $4$-cycle.
+
+The average of $\log(s(n)/n)$ is $+0.877$ over even $n$ and $-2.470$ over odd $n$. The drift over two steps is therefore $-1.59$. Large excursions come from powers of two, since $s(2^k)=3^k-2^k$. The orbit of $4840155$ climbs to about $1.56\cdot10^{31}$ before reaching $1$.
+
+\begin{conjecture}[shift Catalan--Dickson]
+Every orbit of $s$ is bounded.
+\end{conjecture}
+
+Two related constants: the mean value of $\s(n)/n$ is $\prod_\ell(1-1/\ell)/(1-\nx\ell/\ell^2)\approx4.128$. The density of $\{n:\s(n)>2n\}$ exists and is $\approx0.536$ ($0.793$ on even and $0.279$ on odd $n$). This agrees with the data of A246282.
+
+\section{Formal verification}
+
+Lemma~\ref{lem:div}, Theorems~\ref{thm:W1}, \ref{thm:inj}(a,b) and~\ref{thm:aliq}, the symmetry step and the Bertrand step in the proof of Theorem~\ref{thm:half} are proved in core Lean~4.15, without Mathlib and without \texttt{sorry}. The proofs are stated for any completely multiplicative function taking each prime to the next prime. The list of twins up to $3000$, the $22$ twins and the two cycles are checked by \texttt{native\_decide}. The analytic inputs (Hal\'asz, Maynard, Tao, L\'evy) are not formalized.
+
+\section{Open problems}
+\begin{enumerate}
+\item Prove H($\chi$), or prove the converse of Theorem~\ref{thm:twopt}.
+\item Are there infinitely many $n$ with $|D(n)|\le n^\theta$ for some $\theta<1$?
+\item Are there further cycles of $s$? Are all orbits bounded?
+\item Compute $f(0)$, and hence the constant $c$, exactly.
+\end{enumerate}
+
+\subsection*{Acknowledgement}
+The exploration, computations, proofs and Lean formalisation were carried out with extensive assistance from Anthropic's Claude.
+
+\begin{thebibliography}{9}
+\bibitem{Tao} T.~Tao, \emph{The logarithmically averaged Chowla and Elliott conjectures for two-point correlations}, Forum Math.\ Pi \textbf{4} (2016), e8. arXiv:1509.05422.
+\bibitem{Maynard} J.~Maynard, \emph{Dense clusters of primes in subsets}, Compos.\ Math.\ \textbf{152} (2016), 1517--1554. arXiv:1405.2593.
+\bibitem{LOS} R.~J.~Lemke Oliver and K.~Soundararajan, \emph{Unexpected biases in the distribution of consecutive primes}, Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{113} (2016). arXiv:1603.03720.
+\bibitem{Lau} C.~F.~Lau, \emph{Residue class patterns of consecutive primes}, arXiv:2409.12819 (2024).
+\bibitem{KM} O.~Klurman and A.~P.~Mangerel, arXiv:1707.07817 (2017).
+\bibitem{OEIS} OEIS Foundation, \emph{The On-Line Encyclopedia of Integer Sequences}, A003961, A246282, A252748, A275717.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,57 @@
+OEIS GÖNDERİM TASLAKLARI — Abdulkadir Özcan, 26 Kasım 2026
+(oeis.org → Contribute. Göndermeden önce her diziyi OEIS'te terimleriyle aratıp önceden kayıtlı olmadığını kontrol edin.)
+
+============================================================
+TASLAK 1 — σ-ikizleri (yeni dizi)
+============================================================
+%N Numbers k such that A003961(k+1) = A003961(k) + 2.
+%S 1,2,14,25,94,142,214,445,574,1131,2596,39224,142708,145863,181234,
+%T 6915166,17768443,79906755,107246955,811937494,2573316475,76516058733
+%C A003961(k+1) - A003961(k) is always even and never divisible by 3, because A003961(m) is odd for all m and 3 divides A003961(m) iff m is even.
+%C A heuristic singular-series model predicts that the number of terms <= N grows like c*log(N) with c approximately 0.55; the data up to 10^11 agree with this.
+%C The list is complete up to 10^11 (search with a rigorous logarithmic filter followed by exact verification modulo two primes).
+%e 14 = 2*7 and 15 = 3*5; A003961(14) = 3*11 = 33 and A003961(15) = 5*7 = 35 = 33 + 2.
+%o (PARI) f(n) = my(f=factor(n)); prod(i=1, #f~, nextprime(f[i,1]+1)^f[i,2]);
+%o isok(k) = f(k+1) == f(k) + 2;
+%Y Cf. A003961, A252748, A275717.
+%K nonn,more
+%A _Abdulkadir Özcan_, Nov 26 2026
+
+============================================================
+TASLAK 2 — Kaydırma aliquot fonksiyonu (önce OEIS'te "0,1,2,5,2,9,4,19,16,11" diye aratın; varsa bu taslak yerine ona yorum ekleyin)
+============================================================
+%N a(n) = A003961(n) - n.
+%S 0,1,2,5,2,9,4,19,16,11,2,33,4,19,20,65,2,57,4,43,34,17,6,111,24,25,98,
+%T 71,2,75,6,211,32,23,42,189,4,31,46,149,2,123,4,73,130,41,6,357,72,97,
+%U 44,101,6,321,36,241,58,35,2,255
+%C For n >= 2, a(n) > 0 and a(n) has the opposite parity of n, since A003961(n) is odd and greater than n.
+%C The map n -> a(n) has no fixed points (A003961(n) = 2n is impossible by parity) and no 2-cycles (A003961 is injective, so A003961(x) = A003961(y) = x + y forces x = y). Hence every cycle has even length >= 4.
+%C Under iteration, every starting value n <= 10^7 eventually reaches 1 or one of two cycles: (12, 33, 32, 211) and a 12-cycle starting at 11500. About 10.8% of starting values n <= 10^7 enter the 4-cycle.
+%C The average of log(a(n)/n) is about +0.88 over even n and about -2.47 over odd n, so trajectories shrink on average; conjecturally every trajectory is bounded.
+%o (PARI) f(n) = my(f=factor(n)); prod(i=1, #f~, nextprime(f[i,1]+1)^f[i,2]);
+%o a(n) = f(n) - n;
+%Y Cf. A003961, A252748.
+%K nonn
+%A _Abdulkadir Özcan_, Nov 26 2026
+
+============================================================
+TASLAK 3 — Kaydırma aliquot döngüleri (yeni dizi)
+============================================================
+%N Irregular table read by rows: cycles of the map n -> A003961(n) - n, each row listed from its smallest member in iteration order.
+%S 12,33,32,211,11500,78023,22038,33117,79468,99533,68888,184345,335944,
+%T 2470409,125582,62821
+%C Every cycle has even length >= 4 (see the A003961(n) - n entry). These are the only cycles reached from starting values <= 10^7. It is unknown whether more cycles exist.
+%e Row 1: 12 = 2^2*3 -> 3^2*5 - 12 = 33 -> 5*13 - 33 = 32 -> 3^5 - 32 = 211 -> 223 - 211 = 12.
+%Y Cf. A003961.
+%K nonn,tabf,more
+%A _Abdulkadir Özcan_, Nov 26 2026
+
+============================================================
+YORUM ÖNERİSİ — A275717 (A003961(n) > A003961(n-1) olan n'ler)
+============================================================
+%C This sequence has asymptotic density 1/2. Sketch: F(n) = log(A003961(n)/n) is additive with convergent Erdős–Wintner series, so (F(n), F(n+1)) has a limiting distribution. The involution n -> -n-1 on residue classes swaps the roles of n and n+1, so the distribution of F(n+1) - F(n) is symmetric, and it is atomless by Lévy's purity law since sum over primes of 2/p diverges. Numerically the proportion is 0.49997-0.50005 for n near 10^4, 10^6 and 10^8. - _Abdulkadir Özcan_, Nov 26 2026
+
+============================================================
+YORUM ÖNERİSİ — A246282 (A003961(n) > 2n olan n'ler)
+============================================================
+%C The asymptotic density exists (Erdős–Wintner; the limiting distribution of A003961(n)/n is continuous) and is approximately 0.536: about 0.793 among even n and 0.279 among odd n. The mean value of A003961(n)/n is prod_p (1-1/p)/(1-nextprime(p)/p^2) = 4.128... - _Abdulkadir Özcan_, Nov 26 2026

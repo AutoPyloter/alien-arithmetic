@@ -1,0 +1,9 @@
+{
+  "title": "Alien Arithmetic: neighbouring values and aliquot dynamics of the prime shift map",
+  "creators": [{"name": "Özcan, Abdulkadir", "orcid": "0000-0001-6599-7751"}],
+  "description": "Research notes, code, data and Lean 4 proofs on the prime shift map sigma (OEIS A003961): structural theorems, density of sigma(n+1) > sigma(n), equidistribution mod q, shift twins sigma(n+1) = sigma(n) + 2 up to 10^11, and aliquot-type dynamics of sigma(n) - n.",
+  "upload_type": "software",
+  "license": "MIT",
+  "keywords": ["number theory", "prime shift", "A003961", "aliquot sequences", "Lean 4"],
+  "language": "eng"
+}

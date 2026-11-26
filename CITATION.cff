@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Alien Arithmetic: neighbouring values and aliquot dynamics of the prime shift map"
+authors:
+  - family-names: "Özcan"
+    given-names: "Abdulkadir"
+    orcid: "https://orcid.org/0000-0001-6599-7751"
+date-released: 2026-11-26
+version: "1.0.0"
+license: MIT
+repository-code: "https://github.com/AutoPyloter/alien-arithmetic"
+keywords: ["number theory", "prime shift", "A003961", "multiplicative functions", "aliquot sequences", "Lean 4"]
