@@ -1,5 +1,15 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.7.0 — 27 Kasım 2026
+
+- **Tek mükemmel sayı problemi** (`lean/OddPerfect.lean`, Mathlib yok):
+  - `euler_odd_perfect`: Euler teoremi. Tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4), p ∤ m.
+  - `odd_perfect_mod4`: n ≡ 1 (mod 4).
+  - `no_odd_perfect_two_primes`: tek mükemmel sayının en az 3 farklı asal çarpanı var.
+  - Klasik bölen toplamı sıfırdan tanımlandı; `dsum_geo` ile asal kuvvet ayrışması.
+- **Sayısal keşif** (`code/oddperfect/near_perfect.py`): 10⁷'ye kadar en neredeyse mükemmel tek sayılar. Önde gelen 442365 = 3·5·7·11·383 sayısı için σ − 2n = 6.
+- **Belge** `docs/16-tek-mukemmel.md`.
+
 ## v1.6.0 — 26 Kasım 2026
 
 - **Uzaylı +1 yasası** (`AlienSucc.lean`): `alien_succ_law` ve `alien_add_law`. Ayrıca aritmetiğin temel teoreminin varlık yarısı (`eval_vec`); teklik yarısı AlienBridge'de olduğundan sayılar ile harf vektörleri arasındaki eşleme artık tam.

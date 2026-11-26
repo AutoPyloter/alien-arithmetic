@@ -152,6 +152,17 @@ Aynı teoremler ConcreteSigma.lean'de insan notasyonuyla 40–70 satır tutuyor.
 
 Ayrıntı: [`docs/06-toplama.md`](../docs/06-toplama.md).
 
+## OddPerfect.lean — tek mükemmel sayı (v1.7.0)
+
+| Teorem | İçerik |
+|---|---|
+| `dsum_geo` | p ∤ s ⇒ σ(p^j·s) = (1 + … + p^j)·σ(s) |
+| `euler_odd_perfect` | Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4), p ∤ m |
+| `odd_perfect_mod4` | tek mükemmel n ≡ 1 (mod 4) |
+| `no_odd_perfect_two_primes` | en fazla iki asallı tek mükemmel sayı yok |
+
+Derleme: `lean -o OddPerfect.olean OddPerfect.lean` (Sigma.olean gerekli). Ayrıntı: [`docs/16-tek-mukemmel.md`](../docs/16-tek-mukemmel.md).
+
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
 - `Ascent.lean`: Tırmanış yasası. T^L(2^L·u − 1) = 3^L·u − 1 (u tek), burada T(n) = (3n+1)/2 ya da n/2.
