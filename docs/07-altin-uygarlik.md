@@ -39,6 +39,8 @@ Kod: [`code/golden/`](../code/golden/). Bütün iddialar aşağıdaki aralıklar
 
 **Yorum:** İkiz asallarda küçük asallarla bölünebilirlik koşulları birbirine bağlı. Bu yüzden saf modelin üstüne Hardy–Littlewood sabiti (≈1,32) biniyor. Altın kaydırmada φ irrasyonel olduğu için ⌊(p+1)φ⌋'nin kalanları p'ninkilerden bağımsız. Böylece sabit **tam olarak 1** çıkıyor ve yerel düzeltme olmuyor. Altın uygarlıkta ikiz asal sorusunun karşılığı, sayılar kuramının en "temiz" sabitine sahip.
 
+**Literatür notu (ajan taraması):** Bu gözlem yeni değil. kaydır(p) = ⌊φp + 1/φ⌋ olduğundan altın çiftler, Li–Pan'ın ⌊αp + β⌋ problemine giriyor ([arXiv:0803.1740](https://arxiv.org/abs/0803.1740)). Li–Pan her irrasyonel α için sonsuz sayıda çift olduğunu sanı olarak öne sürüyor; φ dahil hiçbir tek α için ispat yok. "Sabit = 1" ifadesi bizim sayısal ölçümümüz (p ≤ 5·10⁸'e kadar), ispat değil. Ayrıntılar: [`10-altin-derin.md`](10-altin-derin.md).
+
 Bu çiftlerin sonsuz çoklukta olup olmadığı yine açık. Duvar aynı, ama altın gözle bakınca yerel engellerin hepsi kayboluyor; geriye yalnızca "asallar rastgele mi?" sorusunun çıplak hali kalıyor.
 
 ## Zorluğun korunumu, altın sürüm

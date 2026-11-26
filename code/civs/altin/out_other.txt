@@ -1,0 +1,32 @@
+=== (a) Altın Fibonacci asalları ===
+kaydır(F_k)=F_{k+1}: F_k < 1e20 için doğru
+Fibonacci asalları (<1e20): [2, 3, 5, 13, 89, 233, 1597, 28657, 514229, 433494437, 2971215073, 99194853094755497]
+p ve kaydır(p) ikisi de Fibonacci asalı: [(2, 3), (3, 5)]
+Teorem: F_n asal => n asal ya da n=4. Ardışık indeksler ikisi de {asal}∪{4} => sadece (2,3),(3,5).
+
+=== (b) Altın Cunningham zincirleri: p, s(p), s(s(p)), ... hepsi asal ===
+  p<=1e7, zincir uzunluğu >= 2: gözlenen   43069, bağımsızlık modeli    43075.3, oran 1.000
+  p<=1e7, zincir uzunluğu >= 3: gözlenen       1, bağımsızlık modeli     2727.6, oran 0.000
+  p<=1e7, zincir uzunluğu >= 4: gözlenen       0, bağımsızlık modeli      169.4, oran 0.000
+  p<=1e7, zincir uzunluğu >= 5: gözlenen       0, bağımsızlık modeli       10.5, oran 0.000
+  p<=1e7, zincir uzunluğu >= 6: gözlenen       0, bağımsızlık modeli        0.7, oran 0.000
+  p<=1e7, zincir uzunluğu >= 7: gözlenen       0, bağımsızlık modeli        0.1, oran 0.000
+  en uzun zincir: [2, 3, 5] ['10', '100'] (6 sn)
+  en küçük başlangıçlar, uzunluk k için: {2: 2, 3: 2}
+
+=== (c) Zeckendorf palindromik asallar ===
+  uzunluk <=  8 (değer < 5.50e+01):      11 palindrom,      0 asal, model Σ1/ln n =       4.0, oran 0.000
+  uzunluk <= 16 (değer < 2.58e+03):      87 palindrom,      4 asal, model Σ1/ln n =      16.1, oran 0.248
+  uzunluk <= 24 (değer < 1.21e+05):     608 palindrom,     24 asal, model Σ1/ln n =      67.3, oran 0.357
+  uzunluk <= 32 (değer < 5.70e+06):    4179 palindrom,    184 asal, model Σ1/ln n =     321.3, oran 0.573
+  uzunluk <= 40 (değer < 2.68e+08):   28655 palindrom,    985 asal, model Σ1/ln n =    1686.5, oran 0.584
+  uzunluk <= 48 (değer < 1.26e+10):  196416 palindrom,   5689 asal, model Σ1/ln n =    9386.0, oran 0.606
+  uzunluk <= 56 (değer < 5.91e+11): 1346267 palindrom,  39989 asal, model Σ1/ln n =   54221.9, oran 0.738
+  palindromların küçük asallara bölünme oranı (beklenen 1/l): {2: 0.618, 3: 0.3367, 5: 0.2, 7: 0.1449, 11: 0.0944}
+  ilk palindromik asallar: [(127, '1010000101'), (197, '10010101001')] (47 sn)
+
+=== (d) Zeckendorf'ta 1 sayısı (hane toplamı) ===
+  p<=1e6: tek sayıda 1 oranı 0.49982 ; mod 3 dağılımı [0.33463 0.33095 0.33442] ; (N=78498, std≈0.00178)
+  p<=1e7: tek sayıda 1 oranı 0.49978 ; mod 3 dağılımı [0.33392 0.33311 0.33296] ; (N=664579, std≈0.00061)
+  p<=1e8: tek sayıda 1 oranı 0.50012 ; mod 3 dağılımı [0.33373 0.33289 0.33337] ; (N=5761455, std≈0.00021)
+  tüm n<=1e7: tek sayıda 1 oranı 0.50000

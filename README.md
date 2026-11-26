@@ -77,6 +77,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [7. Altın uygarlık](docs/07-altin-uygarlik.md) | Fibonacci notasyonu, ×φ kaydırması, altın Sophie Germain çiftleri |
 | [8. Yankı ve ritim](docs/08-yanki-ritim.md) | Kalıntı sistemi, Goldbach eleği, yalnız koşucu taraması |
 | [9. 2-adik uygarlık](docs/09-2adik.md) | Collatz'ın sonsuz-sol görünümü, parite vektörü bijeksiyonu (Lean) |
+| [10. Altın uygarlık (derin)](docs/10-altin-derin.md) | Li–Pan bağlantısı, 5·10⁸'e kadar test, altın Cunningham zincirleri, Zeckendorf yazısı Lean'de |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents

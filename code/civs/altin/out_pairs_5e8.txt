@@ -1,0 +1,156 @@
+elek: 1.6e+09'e kadar, 25.3 sn; pi(X)=26355867
+elek ↔ Miller-Rabin örnek kontrolü: tamam
+
+phi (altın kaydırma: floor((p+1)phi)-1): S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [7.8 sn]
+  x=1e+04  gözlenen=      149  saf model=       149.2  oran=0.9988  oran/S=0.9988
+  x=1e+05  gözlenen=      900  saf model=       896.9  oran=1.0034  oran/S=1.0034
+  x=1e+06  gözlenen=     6015  saf model=      6001.9  oran=1.0022  oran/S=1.0022
+  x=1e+07  gözlenen=    43069  saf model=     43075.4  oran=0.9999  oran/S=0.9999
+  x=1e+08  gözlenen=   324206  saf model=    324397.8  oran=0.9994  oran/S=0.9994
+  x=5e+08  gözlenen=  1359593  saf model=   1359607.3  oran=1.0000  oran/S=1.0000
+
+phi, c=0: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [6.9 sn]
+  x=1e+04  gözlenen=      159  saf model=       149.3  oran=1.0650  oran/S=1.0650
+  x=1e+05  gözlenen=      911  saf model=       897.0  oran=1.0156  oran/S=1.0156
+  x=1e+06  gözlenen=     6036  saf model=      6002.1  oran=1.0057  oran/S=1.0057
+  x=1e+07  gözlenen=    43228  saf model=     43075.5  oran=1.0035  oran/S=1.0035
+  x=1e+08  gözlenen=   324969  saf model=    324397.9  oran=1.0018  oran/S=1.0018
+  x=5e+08  gözlenen=  1359763  saf model=   1359607.4  oran=1.0001  oran/S=1.0001
+
+phi, c=1: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [5.4 sn]
+  x=1e+04  gözlenen=      138  saf model=       148.9  oran=0.9266  oran/S=0.9266
+  x=1e+05  gözlenen=      883  saf model=       896.7  oran=0.9847  oran/S=0.9847
+  x=1e+06  gözlenen=     6000  saf model=      6001.7  oran=0.9997  oran/S=0.9997
+  x=1e+07  gözlenen=    42866  saf model=     43075.1  oran=0.9951  oran/S=0.9951
+  x=1e+08  gözlenen=   324298  saf model=    324397.5  oran=0.9997  oran/S=0.9997
+  x=5e+08  gözlenen=  1359516  saf model=   1359607.1  oran=0.9999  oran/S=0.9999
+
+sqrt2, c=0: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [5.9 sn]
+  x=1e+04  gözlenen=      161  saf model=       151.0  oran=1.0665  oran/S=1.0665
+  x=1e+05  gözlenen=      864  saf model=       907.9  oran=0.9517  oran/S=0.9517
+  x=1e+06  gözlenen=     6047  saf model=      6064.4  oran=0.9971  oran/S=0.9971
+  x=1e+07  gözlenen=    43496  saf model=     43456.8  oran=1.0009  oran/S=1.0009
+  x=1e+08  gözlenen=   326512  saf model=    326887.9  oran=0.9989  oran/S=0.9989
+  x=5e+08  gözlenen=  1369656  saf model=   1369154.8  oran=1.0004  oran/S=1.0004
+
+sqrt2, c=1: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [7.1 sn]
+  x=1e+04  gözlenen=      169  saf model=       151.7  oran=1.1142  oran/S=1.1142
+  x=1e+05  gözlenen=      897  saf model=       908.6  oran=0.9873  oran/S=0.9873
+  x=1e+06  gözlenen=     6028  saf model=      6065.1  oran=0.9939  oran/S=0.9939
+  x=1e+07  gözlenen=    43621  saf model=     43457.5  oran=1.0038  oran/S=1.0038
+  x=1e+08  gözlenen=   327365  saf model=    326888.6  oran=1.0015  oran/S=1.0015
+  x=5e+08  gözlenen=  1370570  saf model=   1369155.5  oran=1.0010  oran/S=1.0010
+
+sqrt3, c=0: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [6.5 sn]
+  x=1e+04  gözlenen=      142  saf model=       147.9  oran=0.9598  oran/S=0.9598
+  x=1e+05  gözlenen=      875  saf model=       891.2  oran=0.9819  oran/S=0.9819
+  x=1e+06  gözlenen=     6056  saf model=      5970.5  oran=1.0143  oran/S=1.0143
+  x=1e+07  gözlenen=    42746  saf model=     42884.7  oran=0.9968  oran/S=0.9968
+  x=1e+08  gözlenen=   323344  saf model=    323152.5  oran=1.0006  oran/S=1.0006
+  x=5e+08  gözlenen=  1356467  saf model=   1354829.0  oran=1.0012  oran/S=1.0012
+
+e, c=0: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [7.5 sn]
+  x=1e+04  gözlenen=      145  saf model=       139.7  oran=1.0378  oran/S=1.0378
+  x=1e+05  gözlenen=      823  saf model=       854.2  oran=0.9634  oran/S=0.9634
+  x=1e+06  gözlenen=     5666  saf model=      5769.9  oran=0.9820  oran/S=0.9820
+  x=1e+07  gözlenen=    41877  saf model=     41663.7  oran=1.0051  oran/S=1.0051
+  x=1e+08  gözlenen=   314798  saf model=    315146.4  oran=0.9989  oran/S=0.9989
+  x=5e+08  gözlenen=  1323605  saf model=   1324033.7  oran=0.9997  oran/S=0.9997
+
+pi, c=0: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [7.4 sn]
+  x=1e+04  gözlenen=      142  saf model=       137.3  oran=1.0341  oran/S=1.0341
+  x=1e+05  gözlenen=      876  saf model=       843.1  oran=1.0390  oran/S=1.0390
+  x=1e+06  gözlenen=     5858  saf model=      5708.5  oran=1.0262  oran/S=1.0262
+  x=1e+07  gözlenen=    41465  saf model=     41286.5  oran=1.0043  oran/S=1.0043
+  x=1e+08  gözlenen=   312845  saf model=    312659.5  oran=1.0006  oran/S=1.0006
+  x=5e+08  gözlenen=  1314284  saf model=   1314440.8  oran=0.9999  oran/S=0.9999
+
+pi, c=1: S(teori)=1.0000 S(kaba sayım, l<200)=1.0000  [11.1 sn]
+  x=1e+04  gözlenen=      148  saf model=       137.2  oran=1.0785  oran/S=1.0785
+  x=1e+05  gözlenen=      852  saf model=       843.0  oran=1.0107  oran/S=1.0107
+  x=1e+06  gözlenen=     5848  saf model=      5708.4  oran=1.0245  oran/S=1.0245
+  x=1e+07  gözlenen=    41470  saf model=     41286.4  oran=1.0044  oran/S=1.0044
+  x=1e+08  gözlenen=   312231  saf model=    312659.4  oran=0.9986  oran/S=0.9986
+  x=5e+08  gözlenen=  1315239  saf model=   1314440.7  oran=1.0006  oran/S=1.0006
+
+3/2, c=0: S(teori)=1.3203 S(kaba sayım, l<200)=1.3213  [6.5 sn]
+  x=1e+04  gözlenen=      172  saf model=       150.7  oran=1.1410  oran/S=0.8642
+  x=1e+05  gözlenen=     1146  saf model=       903.6  oran=1.2682  oran/S=0.9606
+  x=1e+06  gözlenen=     7873  saf model=      6037.5  oran=1.3040  oran/S=0.9876
+  x=1e+07  gözlenen=    57044  saf model=     43289.7  oran=1.3177  oran/S=0.9980
+  x=1e+08  gözlenen=   429960  saf model=    325794.5  oran=1.3197  oran/S=0.9995
+  x=5e+08  gözlenen=  1802777  saf model=   1364962.7  oran=1.3208  oran/S=1.0003
+
+3/2, c=1: S(teori)=1.3203 S(kaba sayım, l<200)=1.3213  [5.5 sn]
+  x=1e+04  gözlenen=      203  saf model=       150.4  oran=1.3501  oran/S=1.0225
+  x=1e+05  gözlenen=     1227  saf model=       903.2  oran=1.3585  oran/S=1.0289
+  x=1e+06  gözlenen=     7988  saf model=      6037.1  oran=1.3231  oran/S=1.0021
+  x=1e+07  gözlenen=    57032  saf model=     43289.3  oran=1.3175  oran/S=0.9978
+  x=1e+08  gözlenen=   430178  saf model=    325794.2  oran=1.3204  oran/S=1.0001
+  x=5e+08  gözlenen=  1802591  saf model=   1364962.4  oran=1.3206  oran/S=1.0002
+
+3/2, c=2: S(teori)=0.0000 S(kaba sayım, l<200)=0.0000  [7.7 sn]
+  x=1e+04  gözlenen=        1  saf model=       150.1  oran=0.0067  oran/S=nan
+  x=1e+05  gözlenen=        1  saf model=       903.0  oran=0.0011  oran/S=nan
+  x=1e+06  gözlenen=        1  saf model=      6036.9  oran=0.0002  oran/S=nan
+  x=1e+07  gözlenen=        1  saf model=     43289.1  oran=0.0000  oran/S=nan
+  x=1e+08  gözlenen=        1  saf model=    325793.9  oran=0.0000  oran/S=nan
+  x=5e+08  gözlenen=        1  saf model=   1364962.1  oran=0.0000  oran/S=nan
+
+3/2, c=-1: S(teori)=0.0000 S(kaba sayım, l<200)=0.0000  [7.2 sn]
+  x=1e+04  gözlenen=        2  saf model=       150.1  oran=0.0133  oran/S=nan
+  x=1e+05  gözlenen=        2  saf model=       903.0  oran=0.0022  oran/S=nan
+  x=1e+06  gözlenen=        2  saf model=      6036.9  oran=0.0003  oran/S=nan
+  x=1e+07  gözlenen=        2  saf model=     43289.1  oran=0.0000  oran/S=nan
+  x=1e+08  gözlenen=        2  saf model=    325793.9  oran=0.0000  oran/S=nan
+  x=5e+08  gözlenen=        2  saf model=   1364962.1  oran=0.0000  oran/S=nan
+
+5/3, c=0 (phi yaklaşığı): S(teori)=1.1736 S(kaba sayım, l<200)=1.1745  [11.4 sn]
+  x=1e+04  gözlenen=      169  saf model=       148.7  oran=1.1368  oran/S=0.9687
+  x=1e+05  gözlenen=     1023  saf model=       894.4  oran=1.1438  oran/S=0.9745
+  x=1e+06  gözlenen=     6933  saf model=      5988.3  oran=1.1578  oran/S=0.9865
+  x=1e+07  gözlenen=    50184  saf model=     42992.3  oran=1.1673  oran/S=0.9946
+  x=1e+08  gözlenen=   379899  saf model=    323855.0  oran=1.1731  oran/S=0.9995
+  x=5e+08  gözlenen=  1593773  saf model=   1357525.1  oran=1.1740  oran/S=1.0003
+
+8/5, c=0 (phi yaklaşığı): S(teori)=1.0563 S(kaba sayım, l<200)=1.0571  [5.4 sn]
+  x=1e+04  gözlenen=      155  saf model=       149.5  oran=1.0368  oran/S=0.9815
+  x=1e+05  gözlenen=      944  saf model=       898.0  oran=1.0512  oran/S=0.9952
+  x=1e+06  gözlenen=     6363  saf model=      6007.3  oran=1.0592  oran/S=1.0028
+  x=1e+07  gözlenen=    45391  saf model=     43107.1  oran=1.0530  oran/S=0.9969
+  x=1e+08  gözlenen=   342494  saf model=    324603.8  oran=1.0551  oran/S=0.9989
+  x=5e+08  gözlenen=  1436383  saf model=   1360397.2  oran=1.0559  oran/S=0.9996
+
+13/8, c=0 (phi yaklaşığı): S(teori)=0.9962 S(kaba sayım, l<200)=0.9970  [5.5 sn]
+  x=1e+04  gözlenen=      144  saf model=       149.2  oran=0.9650  oran/S=0.9687
+  x=1e+05  gözlenen=      889  saf model=       896.7  oran=0.9914  oran/S=0.9952
+  x=1e+06  gözlenen=     5921  saf model=      6000.1  oran=0.9868  oran/S=0.9905
+  x=1e+07  gözlenen=    42810  saf model=     43063.4  oran=0.9941  oran/S=0.9979
+  x=1e+08  gözlenen=   323268  saf model=    324319.0  oran=0.9968  oran/S=1.0005
+  x=5e+08  gözlenen=  1354530  saf model=   1359305.0  oran=0.9965  oran/S=1.0002
+
+7/5, c=0 (sqrt2 yaklaşığı): S(teori)=0.8450 S(kaba sayım, l<200)=0.8456  [6.2 sn]
+  x=1e+04  gözlenen=      122  saf model=       151.2  oran=0.8071  oran/S=0.9552
+  x=1e+05  gözlenen=      760  saf model=       908.7  oran=0.8363  oran/S=0.9897
+  x=1e+06  gözlenen=     5195  saf model=      6069.2  oran=0.8560  oran/S=1.0130
+  x=1e+07  gözlenen=    36670  saf model=     43485.8  oran=0.8433  oran/S=0.9979
+  x=1e+08  gözlenen=   275633  saf model=    327076.3  oran=0.8427  oran/S=0.9973
+  x=5e+08  gözlenen=  1157119  saf model=   1369876.6  oran=0.8447  oran/S=0.9996
+
+2, c=1 (Sophie Germain): S(teori)=1.3203 S(kaba sayım, l<200)=1.3213  [4.6 sn]
+  x=1e+04  gözlenen=      190  saf model=       144.9  oran=1.3115  oran/S=0.9933
+  x=1e+05  gözlenen=     1171  saf model=       878.7  oran=1.3327  oran/S=1.0094
+  x=1e+06  gözlenen=     7746  saf model=      5904.6  oran=1.3119  oran/S=0.9936
+  x=1e+07  gözlenen=    56032  saf model=     42486.9  oran=1.3188  oran/S=0.9989
+  x=1e+08  gözlenen=   423140  saf model=    320552.9  oran=1.3200  oran/S=0.9998
+  x=5e+08  gözlenen=  1775675  saf model=   1344845.0  oran=1.3204  oran/S=1.0000
+
+1, c=2 (ikiz asal): S(teori)=1.3203 S(kaba sayım, l<200)=1.3213  [5.1 sn]
+  x=1e+04  gözlenen=      205  saf model=       158.3  oran=1.2951  oran/S=0.9809
+  x=1e+05  gözlenen=     1224  saf model=       939.8  oran=1.3024  oran/S=0.9865
+  x=1e+06  gözlenen=     8169  saf model=      6233.9  oran=1.3104  oran/S=0.9925
+  x=1e+07  gözlenen=    58980  saf model=     44473.2  oran=1.3262  oran/S=1.0044
+  x=1e+08  gözlenen=   440312  saf model=    333480.7  oran=1.3204  oran/S=1.0000
+  x=5e+08  gözlenen=  1840170  saf model=   1394365.0  oran=1.3197  oran/S=0.9995
+
+toplam süre 156.6 sn
