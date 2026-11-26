@@ -45,11 +45,17 @@ n ∣ σ(n) ⇒ n = 1. Özellikle σ(n) = 2n hiçbir zaman olmaz.
 
 Lean: `no_multiperfect`, `no_perfect`.
 
-## Teorem 2.5 — Her sayı yalnızdır [İspat]
+## Teorem 2.5 — Her sayı yalnızdır [Lean]
 
 σ(n)/n = σ(m)/m ⇒ n = m.
 
 *İspat.* σ(n)/n = ∏ pᵢ^(eᵢ₋₁(n) − eᵢ(n)), burada e₀ = 0. f = e(n) − e(m) olsun; oranlar eşitse her i için fᵢ₋₁ = fᵢ. f₀ = 0 olduğundan bütün fᵢ = 0. ∎
+
+Lean'deki ispat (`sigma_ratio_inj`) farklı ve daha ekonomik bir yol izler. Oran eşitliği çapraz çarpım biçiminde yazılır: σ(a)·b = σ(b)·a.
+1. g = gcd(a,b), a = g·x, b = g·y alınır; gcd(x,y) = 1.
+2. Çarpımsallıkla σ(x)·y = σ(y)·x elde edilir.
+3. Aralarında asallıktan x ∣ σ(x) ve y ∣ σ(y) çıkar.
+4. Teorem 2.4'e göre x = y = 1.
 
 İnsan bölen toplamında 10'un yalnız olup olmadığı bile açık bir problem.
 

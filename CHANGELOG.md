@@ -1,5 +1,11 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.2.0 — 26 Kasım 2026
+
+- **Her sayı yalnızdır** Lean'de ispatlandı: `sigma_ratio_inj`, yani σ(a)·b = σ(b)·a ⇒ a = b. Karşıt yönüyle birlikte `sigma_ratio_iff`.
+- İspat yolu: gcd ayrıştırması, çarpımsallık, aralarında asallık ve çok-mükemmel sayı yokluğu. Yalnızca standart aksiyomlar kullanıldı.
+- Daha önce yalnız kâğıt üzerinde olan son yapısal sonuç da formal hale geldi.
+
 ## v1.1.0 — 26 Kasım 2026
 
 - **Lean köprüsü:** `lean/ConcreteSigma.lean` eklendi. Gerçek σ tanımlandı (`minFac`, `nextP`, `sigma`) ve `Shift sigma nextP` ispatlandı. Soyut teoremler (W1, TA, birebirlik, mükemmel/dost sayı yokluğu, döngü uzunluğu) artık gerçek σ için kernel tarafından denetleniyor.

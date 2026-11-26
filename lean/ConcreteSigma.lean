@@ -353,4 +353,78 @@ theorem twins_complete_3000_real :
 #print axioms sig_agrees_3000
 #print axioms twins_complete_3000_real
 
+/-! ## 10. Her sayı yalnızdır: σ(a)/a = σ(b)/b ⇒ a = b
+
+Oran eşitliği çapraz çarpım biçiminde ifade edilir: σ(a)·b = σ(b)·a.
+(a, b ≥ 1 için bu, σ(a)/a = σ(b)/b ile denktir; çekirdek Lean'de `Rat` olmadığından
+doğal sayılarda çalışılır.)
+
+İspat: g = gcd(a,b), a = g·x, b = g·y, gcd(x,y) = 1. Çarpımsallıkla
+σ(g)σ(x)·g·y = σ(g)σ(y)·g·x ⇒ σ(x)·y = σ(y)·x. Aralarında asallıktan
+x ∣ σ(x) ve y ∣ σ(y); çok-mükemmel sayı yokluğundan x = y = 1. -/
+
+/-- gcd(x, y) = 1 ve x ∣ s·y ise x ∣ s -/
+theorem dvd_of_dvd_mul_coprime {x y s : Nat} (hc : Nat.gcd x y = 1) (h : x ∣ s * y) : x ∣ s := by
+  have h1 : x ∣ Nat.gcd (s * y) (s * x) := Nat.dvd_gcd h (Nat.dvd_mul_left x s)
+  rw [Nat.gcd_mul_left, Nat.gcd_comm, hc, Nat.mul_one] at h1
+  exact h1
+
+/-- a = gcd(a,b)·x, b = gcd(a,b)·y, gcd(x,y) = 1 -/
+theorem gcd_split (a b : Nat) (ha : 1 ≤ a) :
+    Nat.gcd a b * (a / Nat.gcd a b) = a ∧ Nat.gcd a b * (b / Nat.gcd a b) = b ∧
+    Nat.gcd (a / Nat.gcd a b) (b / Nat.gcd a b) = 1 := by
+  have hg : 0 < Nat.gcd a b := Nat.gcd_pos_of_pos_left b (by omega)
+  refine ⟨Nat.mul_div_cancel' (Nat.gcd_dvd_left a b), Nat.mul_div_cancel' (Nat.gcd_dvd_right a b), ?_⟩
+  rw [Nat.gcd_div (Nat.gcd_dvd_left a b) (Nat.gcd_dvd_right a b), Nat.div_self hg]
+
+theorem sigma_pos (n : Nat) (hn : 1 ≤ n) : 1 ≤ sigma n := by
+  have := (odd_real n hn).1; omega
+
+/-- Aralarında asal x, y için σ(x)·y = σ(y)·x ⇒ x = 1 ∧ y = 1 -/
+theorem coprime_ratio (x y : Nat) (hx : 1 ≤ x) (hy : 1 ≤ y) (hc : Nat.gcd x y = 1)
+    (h : sigma x * y = sigma y * x) : x = 1 ∧ y = 1 := by
+  have hx' : x ∣ sigma x := dvd_of_dvd_mul_coprime hc (by rw [h]; exact Nat.dvd_mul_left x _)
+  have hc' : Nat.gcd y x = 1 := by rw [Nat.gcd_comm]; exact hc
+  have hy' : y ∣ sigma y := dvd_of_dvd_mul_coprime hc' (by rw [← h]; exact Nat.dvd_mul_left y _)
+  exact ⟨no_multiperfect_real x hx hx', no_multiperfect_real y hy hy'⟩
+
+/-- **Her sayı yalnızdır** (çapraz çarpım biçimi): σ(a)·b = σ(b)·a ⇒ a = b -/
+theorem sigma_ratio_inj (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b)
+    (h : sigma a * b = sigma b * a) : a = b := by
+  obtain ⟨ea, eb, hc⟩ := gcd_split a b ha
+  generalize hg : Nat.gcd a b = g at ea eb hc
+  generalize hxdef : a / g = x at ea hc
+  generalize hydef : b / g = y at eb hc
+  have hg1 : 1 ≤ g := by
+    rcases Nat.eq_zero_or_pos g with e | e
+    · rw [e, Nat.zero_mul] at ea; omega
+    · exact e
+  have hx1 : 1 ≤ x := by
+    rcases Nat.eq_zero_or_pos x with e | e
+    · rw [e, Nat.mul_zero] at ea; omega
+    · exact e
+  have hy1 : 1 ≤ y := by
+    rcases Nat.eq_zero_or_pos y with e | e
+    · rw [e, Nat.mul_zero] at eb; omega
+    · exact e
+  rw [← ea, ← eb, sigma_mul, sigma_mul] at h
+  -- σg·σx·(g·y) = σg·σy·(g·x)  ⇒  (σg·g)·(σx·y) = (σg·g)·(σy·x)
+  have h' : (sigma g * g) * (sigma x * y) = (sigma g * g) * (sigma y * x) := by
+    have e1 : sigma g * sigma x * (g * y) = (sigma g * g) * (sigma x * y) := by
+      simp only [Nat.mul_assoc, Nat.mul_left_comm]
+    have e2 : sigma g * sigma y * (g * x) = (sigma g * g) * (sigma y * x) := by
+      simp only [Nat.mul_assoc, Nat.mul_left_comm]
+    rw [← e1, ← e2]; exact h
+  have hpos : 0 < sigma g * g := Nat.mul_pos (sigma_pos g hg1) hg1
+  obtain ⟨rfl, rfl⟩ := coprime_ratio x y hx1 hy1 hc (Nat.eq_of_mul_eq_mul_left hpos h')
+  rw [← ea, ← eb]
+
+/-- Karşıt yön de doğru (kontrol): a = b ⇒ çapraz çarpım eşit -/
+theorem sigma_ratio_iff (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) :
+    sigma a * b = sigma b * a ↔ a = b :=
+  ⟨sigma_ratio_inj a b ha hb, fun e => by rw [e]⟩
+
+#print axioms sigma_ratio_inj
+#print axioms sigma_ratio_iff
+
 end Concrete

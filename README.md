@@ -27,7 +27,7 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 1 | σ(n) her zaman tek; 3 ∣ σ(n) ⇔ 2 ∣ n; q ∣ σ(n) ⇔ p ∣ n (q = sonraki asal) | İspat + Lean |
 | 2 | σ(n+1) − σ(n) her zaman çift ve 3'e bölünmez | İspat + Lean |
 | 3 | σ birebir; n ∣ σ(n) ⇒ n = 1 (uzaylı mükemmel/çok-mükemmel sayı yok) | İspat + Lean |
-| 4 | σ(n)/n birebir: her sayı "yalnız" | İspat |
+| 4 | σ(n)/n birebir: her sayı "yalnız" | İspat + Lean |
 | 5 | d{n : σ(n+1) > σ(n)} = 1/2 tam olarak | İspat (analitik) |
 | 6 | σ(n+1)/σ(n) her ε için pozitif yoğunlukta (1−ε, 1+ε) içinde | İspat (analitik) |
 | 7 | σ(n) mod q, (Z/q)* üzerinde eşit dağılır (p ∤ n) | İspat (Halász) |

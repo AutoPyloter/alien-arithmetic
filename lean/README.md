@@ -59,6 +59,8 @@ Sigma.lean'deki teoremler soyut `Shift S sh` yapısı için ispatlanmıştı. Bu
 | `sigma_prime` | asal p için σ(p) = nextP(p) |
 | **`shift_sigma`** | **Shift sigma nextP** |
 
+**Her sayı yalnızdır (v1.2.0):** `sigma_ratio_inj`: a, b ≥ 1 ve σ(a)·b = σ(b)·a ⇒ a = b. Karşıt yönle birlikte: `sigma_ratio_iff`. Yardımcı lemmalar: `gcd_split` (a = g·x, b = g·y, gcd(x,y) = 1), `dvd_of_dvd_mul_coprime`, `coprime_ratio`. İspat, çarpımsallığı ve çok-mükemmel sayı yokluğunu birleştiriyor. Çekirdek Lean'de `Rat` olmadığı için oran eşitliği çapraz çarpım biçiminde ifade edildi; a, b ≥ 1 için ikisi denktir.
+
 **Gerçek σ'ya aktarılan teoremler:** `W1_real`, `odd_real`, `TA_real`, `inj_real`, `no_multiperfect_real`, `no_perfect_real`, `no_amicable_real`, `cycle_even_real`, `no_fixed_real`, `no_cycle2_real`.
 
 **Aksiyom denetimi:** Yukarıdaki bütün teoremler yalnızca Lean'in standart aksiyomlarına dayanır: `propext`, `Classical.choice`, `Quot.sound`. `sorryAx` ve `Lean.ofReduceBool` yok. Dosyalarda `axiom`, `unsafe`, `opaque`, `implemented_by`, `extern`, `sorry`, `admit` ve `set_option` geçmiyor (grep ile kontrol edildi).
