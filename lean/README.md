@@ -71,6 +71,30 @@ Sigma.lean'deki teoremler soyut `Shift S sh` yapısı için ispatlanmıştı. Bu
 - `sig_agrees_3000`: hızlı `sig` ile gerçek `sigma`, 1 ≤ n ≤ 3000 için aynı değerleri veriyor.
 - `twins_complete_3000_real`: 3000'e kadar σ-ikizi listesi gerçek σ için tam.
 
+## FastSigma.lean ve TwinCertificate.lean — tamlık sertifikası (v1.3.0)
+
+| Teorem | İçerik |
+|---|---|
+| `prime_iff_sqrt`, `isPrimeFast_iff` | Kareköke kadar deneme bölmesi ↔ `Prime` |
+| `minFacFast_eq` | Hızlı en küçük bölen = `minFac` |
+| `nextFast_eq` | Sınırlı arama + güvenli geri dönüş = `nextP` (koşulsuz) |
+| **`sigmaFast_eq`** | **Hızlı σ = gerçek σ** (her n için) |
+| `twinScan_mem` | Tarama döngüsünün üyelik karakterizasyonu |
+| `twins_certificate` | Hesaplanan liste L ⇒ 1 ≤ n ≤ N için σ(n+1) = σ(n) + 2 ⇔ n ∈ L |
+| **`twins_complete_1e6`** | **1 ≤ n ≤ 10⁶ için gerçek σ'nın ikizleri tam olarak 15 sayı** |
+
+`sigmaFast_eq` ve `twins_certificate` yalnızca standart aksiyomlara dayanıyor. `twins_complete_1e6` ise ek olarak `Lean.ofReduceBool` kullanıyor: liste `native_decide` ile hesaplanıyor; derleme yaklaşık 8 dakika sürüyor.
+
+Derleme sırası:
+
+```bash
+P=$(lean --print-prefix)/lib/lean
+lean -o Sigma.olean Sigma.lean
+LEAN_PATH=.:$P lean -o ConcreteSigma.olean ConcreteSigma.lean
+LEAN_PATH=.:$P lean -o FastSigma.olean FastSigma.lean
+LEAN_PATH=.:$P lean TwinCertificate.lean
+```
+
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
 - `Ascent.lean`: Tırmanış yasası. T^L(2^L·u − 1) = 3^L·u − 1 (u tek), burada T(n) = (3n+1)/2 ya da n/2.
