@@ -119,6 +119,29 @@ Bu temsilde şu teoremlerin her biri 1–4 satırda ispatlanıyor: σ'nın çarp
 
 Bedeli: Sayılar ile vektörler arasındaki köprü, yani aritmetiğin temel teoremi, bir kez ispatlanmalı. Toplama (n ↦ n+1) ise bu temsilde basit bir işlem değil; σ-ikizleri ve yoğunluk gibi problemler bu yüzden kolaylaşmıyor.
 
+## AlienBridge.lean — insan sayıları ↔ uzaylı harf vektörleri (v1.5.0)
+
+Köprü bir kez kuruluyor; sonra uzaylı ispatları gerçek sayılara birkaç satırla aktarılıyor.
+
+| Teorem | Çeviri yasası |
+|---|---|
+| `P_prime`, `P_inj`, `P_surj` | `P i` = i'inci asal harf; her asal tam olarak bir harftir |
+| `val_mul` | Üs toplamsal: val p (m·n) = val p m + val p n |
+| `vec_mul` | **çarpma ↦ toplama** |
+| `vec_sigma` | **σ ↦ kaydırma**: vec (σ n) = shift (vec n) |
+| `vec_inj` | **Aritmetiğin temel teoremi (teklik)**: vec birebir |
+| `vec_dvd` | bölünme ↦ her yerde ≤ |
+
+**Aktarılan teoremler** (uzaylı ispatı + köprü, her biri 3–7 satır):
+- `sigma_inj'`
+- `no_multiperfect'`
+- `solitary'`
+- `sigma_odd'`
+
+Aynı teoremler ConcreteSigma.lean'de insan notasyonuyla 40–70 satır tutuyor.
+
+**Ölçüm:** Köprü yaklaşık 220 satır; bir kez yazılıyor. Aktarım bölümü 4 teorem için yaklaşık 35 satır. Yeni bir çarpımsal teorem için gereken iş artık yalnızca uzaylı ispatı (1–4 satır) ve köprüden geçiş (3–5 satır).
+
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
 - `Ascent.lean`: Tırmanış yasası. T^L(2^L·u − 1) = 3^L·u − 1 (u tek), burada T(n) = (3n+1)/2 ya da n/2.

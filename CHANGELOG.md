@@ -1,5 +1,11 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.5.0 — 26 Kasım 2026
+
+- **Uzaylı notasyonu Lean'de** (`AlienNotation.lean`): sayılar harf üs vektörü; çarpma = toplama, σ = kaydırma. Çarpımsallık, tek sayı yasası, birebirlik, çok-mükemmel sayının yokluğu ve "her sayı yalnızdır" teoremlerinin her biri 1–4 satır.
+- **Köprü** (`AlienBridge.lean`): asal harf numaralandırması, üs fonksiyonu ve çeviri yasaları. vec (m·n) = vec m + vec n, vec (σ n) = shift (vec n), ayrıca aritmetiğin temel teoremi (teklik).
+- **Aktarım:** Dört teorem uzaylı ispatlarından gerçek σ'ya geçirildi; ConcreteSigma'daki doğrudan ispatlarla aynı sonuçlar, çok daha kısa yoldan.
+
 ## v1.4.0 — 26 Kasım 2026
 
 - **Yoğunluk 1/2 teoreminin sonlu çekirdeği Lean'de** (`DensitySymmetry.lean`):
