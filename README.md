@@ -81,6 +81,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [11. Su, kum, hücre](docs/11-su-kum-hucre.md) | Frobenius ve dökme dizileri, Buffon ve π'nin normalliği, Collatz hücresel otomatı (Lean) |
 | [12. Ağaç ve oyun](docs/12-agac-oyun.md) | Matula ağaçları, sürreal sayılar, nimber cisimleri, ağaç ↔ Hackenbush köprüsü |
 | [13. Kesir-merdiveni ve yol](docs/13-kesir-yol.md) | Sürekli kesirler, Stern–Brocot (Lean), Zaremba, kübik sayıların katsayıları |
+| [14. Harmoni](docs/14-harmoni.md) | Asallar frekans olarak, zeta sıfırlarından asal sayma, Euler'in uyum ölçüsü, Collatz = koma |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents
