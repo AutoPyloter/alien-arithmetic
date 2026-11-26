@@ -1,0 +1,57 @@
+  sıkı: {0,1,2}
+  sıkı: {0,1,3}
+  sıkı: {0,2,3}
+K=3 koşucu, hızlar 0..30: 435 küme, sanıyı bozan 0, sıkı (bir koşucu tam 1/K) 35
+  en kötü: hızlar {0,1,2}, koşucu hızı 0, en iyi uzaklık 1/3 (K*delta = 1.000000), zaman t = 1/3
+  ilkel (ebob=1) sıkı küme: 3
+  sıkı olmayanların en kötüsü: {0,1,3}, koşucu hızı 3, uzaklık 2/5 (K*delta = 1.200000), t = 1/5
+  sıkı: {0,1,2,3}
+  sıkı: {0,1,2,5}
+  sıkı: {0,1,3,4}
+  sıkı: {0,2,3,5}
+  sıkı: {0,3,4,5}
+K=4 koşucu, hızlar 0..30: 4060 küme, sanıyı bozan 0, sıkı (bir koşucu tam 1/K) 35
+  en kötü: hızlar {0,1,2,3}, koşucu hızı 0, en iyi uzaklık 1/4 (K*delta = 1.000000), zaman t = 1/4
+  ilkel (ebob=1) sıkı küme: 5
+  sıkı olmayanların en kötüsü: {0,1,2,6}, koşucu hızı 0, uzaklık 2/7 (K*delta = 1.142857), t = 2/7
+  sıkı: {0,1,2,3,4}
+  sıkı: {0,1,2,3,7}
+  sıkı: {0,1,2,4,5}
+  sıkı: {0,1,2,5,6}
+  sıkı: {0,1,3,4,5}
+  sıkı: {0,1,3,4,6}
+  sıkı: {0,1,3,4,7}
+  sıkı: {0,1,3,4,11}
+  sıkı: {0,1,4,5,6}
+  sıkı: {0,1,4,5,8}
+  sıkı: {0,1,4,5,11}
+  sıkı: {0,2,3,4,7}
+  sıkı: {0,2,3,5,6}
+  sıkı: {0,2,3,5,7}
+  sıkı: {0,2,3,7,10}
+  sıkı: {0,2,4,5,7}
+  sıkı: {0,3,4,5,7}
+  sıkı: {0,3,4,6,7}
+  sıkı: {0,3,4,7,8}
+  sıkı: {0,3,4,7,10}
+  sıkı: {0,3,4,7,11}
+  sıkı: {0,3,6,7,10}
+  sıkı: {0,3,7,8,10}
+  sıkı: {0,4,5,6,7}
+  sıkı: {0,4,5,7,11}
+  sıkı: {0,4,6,7,11}
+  sıkı: {0,4,7,8,11}
+  sıkı: {0,6,7,10,11}
+  sıkı: {0,7,8,10,11}
+K=5 koşucu, hızlar 0..30: 27405 küme, sanıyı bozan 0, sıkı (bir koşucu tam 1/K) 105
+  en kötü: hızlar {0,1,2,3,4}, koşucu hızı 0, en iyi uzaklık 1/5 (K*delta = 1.000000), zaman t = 1/5
+  ilkel (ebob=1) sıkı küme: 29
+  sıkı olmayanların en kötüsü: {0,1,2,3,8}, koşucu hızı 0, uzaklık 2/9 (K*delta = 1.111111), t = 2/9
+K=6 koşucu, hızlar 0..30: 142506 küme, sanıyı bozan 0, sıkı (bir koşucu tam 1/K) 163
+  en kötü: hızlar {0,1,2,3,4,5}, koşucu hızı 0, en iyi uzaklık 1/6 (K*delta = 1.000000), zaman t = 1/6
+  ilkel (ebob=1) sıkı küme: 60
+  sıkı olmayanların en kötüsü: {0,1,2,3,4,10}, koşucu hızı 0, uzaklık 2/11 (K*delta = 1.090909), t = 2/11
+
+real	0m5.534s
+user	0m3.614s
+sys	0m0.000s

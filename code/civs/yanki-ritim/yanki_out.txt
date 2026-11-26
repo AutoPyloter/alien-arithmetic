@@ -1,0 +1,33 @@
+Test: 200000 rastgele çift, a,b < M=30030
+  + hata 0, x hata 0, CRT geri dönüş hata 0, karşılaştırma hata 0
+  29 -> (1, 2, 4, 1, 7, 3)  30 -> (0, 0, 0, 2, 8, 4)  30029 -> (1, 2, 4, 6, 10, 12)
+  ilk 5 koordinat sabit -> sayı 13 farklı değerden biri (aralık 2310 adım): [7, 2317, 4627, 6937, 9247] ...
+Maliyet (20000 sayı, k=6 koordinat, saf Python, mikrosaniye/sayı):
+  onluk->yankı 0.54 | + 0.82 | x 0.84 | yankı->onluk CRT 1.53 | karışık taban 3.60
+  küçük işlem sayısı: enc 6, +/x 6, CRT 18 (büyük sayılarla), karışık taban 30 (küçük sayılarla)
+harf->yankı (indis tablosu, doğrusal form): n <= 200000, hata 0, ortalama 10.79 tablo işlemi
+yankı->harf = çarpanlara ayırma; burada sympy factorint ortalama 4.0 mikrosaniye (n<=2e5)
+  aynı yankı (1, 2, 2, 3, 6, 4) taşıyan sayılar: [17, 30047, 60077, 90107, 120137] harfleri: [{17: 1}, {30047: 1}, {60077: 1}, {90107: 1}, {19: 1, 6323: 1}]
+Asallık: 13 < n < 30030, tüm yankı koordinatları ≠ 0 olan 5759 sayı, bunların 3242 tanesi asal (oran 0.563).
+  n < M için kesin asallık testi, √M ≈ 173'e kadar 40 asallık koordinat ister (taban 6).
+Goldbach: 2N = p + q. Her ℓ için p mod ℓ ∉ {0, 2N mod ℓ}: ℓ | 2N ise ℓ-1, değilse ℓ-2 izinli kalan.
+  2N∈[100000,100600): yerel çarpan S∈[1.0,1.01) -> 65 sayı, ortalama temsil 604
+  2N∈[100000,100600): yerel çarpan S∈[1.3,1.4) -> 27 sayı, ortalama temsil 815
+  2N∈[100000,100600): yerel çarpan S∈[2.0,2.1) -> 49 sayı, ortalama temsil 1221
+  2N∈[100000,100600): yerel çarpan S∈[2.6,2.8) -> 15 sayı, ortalama temsil 1633
+  temsil/S oranı: ortalama 605, göreli sapma 0.015 (ham temsilin göreli sapması 0.386)
+İkiz asallar (p, p+2): her ℓ ≥ 3 için p mod ℓ ∉ {0, ℓ-2}: izinli ℓ-2 kalan.
+İkiz asal çifti sayısı p < 1000000: 8169
+  z=    3: yerel koşulları sağlayan p<X sayısı  166666, bunlardan ikiz 8168
+  z=    5: yerel koşulları sağlayan p<X sayısı   99999, bunlardan ikiz 8167
+  z=    7: yerel koşulları sağlayan p<X sayısı   71427, bunlardan ikiz 8167
+  z=   13: yerel koşulları sağlayan p<X sayısı   49447, bunlardan ikiz 8166
+  z=   31: yerel koşulları sağlayan p<X sayısı   31047, bunlardan ikiz 8164
+  z=  100: yerel koşulları sağlayan p<X sayısı   19296, bunlardan ikiz 8161
+  z= 1000: yerel koşulları sağlayan p<X sayısı    8134, bunlardan ikiz 8134
+Parite: n ≤ 1000000, p ≤ z=100 için tüm yankı koordinatları ≠ 0 olan 120759 sayı:
+  Ω=1 (asal, λ=-1): 78473,  Ω=2 (iki büyük harf, λ=+1): 42286
+  mod 3: asallar [0.5 0.5] | iki-harfliler [0.501 0.499]
+  mod 5: asallar [0.25  0.25  0.251 0.25 ] | iki-harfliler [0.25  0.25  0.249 0.251]
+  mod 7: asallar [0.166 0.166 0.167 0.167 0.167 0.167] | iki-harfliler [0.167 0.167 0.166 0.167 0.166 0.167]
+  mod 11: asallar [0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1] | iki-harfliler [0.1   0.1   0.101 0.1   0.1   0.099 0.1   0.099 0.1   0.1  ]

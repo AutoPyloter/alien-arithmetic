@@ -1,0 +1,8 @@
+K=7 koşucu, hızlar 0..30: 593775 küme, sanıyı bozan 0, sıkı (bir koşucu tam 1/K) 158
+  en kötü: hızlar {0,1,2,3,4,5,6}, koşucu hızı 0, en iyi uzaklık 1/7 (K*delta = 1.000000), zaman t = 1/7
+  ilkel (ebob=1) sıkı küme: 62
+  sıkı olmayanların en kötüsü: {0,1,5,6,11,16,17}, koşucu hızı 0, uzaklık 5/33 (K*delta = 1.060606), t = 10/33
+
+real	0m58.304s
+user	0m27.135s
+sys	0m0.000s

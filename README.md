@@ -75,6 +75,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [5. Açık problemler](docs/05-acik-problemler.md) | Katkıya açık sorular ve "duvar merdiveni" |
 | [6. Uzaylı toplama (+1)](docs/06-toplama.md) | İndis tabloları, doğrusal +1 yasası, zorluğun korunumu |
 | [7. Altın uygarlık](docs/07-altin-uygarlik.md) | Fibonacci notasyonu, ×φ kaydırması, altın Sophie Germain çiftleri |
+| [8. Yankı ve ritim](docs/08-yanki-ritim.md) | Kalıntı sistemi, Goldbach eleği, yalnız koşucu taraması |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents

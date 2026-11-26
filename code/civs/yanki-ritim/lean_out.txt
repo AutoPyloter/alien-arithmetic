@@ -1,0 +1,8 @@
+'Yanki.enc_add' depends on axioms: [propext]
+'Yanki.enc_mul' depends on axioms: [propext]
+'Yanki.crt23_correct' depends on axioms: [propext]
+'Yanki.crt23_unique' depends on axioms: [propext]
+'Yanki.crt2357_correct' depends on axioms: [propext]
+'Yanki.enc2357_unique' depends on axioms: [propext]
+'Yanki.beat_iff' depends on axioms: [propext]
+'Yanki.order_not_local' does not depend on any axioms
