@@ -36,7 +36,8 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 10 | s(n) = σ(n) − n: sabit nokta ve 2-döngü yok, her döngü çift uzunlukta | İspat + Lean |
 | 11 | 10⁷'ye kadar yalnız iki döngü: (12, 33, 32, 211) ve bir 12-döngü | Hesap |
 | 12 | σ(n)/n ortalaması ≈ 4,128; d{σ(n) > 2n} ≈ 0,536 | Hesap / sezgisel |
-| 13 | Klasik σ₁ için Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4); Touchard: n ≡ 1 (mod 12) veya 9 (mod 36); en az 4 farklı asal (Sylvester) | Lean (Mathlib yok) |
+| 13 | Klasik σ₁ için Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4); Touchard: n ≡ 1 (mod 12) veya 9 (mod 36); en az 4 farklı asal (Peirce 1832) | Lean (Mathlib yok) |
+| 14 | Tek mükemmel sayının en az 6 farklı asal çarpanı var (zorlama motoru) | Bilgisayar ispatı (kesin aritmetik; Euler Lean'de) |
 
 Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.pdf) (English) and [`notes/uzayli_defteri.md`](notes/uzayli_defteri.md) (Turkish research notebook).
 
@@ -84,6 +85,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [13. Kesir-merdiveni ve yol](docs/13-kesir-yol.md) | Sürekli kesirler, Stern–Brocot (Lean), Zaremba, kübik sayıların katsayıları |
 | [14. Harmoni](docs/14-harmoni.md) | Asallar frekans olarak, zeta sıfırlarından asal sayma, Euler'in uyum ölçüsü, Collatz = koma |
 | [15. Geometri](docs/15-geometri.md) | Pergel–cetvel makinesi, 17-gen, açı üçlemenin imkânsızlığı (Lean), origami, Fermat asalları |
+| [17. Zorlama motoru](docs/17-zorlama-motoru.md) | Tek mükemmel sayı için ω ≥ 5 ve ω ≥ 6 bilgisayar ispatı; motor bilinen mükemmel ve 3-mükemmel sayılarla doğrulandı |
 | [16. Tek mükemmel sayı](docs/16-tek-mukemmel.md) | Euler teoremi Lean'de, en az 3 asal, neredeyse mükemmel tek sayılar, Descartes'ın sahtesi |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 

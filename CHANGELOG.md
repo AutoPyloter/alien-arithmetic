@@ -1,8 +1,16 @@
 # Değişiklik günlüğü / Changelog
 
+## v2.0.0 — 27 Kasım 2026
+
+- **Zorlama zinciri motoru** (`code/oddperfect/engine_general.py`, `engine_fast.py`): σ(n) = T·n için harf harf arama. Kullanılan araçlar: oran alt ve üst sınırları, σ(p^e)'nin siklotomik zorlaması, üs muhasebesi ve Euler sınıfları.
+  - Tek mükemmel sayılar için ω = 3, 4, 5 durumları kapatıldı, yani **ω ≥ 6**.
+  - Doğrulama: motor, 2³¹ − 1'e kadarki bütün çift mükemmel sayıları ve 3 ile 4 asallı 3-mükemmel sayıları (120, 672, 523776) buldu.
+- Belge `docs/17-zorlama-motoru.md`.
+- Atıf düzeltmesi: "en az 4 asal" sonucu Peirce'e (1832) ait.
+
 ## v1.9.0 — 27 Kasım 2026
 
-- **Sylvester** (`lean/OddPerfect3.lean`, `no_odd_perfect_three_primes`): tek mükemmel sayının en az 4 farklı asal çarpanı vardır. Oran sınırı, mod 4/mod 5 harf toplamı tabloları ve (3,5,11) için tamsayı alt/üst oran sınırlarıyla ispatlandı. Mathlib ve sorry yok.
+- **Peirce (1832)** (`lean/OddPerfect3.lean`, `no_odd_perfect_three_primes`): tek mükemmel sayının en az 4 farklı asal çarpanı vardır. Oran sınırı, mod 4/mod 5 harf toplamı tabloları ve (3,5,11) için tamsayı alt/üst oran sınırlarıyla ispatlandı. Mathlib ve sorry yok.
 
 ## v1.8.0 — 27 Kasım 2026
 

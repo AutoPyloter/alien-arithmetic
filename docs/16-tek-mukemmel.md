@@ -22,7 +22,7 @@ Mükemmellik koşulu σ(n) = 2n vektör üzerinde bir **çarpım denklemi**. Har
 | `no_odd_perfect_two_primes` | en fazla iki farklı asal çarpanı olan tek mükemmel sayı yok |
 | `dsum_mod3` | n ≡ 2 (mod 3) ⇒ 3 ∣ σ(n) |
 | `touchard` | **Touchard (1953):** tek mükemmel n ≡ 1 (mod 12) veya n ≡ 9 (mod 36) |
-| `no_odd_perfect_three_primes` (OddPerfect3.lean) | **Sylvester:** tek mükemmel sayının en az 4 farklı asal çarpanı var |
+| `no_odd_perfect_three_primes` (OddPerfect3.lean) | **Peirce (1832):** tek mükemmel sayının en az 4 farklı asal çarpanı var |
 | `euler_alien` | Euler harf dilinde: ∃ j, P j ≡ 1 (mod 4), vec n j ≡ 1 (mod 4), diğer her i için vec n i çift |
 
 Aksiyomlar: yalnızca `propext`, `Classical.choice`, `Quot.sound` (native_decide yok).
@@ -76,7 +76,7 @@ Bu kanıtta ince bir Diophantus analizi gerekmedi; yalnızca mod 4 ve mod 5 say�
 
 ## Sonraki adımlar
 
-1. ~~En az 4 farklı asal~~: yapıldı (v1.9.0). Sıradaki: en az 5 (Sylvester 1888); vaka sayısı hızla artıyor.
+1. ~~En az 4 farklı asal~~: yapıldı (v1.9.0). Sıradaki: en az 5 (Sylvester 1888).
 2. ~~Touchard~~ ve ~~uzaylı köprüsü~~: yapıldı (v1.8.0).
 
 ### Touchard'ın harf dilinde ispatı

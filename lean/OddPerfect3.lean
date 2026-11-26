@@ -1,7 +1,7 @@
 import OddPerfect
 
 /-! # OddPerfect3 — tek mükemmel sayının en az 4 farklı asal çarpanı vardır
-(Sylvester 1888 / Gradstein; çekirdek Lean 4.15, Mathlib yok)
+(Peirce 1832; Sylvester ve Servais 1888; çekirdek Lean 4.15, Mathlib yok)
 
 Yol:
 1. Oran sınırı: σ(n)/n < ∏ p/(p−1) ⇒ 2(p−1)(q−1)(r−1) < pqr.
@@ -325,7 +325,7 @@ theorem no_odd_perfect_three_ordered (p q r a b c : Nat) (hp : Prime p) (hq : Pr
     · have := (geo_odd_iff 13 c (by decide)).1 h1; omega
     · have := (geo_two_mod4 13 c (by decide) h1).2; omega
 
-/-- **Sylvester:** tek mükemmel bir sayının en az dört farklı asal çarpanı vardır.
+/-- **Peirce (1832):** tek mükemmel bir sayının en az dört farklı asal çarpanı vardır.
     (p, q, r farklı tek asallar; a, b, c herhangi, sıfır dahil.) -/
 theorem no_odd_perfect_three_primes (p q r a b c : Nat) (hp : Prime p) (hq : Prime q) (hr : Prime r)
     (hp2 : p % 2 = 1) (hq2 : q % 2 = 1) (hr2 : r % 2 = 1)
