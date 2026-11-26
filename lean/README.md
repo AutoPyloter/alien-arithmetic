@@ -108,6 +108,17 @@ LEAN_PATH=.:$P lean TwinCertificate.lean
 
 Yalnızca standart aksiyomlar. Teorem 3.1'in geri kalanı (kuyruk tahmini ve Erdős–Littlewood–Offord ile gerçek σ'ya geçiş) `docs/02-teoremler.md`'de; Lean'de değil.
 
+## AlienNotation.lean — uzaylı notasyonunda ispatlar (deneme)
+
+Sayılar harf üs vektörü (`Nat → Nat`) olarak tanımlanıyor:
+- çarpma ↦ vektör toplamı,
+- bölünme ↦ her yerde ≤,
+- σ ↦ sağa kaydırma.
+
+Bu temsilde şu teoremlerin her biri 1–4 satırda ispatlanıyor: σ'nın çarpımsallığı, σ(n)'nin tekliği, σ'nın birebirliği, çok-mükemmel sayının yokluğu ve "her sayı yalnızdır". `Classical.choice` bile gerekmiyor. Sigma.lean ve ConcreteSigma.lean'de aynı teoremler yüzlerce satır tutuyor.
+
+Bedeli: Sayılar ile vektörler arasındaki köprü, yani aritmetiğin temel teoremi, bir kez ispatlanmalı. Toplama (n ↦ n+1) ise bu temsilde basit bir işlem değil; σ-ikizleri ve yoğunluk gibi problemler bu yüzden kolaylaşmıyor.
+
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
 - `Ascent.lean`: Tırmanış yasası. T^L(2^L·u − 1) = 3^L·u − 1 (u tek), burada T(n) = (3n+1)/2 ya da n/2.
