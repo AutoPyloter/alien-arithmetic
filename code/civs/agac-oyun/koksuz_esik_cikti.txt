@@ -1,0 +1,14 @@
+1 köksüz: 1 en büyük kanonik: 1 köklü en büyük: 1
+2 köksüz: 1 en büyük kanonik: 2 köklü en büyük: 2
+3 köksüz: 1 en büyük kanonik: 3 köklü en büyük: 4
+4 köksüz: 2 en büyük kanonik: 7 köklü en büyük: 8
+5 köksüz: 3 en büyük kanonik: 16 köklü en büyük: 19
+6 köksüz: 6 en büyük kanonik: 32 köklü en büyük: 67
+7 köksüz: 11 en büyük kanonik: 64 köklü en büyük: 331
+8 köksüz: 23 en büyük kanonik: 152 köklü en büyük: 2221
+9 köksüz: 47 en büyük kanonik: 361 köklü en büyük: 19577
+10 köksüz: 106 en büyük kanonik: 1273 köklü en büyük: 219613
+11 köksüz: 235 en büyük kanonik: 4489 köklü en büyük: 3042161
+12 köksüz: 551 en büyük kanonik: 22177 köklü en büyük: 50728129
+13 köksüz: 1301 en büyük kanonik: 109561 köklü en büyük: 997525853
+14 köksüz: 3159 en büyük kanonik: 735151 köklü en büyük: 22742734291

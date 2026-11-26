@@ -1,0 +1,7 @@
+'nimAdd_assoc' depends on axioms: [propext, Quot.sound]
+'sprague_grundy_nim2_lt8' depends on axioms: [propext]
+'nim_field16_laws' depends on axioms: [propext]
+'nim_field16_inverses' depends on axioms: [propext]
+'matula_roundtrip_le60' does not depend on any axioms
+'hackenbush_squares_zero' depends on axioms: [propext]
+exit 0
