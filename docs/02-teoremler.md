@@ -61,15 +61,49 @@ Lean'deki ispat (`sigma_ratio_inj`) farklı ve daha ekonomik bir yol izler. Oran
 
 ---
 
-## Teorem 3.1 — Yarı yarıya [İspat]
+## Teorem 3.1 — Yarı yarıya [İspat; sonlu çekirdek Lean]
 
-**d{n : σ(n+1) > σ(n)} = 1/2** (doğal yoğunluk). Ayrıca her ε > 0 için |σ(n+1)/σ(n) − 1| < ε olan n'ler pozitif yoğunluktadır.
+**d{n : σ(n+1) > σ(n)} = 1/2** (doğal yoğunluk).
 
-*İspat fikri.*
-1. **Kesme:** y'den küçük asalların katkısı n mod W'ye bağlıdır. Kuyruğun ortalaması, Bertrand tahminiyle ≤ 4/y'dir: Σ_{ℓ>y} (ℓ'−ℓ)/ℓ² ≤ 2/y.
-2. **Bağımsızlık:** Çin kalan teoremiyle farklı asalların katkıları bağımsızdır.
-3. **Simetri:** n ↦ −n−1 dönüşümü her modülde "d ∣ n" ile "d ∣ n+1"in yerini değiştirir. Bu yüzden F(n+1) − F(n) simetrik dağılır.
-4. **Atomsuzluk:** Σ 2/ℓ = ∞ olduğundan Lévy'nin saflık yasası eşitlik olasılığını 0 yapar. Simetrik ve atomsuz dağılımda P(> 0) = 1/2. ∎
+### Adım 1 — Kesilmiş model tam olarak 1/2'dir [Lean]
+
+W çift bir sayı olsun (örneğin W = ∏_{p≤y} p^k). Kesilmiş oran R_W(n) = σ(g)/g, burada g = gcd(n, W). Bu oran n mod W'ye bağlıdır.
+
+> **Teorem (Lean: `up_exactly_half`).** Her çift W için
+> #{r < W : R_W(r+1) > R_W(r)} = W/2.
+
+İspat iki parçalı:
+- **Simetri (`up_eq_down`):** r ↦ W−1−r dönüşümü, gcd(·, W) değerlerinde r ile r+1'in yerini değiştirir: gcd(W−1−r, W) = gcd(r+1, W). Bu yüzden yukarı adımların sayısı aşağı adımların sayısına eşittir.
+- **Beraberlik yok (`no_tie`):** gcd(r,W) ile gcd(r+1,W) aralarında asaldır. Oranları eşit olsaydı, "her sayı yalnızdır" teoremine göre ikisi de 1 olurdu. Ama W çiftken r ya da r+1 çifttir, dolayısıyla gcd'lerden biri çifttir.
+
+Yan sonuç (`consecutive_ratio_ne`): Gerçek σ için de σ(n+1)/(n+1) ≠ σ(n)/n her n ≥ 1 için geçerli.
+
+### Adım 2 — Kesilmiş modelden gerçek σ'ya [İspat, Lean'de değil]
+
+Z(n) = log σ(n+1) − log σ(n) farkını iki parçaya ayıralım:
+- Z_W(n): kesilmiş katkı, n mod W'ye bağlı.
+- T(n): kuyruk, yani y'den büyük asalların ve kesilmiş üslerin katkısı.
+
+Gerçek karşılaştırma ile kesilmiş karşılaştırmanın farklı çıktığı n'ler şu iki kümenin birleşimindedir:
+- {|T(n)| ≥ η}
+- {|Z_W(n)| < η + 1/n}
+
+**(a) Kuyruk.** Bertrand ile Σ_{ℓ>y} (ℓ'−ℓ)/ℓ² ≤ 2/y. Buradan T'nin ortalaması O(1/y + 2^{−k}) çıkar. Markov eşitsizliğiyle d{|T| ≥ η} ≤ O(1/(ηy) + 2^{−k}/η).
+
+**(b) Yoğunlaşmama (anti-concentration).** Çin kalan teoremine göre Z_W'nin bir periyottaki dağılımı, bağımsız X_ℓ'lerin (ℓ ≤ y) toplamının dağılımıdır.
+- Her X_ℓ simetriktir: ℓ^v'nin n'yi ya da n+1'i tam bölmesi eşit olasılıklıdır.
+- X_ℓ ≠ 0 olasılığı yaklaşık 2/ℓ'dir.
+- "Aktif" asallar (X_ℓ ≠ 0 olanlar) koşullandırıldığında işaretler bağımsız yazı-turadır.
+
+Erdős'ün Littlewood–Offord eşitsizliğine (Sperner teoremi) göre: |x_ℓ| ≥ 2η olan m aktif terimin ± toplamının uzunluğu 2η olan bir aralığa düşme olasılığı ≤ C(m, ⌊m/2⌋)/2^m ≤ 1/√m.
+
+log(ℓ'/ℓ) ≥ 2η olan asalların 1/ℓ toplamı η → 0 iken ıraksar (yaklaşık log log(1/η)). Bu yüzden aktif terim sayısı m büyür ve
+
+d{|Z_W| < 2η} ≪ E[min(1, m^{−1/2})] → 0   (η → 0, y → ∞).
+
+**(c) Sonuç.** Önce η'yı küçük, sonra y ve k'yı büyük seçince fark kümesinin üst yoğunluğu istenildiği kadar küçük olur. Adım 1'e göre kesilmiş yoğunluk tam olarak 1/2 olduğundan, gerçek yoğunluk da 1/2'dir. ∎
+
+Bu ispat önceki sürümdeki Lévy saflık yasasına ve Erdős–Wintner limit dağılımına ihtiyaç duymuyor. Kullanılan araçlar: Çin kalan teoremi, Bertrand postulatı, Markov eşitsizliği ve Erdős–Littlewood–Offord. Üstelik etkili bir oran da veriyor: d{|Z| < η} ≪ (log log(1/η))^{−1/2}.
 
 Sayısal kontrol:
 
@@ -79,7 +113,15 @@ Sayısal kontrol:
 | n ≈ 10⁶ | 0,49997 |
 | n ≈ 10⁸ | 0,50005 |
 
-Lean: simetri adımı `W5_symm`, Bertrand adımı `bertrand_step`.
+Kesilmiş model (Python ile ayrıca sayıldı):
+
+| W | Yukarı | Aşağı | Eşit |
+|---|---|---|---|
+| 12 | 6 | 6 | 0 |
+| 360 | 180 | 180 | 0 |
+| 5040 | 2520 | 2520 | 0 |
+| 720 720 | 360 360 | 360 360 | 0 |
+| 21 621 600 | 10 810 800 | 10 810 800 | 0 |
 
 ## Teorem 3.2 — Mod q eşit dağılım [İspat]
 

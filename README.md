@@ -28,7 +28,7 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 2 | σ(n+1) − σ(n) her zaman çift ve 3'e bölünmez | İspat + Lean |
 | 3 | σ birebir; n ∣ σ(n) ⇒ n = 1 (uzaylı mükemmel/çok-mükemmel sayı yok) | İspat + Lean |
 | 4 | σ(n)/n birebir: her sayı "yalnız" | İspat + Lean |
-| 5 | d{n : σ(n+1) > σ(n)} = 1/2 tam olarak | İspat (analitik) |
+| 5 | d{n : σ(n+1) > σ(n)} = 1/2 tam olarak | İspat; sonlu çekirdeği (kesilmiş modelde tam 1/2) Lean'de |
 | 6 | σ(n+1)/σ(n) her ε için pozitif yoğunlukta (1−ε, 1+ε) içinde | İspat (analitik) |
 | 7 | σ(n) mod q, (Z/q)* üzerinde eşit dağılır (p ∤ n) | İspat (Halász) |
 | 8 | (σ(n), σ(n+1)) mod q ortak dağılımı | Hipotez H'ye koşullu (Tao 2016) |

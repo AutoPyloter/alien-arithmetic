@@ -1,5 +1,12 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.4.0 — 26 Kasım 2026
+
+- **Yoğunluk 1/2 teoreminin sonlu çekirdeği Lean'de** (`DensitySymmetry.lean`):
+  - `up_exactly_half`: her çift W için kesilmiş modelde yukarı adımlar tam olarak yarıdır.
+  - `consecutive_ratio_ne`: σ(n+1)/(n+1) ≠ σ(n)/n.
+- **Yeni ve daha basit ispat:** Beraberliğin hiç olmadığı (her sayı yalnızdır teoreminden) gösterilince Lévy saflık yasasına gerek kalmadı. Gerçek σ'ya geçiş elementer: Markov eşitsizliği ve Erdős–Littlewood–Offord. İspat ayrıca etkili bir oran veriyor: d{|Z| < η} ≪ (log log 1/η)^(−1/2).
+
 ## v1.3.0 — 26 Kasım 2026
 
 - **σ-ikizi tamlık sertifikası (Katman 1, Lean):**

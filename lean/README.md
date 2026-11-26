@@ -95,6 +95,19 @@ LEAN_PATH=.:$P lean -o FastSigma.olean FastSigma.lean
 LEAN_PATH=.:$P lean TwinCertificate.lean
 ```
 
+## DensitySymmetry.lean — yoğunluk 1/2 teoreminin sonlu çekirdeği (v1.4.0)
+
+| Teorem | İçerik |
+|---|---|
+| `sumR_reflect`, `gcd_reflect` | Toplamın ve gcd'nin r ↦ W−1−r yansıması |
+| `up_eq_down` | Her W için bir periyotta yukarı adım sayısı = aşağı adım sayısı |
+| `no_tie` | W çiftse kesilmiş oranlar asla eşit değil (`sigma_ratio_inj`'den) |
+| **`up_exactly_half`** | **Her çift W için 2 · (yukarı adım sayısı) = W** |
+| `upStep_periodic` | Kesilmiş karşılaştırma W-periyodik |
+| `consecutive_ratio_ne` | Gerçek σ için σ(n+1)/(n+1) ≠ σ(n)/n, her n ≥ 1 |
+
+Yalnızca standart aksiyomlar. Teorem 3.1'in geri kalanı (kuyruk tahmini ve Erdős–Littlewood–Offord ile gerçek σ'ya geçiş) `docs/02-teoremler.md`'de; Lean'de değil.
+
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
 - `Ascent.lean`: Tırmanış yasası. T^L(2^L·u − 1) = 3^L·u − 1 (u tek), burada T(n) = (3n+1)/2 ya da n/2.
