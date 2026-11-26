@@ -1,5 +1,9 @@
 # Değişiklik günlüğü / Changelog
 
+## v1.9.0 — 27 Kasım 2026
+
+- **Sylvester** (`lean/OddPerfect3.lean`, `no_odd_perfect_three_primes`): tek mükemmel sayının en az 4 farklı asal çarpanı vardır. Oran sınırı, mod 4/mod 5 harf toplamı tabloları ve (3,5,11) için tamsayı alt/üst oran sınırlarıyla ispatlandı. Mathlib ve sorry yok.
+
 ## v1.8.0 — 27 Kasım 2026
 
 - **Touchard teoremi** (`touchard`): tek mükemmel n ≡ 1 (mod 12) veya ≡ 9 (mod 36). Ara sonuç `dsum_mod3`: n ≡ 2 (mod 3) ⇒ 3 ∣ σ(n). Bölen eşlemesi yerine harf ayrıştırmasıyla ispatlandı.

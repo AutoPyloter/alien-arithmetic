@@ -162,6 +162,7 @@ Ayrıntı: [`docs/06-toplama.md`](../docs/06-toplama.md).
 | `no_odd_perfect_two_primes` | en fazla iki asallı tek mükemmel sayı yok |
 | `touchard` | tek mükemmel n ≡ 1 (mod 12) veya ≡ 9 (mod 36) |
 | `euler_alien` (OddPerfectAlien.lean) | Euler harf vektörü dilinde |
+| `no_odd_perfect_three_primes` (OddPerfect3.lean) | en az 4 farklı asal (Sylvester) |
 
 Derleme: `lean -o OddPerfect.olean OddPerfect.lean` (Sigma.olean gerekli). Ayrıntı: [`docs/16-tek-mukemmel.md`](../docs/16-tek-mukemmel.md).
 

@@ -22,6 +22,7 @@ Mükemmellik koşulu σ(n) = 2n vektör üzerinde bir **çarpım denklemi**. Har
 | `no_odd_perfect_two_primes` | en fazla iki farklı asal çarpanı olan tek mükemmel sayı yok |
 | `dsum_mod3` | n ≡ 2 (mod 3) ⇒ 3 ∣ σ(n) |
 | `touchard` | **Touchard (1953):** tek mükemmel n ≡ 1 (mod 12) veya n ≡ 9 (mod 36) |
+| `no_odd_perfect_three_primes` (OddPerfect3.lean) | **Sylvester:** tek mükemmel sayının en az 4 farklı asal çarpanı var |
 | `euler_alien` | Euler harf dilinde: ∃ j, P j ≡ 1 (mod 4), vec n j ≡ 1 (mod 4), diğer her i için vec n i çift |
 
 Aksiyomlar: yalnızca `propext`, `Classical.choice`, `Quot.sound` (native_decide yok).
@@ -59,9 +60,23 @@ Gözlem: en yakın adayların hepsinde **birden fazla tek üslü harf** var, yan
 
 **Uyarı (Descartes'ın sahtesi):** D = 3²·7²·11²·13²·22021 sayısı, 22021 asalmış gibi hesaplanırsa σ(D) = 2D sağlıyor. Euler biçimine de tam uyuyor: 22021 ≡ 1 (mod 4), üs 1. Ama 22021 = 19²·61, yani gerçekten asal değil. Bu örnek, mod 4 kısıtlarının tek başına yetmediğini gösteriyor; asallık bilgisi şart.
 
+## En az 4 asal (`lean/OddPerfect3.lean`)
+
+1. **Oran sınırı:** σ(n)/n < ∏ p/(p−1). Buradan 2(p−1)(q−1)(r−1) < pqr çıkıyor. p < q < r tek asallar için bu yalnızca (3,5,7), (3,5,11), (3,5,13) üçlülerinde mümkün.
+2. **(3,5,7) ve (3,5,13): mod 5'te farklı sayım.** 5 ∣ n olduğundan 5 bir harf toplamını bölmeli.
+   - 1+5+…+5^b toplamı her zaman ≡ 1 (mod 5).
+   - Euler'e göre 3'ün üssü çift; çift üslü 3-toplamı hiçbir zaman 5'e bölünmüyor.
+   - 7-toplamı (çift üslü) ya da 13-toplamı ancak üs ≡ 3 (mod 4) iken 5'e bölünüyor. Bu da Euler'in izin verdiği üslerle (çift ya da ≡ 1 mod 4) çelişiyor.
+3. **(3,5,11):**
+   - mod 5 hesabı 11'in üssünü ≥ 4'e zorluyor.
+   - 3'ün üssü 2 ise 1+3+9 = 13 sayısı σ(n)'i bölüyor, ama 13 sayının harfleri arasında yok.
+   - 5'in üssü 1 ise oran 2'nin altında kalıyor; üssü ≥ 3 ise 2'yi aşıyor.
+
+Bu kanıtta ince bir Diophantus analizi gerekmedi; yalnızca mod 4 ve mod 5 sayımları ile tamsayı oran sınırları yetti.
+
 ## Sonraki adımlar
 
-1. **En az 3 → en az 4, 5, … farklı asal.** Sylvester'in bolluk sınırları; bunlar sonlu vaka analizi gerektiriyor.
+1. ~~En az 4 farklı asal~~: yapıldı (v1.9.0). Sıradaki: en az 5 (Sylvester 1888); vaka sayısı hızla artıyor.
 2. ~~Touchard~~ ve ~~uzaylı köprüsü~~: yapıldı (v1.8.0).
 
 ### Touchard'ın harf dilinde ispatı
