@@ -1,0 +1,33 @@
+== Buffon ignesi (l=t=1), yon pi'siz uretiliyor ==
+N=10^2: pi_hat=2.985075  hata=-1.57e-01  kuram SD=2.37e-01
+N=10^3: pi_hat=3.125000  hata=-1.66e-02  kuram SD=7.51e-02
+N=10^4: pi_hat=3.109936  hata=-3.17e-02  kuram SD=2.37e-02
+N=10^5: pi_hat=3.127932  hata=-1.37e-02  kuram SD=7.51e-03
+N=10^6: pi_hat=3.141128  hata=-4.65e-04  kuram SD=2.37e-03
+N=10^7: pi_hat=3.141928  hata=+3.35e-04  kuram SD=7.51e-04
+-- tekrarli deney: RMS hata * sqrt(N) (kuram sqrt(pi^2(pi-2)/2) = 2.374)
+N=10^2: RMS*sqrt(N) = 2.510
+N=10^3: RMS*sqrt(N) = 2.407
+N=10^4: RMS*sqrt(N) = 2.231
+N=10^5: RMS*sqrt(N) = 2.450
+-- Lazzarini (1901) 3408 atis, l/t=5/6, 1808 kesis: pi_hat = 3.1415929203539825 = 355/113? True
+
+== Monte Carlo: d-boyutlu birim top hacmi ==
+d= 2: tahmin=3.1413  gercek=3.1416  isabet=785328  goreli SD~5.23e-04
+d= 3: tahmin=4.1927  gercek=4.1888  isabet=524090  goreli SD~9.54e-04
+d= 5: tahmin=5.2592  gercek=5.2638  isabet=164349  goreli SD~2.25e-03
+d=10: tahmin=2.4494  gercek=2.5502  isabet=2392  goreli SD~2.00e-02
+d=15: tahmin=0.36045  gercek=0.38144  isabet=11  goreli SD~2.93e-01
+d=20: tahmin=0  gercek=0.025807  isabet=0  goreli SD~inf
+
+== pi'nin ilk 10^6 ondalik basamagi ==
+rakam sayilari: [99959, 99758, 100026, 100229, 100230, 100359, 99548, 99800, 99985, 100106]
+ki-kare=5.509, sd=9, p=0.788
+2'li ortusmeyen bloklar: ki-kare=105.8, sd=99, p=0.301
+3'li ortusmeyen bloklar: ki-kare=998.1, sd=999, p=0.502
+100 parcanin (10^4 basamak) rakam p-degerleri, KS uniform testi p = 0.366
+
+== Yeni deneme: tum k-basamakli dizilerin ilk kez ne zaman tamamlandigi ==
+k=2: pi'de tum 10^2 dizi 606. basamakta tamam; rastgele: ort=527, SD=118, pi'nin yuzdelik sirasi=0.78
+k=3: pi'de tum 10^3 dizi 8555. basamakta tamam; rastgele: ort=7480, SD=1288, pi'nin yuzdelik sirasi=0.82
+k=4: pi'de tum 10^4 dizi 99849. basamakta tamam; rastgele: ort=96458, SD=12359, pi'nin yuzdelik sirasi=0.72

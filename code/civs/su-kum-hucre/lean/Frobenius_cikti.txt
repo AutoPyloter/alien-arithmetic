@@ -1,0 +1,7 @@
+'allPairs_spec' depends on axioms: [propext, Quot.sound]
+'sylvester_gap' depends on axioms: [propext, Quot.sound]
+'all_above' depends on axioms: [propext, Quot.sound]
+'su_3_5' depends on axioms: [propext, Quot.sound]
+'su_7_11' depends on axioms: [propext, Quot.sound]
+'allPairs_ok' depends on axioms: [propext]
+'su_4_6_odd' depends on axioms: [propext, Quot.sound]

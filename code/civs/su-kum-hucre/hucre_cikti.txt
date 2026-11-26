@@ -1,0 +1,15 @@
+Collatz CA (taban 6, 12 durum, yaricap 1): n<=3000, 215063 adim, 0 hata
+Ornek n=7: [7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+Kural tablosu girdisi: 1728
+De Mol etiket sistemi: 2<=n<=5000, a^n -> a^T(n), 0 hata
+Bir T-adimi icin etiket adimi = n + (n mod 2): True
+n<=5000 icin 1'e kadar toplam etiket adimi: 651279884
+Kural 30 merkez sutun (10001 bit): 1 orani=0.5032
+Son 4000 bitte <=2000 periyot yok
+Kural 110: 200 adimdan sonra canli hucre: 121
+Yasam Oyunu planor: 4 adim sonra (1,1) kaymis kopya: True
+{(3/2)^t}, t<=3000: KS uniform p = 0.956 ; ortalama 0.4971 ; <1/2 orani 0.503
+
+real	7m58.037s
+user	3m29.126s
+sys	0m4.079s

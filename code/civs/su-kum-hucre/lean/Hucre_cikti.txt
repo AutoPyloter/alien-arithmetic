@@ -1,0 +1,4 @@
+'val_times3' depends on axioms: [propext, Quot.sound]
+'times3_digits' depends on axioms: [propext, Quot.sound]
+'caStep_correct' depends on axioms: [propext, Quot.sound]
+'tag_ok_100' does not depend on any axioms
