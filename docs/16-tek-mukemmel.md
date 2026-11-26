@@ -26,6 +26,8 @@ Mükemmellik koşulu σ(n) = 2n vektör üzerinde bir **çarpım denklemi**. Har
 
 Aksiyomlar: yalnızca `propext`, `Classical.choice`, `Quot.sound` (native_decide yok).
 
+**Önceki biçimselleştirmeler:** Euler biçimi, Google DeepMind'ın *formal-conjectures* deposunda (`FormalConjectures/Wikipedia/PerfectNumbers.lean`, `odd_perfect_number.euler_form`) "çözülmüş" olarak işaretli. Orada AlphaProof tarafından Mathlib ile yapılmış bir ispata bağlantı verilmiş. Bizim katkımız bu sonucun ilk biçimsel ispatı değil. Farklı olan üç şey var: Mathlib kullanmadan, sıfırdan tanımlanmış bölen toplamıyla yapılmış olması; ispatın harf ayrıştırmasına dayanması; ve Touchard teoremi ile "en az 3 asal" sonucunu da içermesi (bu ikisi o dosyada yok).
+
 **Harf dilinde Euler:** Tek mükemmel bir sayının harf vektöründe **yalnızca bir harf tek üslüdür**. O harf 4k+1 biçimli bir asal, üssü de 4k+1. Diğer bütün üsler çift.
 
 ### İspat fikri (mod 4 sayımı)
