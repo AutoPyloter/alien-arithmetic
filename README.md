@@ -74,6 +74,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [4. Aliquot dizileri](docs/04-aliquot.md) | İnsan/uzaylı karşılaştırması, döngüler, dinamik |
 | [5. Açık problemler](docs/05-acik-problemler.md) | Katkıya açık sorular ve "duvar merdiveni" |
 | [6. Uzaylı toplama (+1)](docs/06-toplama.md) | İndis tabloları, doğrusal +1 yasası, zorluğun korunumu |
+| [7. Altın uygarlık](docs/07-altin-uygarlik.md) | Fibonacci notasyonu, ×φ kaydırması, altın Sophie Germain çiftleri |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
 
 ## İçerik / Contents
