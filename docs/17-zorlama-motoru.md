@@ -94,7 +94,7 @@ Motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı. Mathlib kullanılm
 | `no_odd_perfect_omega3` | ω = 3 olan tek mükemmel sayı yok | < 1 s |
 | `no_odd_perfect_omega4` | ω = 4 olan tek mükemmel sayı yok ⇒ **ω ≥ 5** (Sylvester 1888) | < 1 s |
 | `no_odd_perfect_omega5` (`lean/OPN5.lean`) | ω = 5 olan tek mükemmel sayı yok ⇒ **ω ≥ 6** (Gradstein 1925) | 86 s |
-| `no_odd_perfect_omega6` (`lean/OPN6.lean`) | ω = 6 — çalışıyor (sonuç bekleniyor) | — |
+| `no_odd_perfect_omega6` (`lean/OPN6.lean`) | ω = 6 — 27 Kasım gecesi 2 saat 45 dakikada bitmedi; daha uzun bir çalıştırma gerekiyor | > 2 sa 45 dk |
 
 ## Güvenilirlik
 
@@ -106,3 +106,9 @@ Motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı. Mathlib kullanılm
 
 - `engine_general.py`: açık ve basit sürüm (doğrulama testleri).
 - `engine_fast.py`: aynı mantık; siklotomik ayrıştırma ve gcd(m, L#) ile hızlandırılmış.
+
+## Açık iş (27 Kasım sabahı)
+
+- **ω = 7 araması (Python):** 3 saat 15 dakikada 210 milyon düğüme ulaştı, bitmedi. Bu arama "ω ≥ 8" sonucunu (Chein, Hagis 1979) yeniden elde etmeyi hedefliyor.
+- **Lean ω = 6:** Uyarlanır motor K=5'i 86 saniyede kapatıyor; K=6 için birkaç saat ya da daha hızlı bir asallık/çarpanlama gerekiyor.
+- **Hızlandırma fikri:** Lean yorumlayıcısı Python'dan yaklaşık 10 kat yavaş. C'ye derlenmiş kütüphaneyi yüklemek (`--load-dynlib`) `native_decide` için hız kazandırmadı.
