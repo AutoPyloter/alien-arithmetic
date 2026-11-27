@@ -166,6 +166,17 @@ Ayrıntı: [`docs/06-toplama.md`](../docs/06-toplama.md).
 
 Derleme: `lean -o OddPerfect.olean OddPerfect.lean` (Sigma.olean gerekli). Ayrıntı: [`docs/16-tek-mukemmel.md`](../docs/16-tek-mukemmel.md).
 
+## OPNCheck.lean — doğrulanmış zorlama motoru (v2.1.0)
+
+| Teorem | İçerik |
+|---|---|
+| `run_sound` | motor `true` döndürürse tutarlı mükemmel yapılandırma yok |
+| `no_odd_perfect_of_run` | `run N (init K) = true` ⇒ tam K farklı tek asallı mükemmel sayı yok |
+| `no_odd_perfect_omega4` (OPNResult.lean) | ω = 4 yok (Sylvester) |
+| `no_odd_perfect_omega5` (OPN5.lean) | ω = 5 yok (Gradstein) ⇒ ω ≥ 6 |
+
+Derleme sırası: OddPerfect → OddPerfect3 → OPNCheck (`-o OPNCheck.olean`) → OPNResult / OPN5. OPN5 yaklaşık 70 saniye sürüyor.
+
 ## Diğer dosyalar — uzaylı Collatz lemmaları
 
 - `Ascent.lean`: Tırmanış yasası. T^L(2^L·u − 1) = 3^L·u − 1 (u tek), burada T(n) = (3n+1)/2 ya da n/2.

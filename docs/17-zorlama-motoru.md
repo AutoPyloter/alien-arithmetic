@@ -56,6 +56,28 @@ Motor genel σ(n) = T·n denklemi için yazıldı ve bilinen çözümleri bulup 
 
 **Bir hata ve dersi:** Motorun ilk sürümü, alt sınırın tam 2'ye eşit olduğu dalları da buduyordu. Doğrulama testi bu yüzden 6 ile 28'i bulamadı ve hata ortaya çıktı. Bunun nedeni, serbest bir üssün en küçük değerini alabilmesi; o durumda eşitlik gerçek bir çözüm. Düzeltmeden sonra tek sayı sonuçları değişmedi, ama doğrulama adımının gerekli olduğu görülmüş oldu.
 
+## Lean'de doğrulanmış motor (`lean/OPNCheck.lean`)
+
+Motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı. Mathlib kullanılmadı.
+
+- **Model:** n = ∏_{p ∈ ps} p^(e p). Burada ps farklı tek asallardan oluşan bir liste, e bir üs fonksiyonu.
+- **Durum:** karar sınırı L, bilinen harfler K, her biri için üs bilgisi (sınıf, en küçük üs, sabit üs) ve boş yuva sayısı.
+- **`run_sound`:** `run n st = true` ise, `st` ile tutarlı hiçbir (ps, e) yapılandırması σ(n) = 2n'yi sağlamaz.
+- **Kullanılan kurallar:**
+  1. Euler sınıfları (Euler teoreminin liste sürümü Lean'de ispatlandı).
+  2. Oran alt ve üst sınırları.
+  3. Zorlama: σ(p^e)'nin asal bölenleri; asallık ispatlı `isPrimeFast` ile kontrol ediliyor.
+  4. Kofaktör kuralı: yuva kalmadıysa ve kofaktör > 1 ise dal kapanıyor.
+  5. 2'nin üssü tam 1.
+  6. L-genişletme ve üs dallanması.
+- **Güven tabanı:** Çarpan adaylarını üreten fonksiyon (`minFacFast`) ispatsız bir öneri gibi kullanılıyor; her aday ayrıca kontrol ediliyor. Hesap `native_decide` ile yapıldığından `Lean.ofReduceBool` aksiyomu (Lean derleyicisine güven) ekleniyor.
+
+| Teorem (`lean/OPNResult.lean`) | İçerik | Süre |
+|---|---|---|
+| `no_odd_perfect_omega3` | ω = 3 olan tek mükemmel sayı yok | < 1 s |
+| `no_odd_perfect_omega4` | ω = 4 olan tek mükemmel sayı yok ⇒ **ω ≥ 5** (Sylvester 1888) | < 1 s |
+| `no_odd_perfect_omega5` (`lean/OPN5.lean`) | ω = 5 olan tek mükemmel sayı yok ⇒ **ω ≥ 6** (Gradstein 1925) | 70 s |
+
 ## Güvenilirlik
 
 - Her budama kesin rasyonel aritmetikle yapılıyor (Fraction, gmpy2).

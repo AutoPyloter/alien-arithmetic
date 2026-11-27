@@ -164,9 +164,23 @@ class Engine:
             if s == self.T * n:
                 self.found.append(n)
             return
+        # Tek bilinmeyen asal q kaldı ve tüm bilinen üsler sabit: v_q(n) ≥ 1 ama
+        # q, hiçbir σ(p^e)'yi bölmez (sabitlerin çarpanları zorlamayla bilinene eklendi,
+        # σ(q^f) ≡ 1 mod q). Çelişki.
+        if k2 == 1 and allfixed:
+            return
         free = [(v[1], p) for p, v in known.items() if v[2] is None]
         if k2 > 0 and (hik < T or not free):
+            # en küçük bilinmeyen asal q için: (1 + 1/q) ≤ T / lo_k  ⇒  q ≥ 1 / (T/lo_k − 1)
+            lok = F(1)
+            for p, (cls, emin, fx) in known.items():
+                lok *= ab(p, fx if fx is not None else emin)
+            y = T / lok
             q = L
+            if y > 1:
+                qmin = int(1 / (y - 1))          # q ≥ 1/(y−1); bu sayının altındaki asallar elenir
+                if qmin - 1 > q:
+                    q = qmin - 1
             while True:
                 q = self.nextprime_(q)
                 if q in known:

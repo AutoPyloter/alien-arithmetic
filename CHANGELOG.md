@@ -1,5 +1,10 @@
 # Değişiklik günlüğü / Changelog
 
+## v2.1.0 — 27 Kasım 2026
+
+- **Doğrulanmış zorlama motoru** (`lean/OPNCheck.lean`, yaklaşık 1050 satır, Mathlib yok): motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı (`run_sound`). Euler sınıfları, oran sınırları, siklotomik zorlama, kofaktör kuralı, L-genişletme ve üs dallanması kurallarının hepsi ispatlı.
+- `no_odd_perfect_omega4` (`lean/OPNResult.lean`) ve `no_odd_perfect_omega5` (`lean/OPN5.lean`): tek mükemmel sayının **en az 6 farklı asal çarpanı** var. Hesap `native_decide` ile yapıldı (aksiyomlar: propext, Classical.choice, Quot.sound, Lean.ofReduceBool).
+
 ## v2.0.0 — 27 Kasım 2026
 
 - **Zorlama zinciri motoru** (`code/oddperfect/engine_general.py`, `engine_fast.py`): σ(n) = T·n için harf harf arama. Kullanılan araçlar: oran alt ve üst sınırları, σ(p^e)'nin siklotomik zorlaması, üs muhasebesi ve Euler sınıfları.
