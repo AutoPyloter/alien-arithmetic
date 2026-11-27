@@ -42,6 +42,8 @@ Bu çok güçlü bir filtre. 3 ∤ m ise m'nin en az dört asalı olmalı (örne
 
 Sonuç: tek m'lerin yalnızca yaklaşık %14'ü taranıyor ve tarama 7 kat hızlanıyor.
 
+**Teorem 3'–4'.** Tanım gereği Descartes sayısında x asal değil (asal olsaydı D gerçek bir tek mükemmel sayı olurdu). x ≡ 1 (mod 4) ve bileşik ⇒ x ≥ 9 ⇒ k ≥ 5 ⇒ σ(n)/n ≥ 9/5 ⇒ ∏ p/(p−1) > 9/5. Bu eşikle taranan m'ler 1,6 kat daha azalıyor; 10¹² ≤ m < 10¹³ taraması bu eşikle yapıldı.
+
 **Doğrulama.**
 - Kapsama testi: m < 3·10⁵'te Teorem 4'ü sağlayan 17 994 adayın her biri tam bir kez taranıyor (eksik 0, fazla 0, tekrar 0) ve σ değerleri sympy ile aynı.
 - Tutarlılık: m < 10¹¹ için iki program (düz tarama ve çekirdek taraması) aynı sonucu veriyor.
@@ -54,6 +56,8 @@ Sonuç: tek m'lerin yalnızca yaklaşık %14'ü taranıyor ve tarama 7 kat hızl
 | `descartes_deficiency` | aynı koşullarda σ(n) = x·d, (x+1)·d = 2n, d ∣ n |
 | `descartes_abundancy` | x ≡ 1 (mod 4), x ≥ 5 ve 5n ≤ 3σ(n) (Teorem 3) |
 | `descartes_core` (`lean/DescartesCore.lean`) | n = ∏ p^(e p) ise 5·∏(p − 1) < 3·∏p, yani ∏ p/(p−1) > 5/3 (Teorem 4) |
+| `descartes_abundancy'` | x asal değilse (Descartes tanımı) x ≥ 9 ve 9n ≤ 5σ(n) (Teorem 3') |
+| `descartes_core'` | x asal değilse 9·∏(p − 1) < 5·∏p, yani ∏ p/(p−1) > 9/5 (Teorem 4') |
 
 Böylece taramanın dayandığı bütün matematik (n kare, d ∣ n, bolluk ≥ 5/3, ∏ p/(p−1) > 5/3) biçimsel olarak doğrulandı. Geriye yalnızca hesap (C programı) kalıyor.
 

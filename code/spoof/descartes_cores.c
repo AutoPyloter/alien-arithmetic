@@ -2,7 +2,8 @@
  * Descartes sayıları için çekirdek taraması (descartes_squares.c'nin hızlı sürümü).
  *
  * Teorem 3: x ≥ 5 (x tek, x ≡ 1 mod 4) ⇒ σ(m²)/m² = 2 − 1/k ≥ 5/3.
- * Teorem 4: σ(m²)/m² < ∏_{p | m} p/(p−1) ⇒ ∏_{p | m} p/(p−1) > 5/3.
+ * Teorem 3': Descartes sayısında x bileşik ⇒ x ≥ 9 ⇒ σ(m²)/m² ≥ 9/5 (varsayılan eşik).
+ * Teorem 4: σ(m²)/m² < ∏_{p | m} p/(p−1) ⇒ ∏_{p | m} p/(p−1) > eşik.
  *
  * m'nin asallarını artan sırada dizince, p/(p−1) çarpımının ilk kez 5/3'ü aştığı önek
  * C = {p_1 < … < p_j} "çekirdek" olsun ve c = p_1⋯p_j. O zaman m = c·t; t'nin her asal
@@ -125,7 +126,11 @@ int main(int argc, char **argv) {
     }
     /* Q = lim ≥ √B: m < B'nin Q'dan büyük en fazla bir asal böleni var ve onun katkısı < Q/(Q−1).
        Dolayısıyla m'nin Q'ya kadar olan asallarının çarpımı > (5/3)(Q−1)/Q olmalı. */
-    TH = (5.0L / 3.0L) * (long double)(lim - 1) / (long double)lim - 1e-12L;
+#ifndef TNUM
+#define TNUM 9.0L   /* x bileşik ⇒ x ≥ 9 ⇒ σ(m²)/m² ≥ 9/5 (Teorem 3'); x asal durumlar (gerçek tek mükemmel) için -DTNUM=5.0L -DTDEN=3.0L */
+#define TDEN 5.0L
+#endif
+    TH = (TNUM / TDEN) * (long double)(lim - 1) / (long double)lim - 1e-12L;
     dfs(1, 1.0L, 1, 0);   /* pr[0] = 2 atlanır */
     fprintf(stderr, "done [%llu,%llu) cores=%llu found=%llu scanned_t=%.3Le\n",
             (unsigned long long)A, (unsigned long long)B, (unsigned long long)cores,
