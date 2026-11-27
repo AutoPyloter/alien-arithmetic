@@ -53,8 +53,9 @@ Sonuç: tek m'lerin yalnızca yaklaşık %14'ü taranıyor ve tarama 7 kat hızl
 | `descartes_square` | tek n, tek x, σ(n)(x+1) = 2nx ⇒ n tam kare |
 | `descartes_deficiency` | aynı koşullarda σ(n) = x·d, (x+1)·d = 2n, d ∣ n |
 | `descartes_abundancy` | x ≡ 1 (mod 4), x ≥ 5 ve 5n ≤ 3σ(n) (Teorem 3) |
+| `descartes_core` (`lean/DescartesCore.lean`) | n = ∏ p^(e p) ise 5·∏(p − 1) < 3·∏p, yani ∏ p/(p−1) > 5/3 (Teorem 4) |
 
-Böylece sonucun "ispat" kısmı biçimsel olarak doğrulandı. Geriye yalnızca hesap (tarama) kalıyor.
+Böylece taramanın dayandığı bütün matematik (n kare, d ∣ n, bolluk ≥ 5/3, ∏ p/(p−1) > 5/3) biçimsel olarak doğrulandı. Geriye yalnızca hesap (C programı) kalıyor.
 
 ## Hesap (`code/spoof/descartes_squares.c`)
 
