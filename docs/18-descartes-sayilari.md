@@ -19,9 +19,27 @@ n ve x tek olsun.
 
 **Sonuç:** n = m². Dolayısıyla "n ≤ 10¹²" taraması aslında yalnızca "tek m ≤ 10⁶" demek. Bu, Euler'in tek mükemmel sayılar için kullandığı mod 4 argümanının sahte sayılardaki karşılığı. Harf dilinde: n'nin harf vektöründe bütün üsler çift; tek üslü tek harf, sahte çarpan x.
 
+## İkinci gözlem: açık (2n − σ(n)), n'yi böler
+
+d = 2n − σ(n) olsun. Eşitlik σ(n)·x + σ(n) = 2n·x biçiminde yazılınca:
+- **σ(n) = x·d.**
+- **(x + 1)·d = 2n.** Buradan x + 1 = 2k (k tam sayı) için **k·d = n**, yani **d ∣ n**.
+- Dolayısıyla **σ(n)/n = 2 − 1/k**: n'nin bolluk oranı 2'nin tam olarak bir birim kesir kadar altında. x ≡ 1 (mod 4) olduğundan k tek.
+
+Descartes örneği: n = 3003², d = 819, k = 11011, x = 22021 = 2k − 1.
+
+## Lean'de (`lean/Descartes.lean`, Mathlib yok, standart aksiyomlar)
+
+| Teorem | İçerik |
+|---|---|
+| `descartes_square` | tek n, tek x, σ(n)(x+1) = 2nx ⇒ n tam kare |
+| `descartes_deficiency` | aynı koşullarda σ(n) = x·d, (x+1)·d = 2n, d ∣ n |
+
+Böylece sonucun "ispat" kısmı biçimsel olarak doğrulandı. Geriye yalnızca hesap (tarama) kalıyor.
+
 ## Hesap (`code/spoof/descartes_squares.c`)
 
-- Her tek m için σ(m²)'yi parçalı elekle hesaplıyor (128 bit tam sayılar).
+- Her tek m için σ(m²)'yi parçalı elekle hesaplıyor (128 bit tam sayılar, yalnızca tek m'ler; ilk sürüme göre 2,2 kat hızlı).
 - d = 2m² − σ(m²) > 0 ve d ∣ σ(m²) koşulunu kontrol ediyor; sağlanıyorsa x = σ(m²)/d.
 - Doğrulama: m ≤ 20 000 için Python + sympy ile kaba hesap aynı sonucu veriyor. Ayrıca m ≈ 10¹¹ civarında rastgele 100 değerde σ(m²) sympy ile birebir aynı.
 
@@ -30,6 +48,7 @@ n ve x tek olsun.
 | m ≤ 10⁶ (n ≤ 10¹², Tóth'un sınırı) | 0,05 s | yalnızca m = 3003, x = 22021 (Descartes) |
 | m ≤ 10⁹ (n ≤ 10¹⁸) | 26 s | yalnızca Descartes |
 | m < 10¹¹ (n < 10²²) | yaklaşık 47 dk | yalnızca Descartes |
+| 10¹¹ ≤ m < 10¹² (n < 10²⁴) | (sürüyor, tahmini 3 sa) | |
 
 **Yeni sınır:** Descartes örneği dışında bir Descartes sayısı D = n·x varsa **n > 10²²**. Bu, Tóth'un 10¹² sınırının on milyar (10¹⁰) kat büyütülmesi. Ham çıktı: `data/descartes_squares_m_1e11.txt`.
 

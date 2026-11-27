@@ -8,6 +8,8 @@
  *
  * Program [A, B) aralığındaki tek m'ler için σ(m²)'yi parçalı elekle hesaplar ve
  * d = 2m² − σ(m²) > 0 olup d | σ(m²) olan bütün m'leri (x = σ/d) yazdırır.
+ * Lemma 2: d tek ve x + 1 = 2n/d ⇒ d | n; σ(n)/n = 2 − 1/k, k = n/d = (x+1)/2 tek.
+ * Yalnızca tek m işlenir (yarı bellek, yarı iş).
  * Kullanım: ./descartes_squares A B
  */
 #include <stdio.h>
@@ -38,15 +40,18 @@ int main(int argc, char **argv) {
     uint64_t *rem = malloc(sizeof(uint64_t) * SEG);
     u128 *val = malloc(sizeof(u128) * SEG);
     uint64_t found = 0;
-    for (uint64_t lo = A; lo < B; lo += SEG) {
-        uint64_t hi = lo + SEG < B ? lo + SEG : B, len = hi - lo;
-        for (uint64_t i = 0; i < len; i++) { rem[i] = lo + i; val[i] = 1; }
-        for (size_t k = 0; k < np; k++) {
+    if ((A & 1) == 0) A++;
+    for (uint64_t lo = A; lo < B; lo += 2 * SEG) {
+        uint64_t hi = lo + 2 * SEG < B ? lo + 2 * SEG : B, len = (hi - lo + 1) / 2;
+        /* yalnızca tek m: i ↔ m = lo + 2i (lo tek) */
+        for (uint64_t i = 0; i < len; i++) { rem[i] = lo + 2 * i; val[i] = 1; }
+        for (size_t k = 1; k < np; k++) {           /* pr[0] = 2 atlanır */
             uint64_t p = pr[k];
             if (p * p >= hi) break;
             uint64_t st = (lo + p - 1) / p * p;
-            for (uint64_t m = st; m < hi; m += p) {
-                uint64_t i = m - lo;
+            if ((st & 1) == 0) st += p;
+            for (uint64_t m = st; m < hi; m += 2 * p) {
+                uint64_t i = (m - lo) >> 1;
                 int a = 0;
                 while (rem[i] % p == 0) { rem[i] /= p; a++; }
                 /* σ(p^{2a}) = 1 + p + … + p^{2a} */
@@ -56,13 +61,13 @@ int main(int argc, char **argv) {
             }
         }
         for (uint64_t i = 0; i < len; i++) {
-            uint64_t m = lo + i;
-            if (m < 3 || (m & 1) == 0) continue;
+            uint64_t m = lo + 2 * i;
+            if (m < 3) continue;
             if (rem[i] > 1) { u128 r = rem[i]; val[i] *= (r * r + r + 1); }
             u128 n = (u128)m * m, s = val[i];
             if (s < 2 * n) {
                 u128 d = 2 * n - s;
-                if (s % d == 0) {
+                if (s % d == 0 && n % d == 0) {
                     u128 x = s / d;
                     printf("m=%llu n=", (unsigned long long)m); print_u128(n);
                     printf(" x="); print_u128(x); printf("\n");
