@@ -1,5 +1,9 @@
 # Değişiklik günlüğü / Changelog
 
+## v2.4.0 — 27 Kasım 2026
+
+- **Descartes sayıları için yeni alt sınır** (`docs/18-descartes-sayilari.md`, `code/spoof/descartes_squares.c`). Mod 4 argümanından n tam kare olmak zorunda. Bu sayede m < 10¹¹ için n = m² tarandı ve Descartes örneğinden başka çözüm çıkmadı. Sonuç: başka bir Descartes sayısı varsa **n > 10²²** (Tóth 2021: n > 10¹²).
+
 ## v2.3.0 — 27 Kasım 2026
 
 - **Lean: ω ≥ 7** (`lean/OPN6.lean`, `no_odd_perfect_omega6`): tek mükemmel sayının en az 7 farklı asal çarpanı var (Pomerance 1974), doğrulanmış motorla 27 dakikada.
