@@ -28,12 +28,31 @@ d = 2n − σ(n) olsun. Eşitlik σ(n)·x + σ(n) = 2n·x biçiminde yazılınca
 
 Descartes örneği: n = 3003², d = 819, k = 11011, x = 22021 = 2k − 1.
 
+## Üçüncü ve dördüncü gözlem: bolluk en az 5/3
+
+- **Teorem 3.** n tek olduğundan k tek, dolayısıyla x = 2k − 1 ≡ 1 (mod 4) ve x ≥ 5. Buradan k ≥ 3 ve **σ(n)/n = 2 − 1/k ≥ 5/3**.
+- **Teorem 4.** σ(m²)/m² < ∏_{p ∣ m} p/(p−1) olduğundan **∏_{p ∣ m} p/(p−1) > 5/3**.
+
+Bu çok güçlü bir filtre. 3 ∤ m ise m'nin en az dört asalı olmalı (örneğin 5·7·11·13). 3 ∣ m ise 5 ya da 7 de m'yi bölmeli; ikisi de bölmüyorsa birkaç ek asal gerekiyor.
+
+**Çekirdek taraması (`code/spoof/descartes_cores.c`).**
+- m'nin asallarını artan sırada dizince, p/(p−1) çarpımının ilk kez eşiği aştığı önek C "çekirdek" olsun ve m = c·t.
+- t'nin her asalı ya C'de ya da C'nin en büyük asalından büyük. Her m en fazla bir çekirdeğe düşer.
+- Eşik (5/3)(Q−1)/Q alınıyor. Q = max(√B, 2·10⁶) olduğundan m'nin Q'dan büyük en fazla bir asalı olabilir, o yüzden bütün çekirdek asalları Q'nun altında kalıyor.
+
+Sonuç: tek m'lerin yalnızca yaklaşık %14'ü taranıyor ve tarama 7 kat hızlanıyor.
+
+**Doğrulama.**
+- Kapsama testi: m < 3·10⁵'te Teorem 4'ü sağlayan 17 994 adayın her biri tam bir kez taranıyor (eksik 0, fazla 0, tekrar 0) ve σ değerleri sympy ile aynı.
+- Tutarlılık: m < 10¹¹ için iki program (düz tarama ve çekirdek taraması) aynı sonucu veriyor.
+
 ## Lean'de (`lean/Descartes.lean`, Mathlib yok, standart aksiyomlar)
 
 | Teorem | İçerik |
 |---|---|
 | `descartes_square` | tek n, tek x, σ(n)(x+1) = 2nx ⇒ n tam kare |
 | `descartes_deficiency` | aynı koşullarda σ(n) = x·d, (x+1)·d = 2n, d ∣ n |
+| `descartes_abundancy` | x ≡ 1 (mod 4), x ≥ 5 ve 5n ≤ 3σ(n) (Teorem 3) |
 
 Böylece sonucun "ispat" kısmı biçimsel olarak doğrulandı. Geriye yalnızca hesap (tarama) kalıyor.
 
@@ -48,9 +67,10 @@ Böylece sonucun "ispat" kısmı biçimsel olarak doğrulandı. Geriye yalnızca
 | m ≤ 10⁶ (n ≤ 10¹², Tóth'un sınırı) | 0,05 s | yalnızca m = 3003, x = 22021 (Descartes) |
 | m ≤ 10⁹ (n ≤ 10¹⁸) | 26 s | yalnızca Descartes |
 | m < 10¹¹ (n < 10²²) | yaklaşık 47 dk | yalnızca Descartes |
-| 10¹¹ ≤ m < 10¹² (n < 10²⁴) | (sürüyor, tahmini 3 sa) | |
+| m < 10¹¹, çekirdek taraması (yeniden) | 3 dk | yalnızca Descartes (düz taramayla aynı) |
+| 10¹¹ ≤ m < 10¹² (n < 10²⁴), çekirdek taraması | 25 dk | yok |
 
-**Yeni sınır:** Descartes örneği dışında bir Descartes sayısı D = n·x varsa **n > 10²²**. Bu, Tóth'un 10¹² sınırının on milyar (10¹⁰) kat büyütülmesi. Ham çıktı: `data/descartes_squares_m_1e11.txt`.
+**Yeni sınır:** Descartes örneği dışında bir Descartes sayısı D = n·x varsa **n > 10²⁴**. Bu, Tóth'un 10¹² sınırının 10¹² kat büyütülmesi. Ham çıktılar: `data/descartes_squares_m_1e11.txt` ve `data/descartes_cores_m_1e12.txt`.
 
 ## Notlar
 

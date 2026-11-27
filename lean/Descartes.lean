@@ -53,5 +53,34 @@ theorem descartes_deficiency (n x : Nat) (hn : n % 2 = 1) (hx : x % 2 = 1)
   have e3 : k * D = n := by omega
   exact ⟨k, by rw [Nat.mul_comm]; exact e3.symm⟩
 
+/-- **Teorem 3:** x ≡ 1 (mod 4), x ≥ 5 ve σ(n)/n ≥ 5/3 (yani 3·σ(n) ≥ 5·n). -/
+theorem descartes_abundancy (n x : Nat) (hn : n % 2 = 1) (hx : x % 2 = 1) (hx2 : 2 ≤ x)
+    (h : dsum n * (x + 1) = 2 * n * x) : x % 4 = 1 ∧ 5 ≤ x ∧ 5 * n ≤ 3 * dsum n := by
+  obtain ⟨e1, e2, _⟩ := descartes_deficiency n x hn hx h
+  generalize hD : 2 * n - dsum n = D at e1 e2
+  obtain ⟨k, hk⟩ : ∃ k, x + 1 = 2 * k := ⟨(x + 1) / 2, by omega⟩
+  rw [hk, Nat.mul_assoc] at e2
+  have hn' : k * D = n := by omega
+  -- n tek ⇒ k tek ⇒ x = 2k − 1 ≡ 1 (mod 4)
+  have hk2 : k % 2 = 1 := by
+    rcases Nat.mod_two_eq_zero_or_one k with h0 | h0
+    · exfalso
+      obtain ⟨j, rfl⟩ : ∃ j, k = 2 * j := ⟨k / 2, by omega⟩
+      rw [Nat.mul_assoc] at hn'; omega
+    · exact h0
+  have hx4 : x % 4 = 1 := by omega
+  have hx5 : 5 ≤ x := by omega
+  refine ⟨hx4, hx5, ?_⟩
+  -- 3σ = 3xD = 3(2k−1)D ≥ 5kD = 5n  (k ≥ 3)
+  have hk3 : 3 ≤ k := by omega
+  rw [e1, ← hn']
+  have hxk : x = 2 * k - 1 := by omega
+  rw [hxk]
+  have : 5 * k ≤ 3 * (2 * k - 1) := by omega
+  calc 5 * (k * D) = (5 * k) * D := by rw [Nat.mul_assoc]
+    _ ≤ (3 * (2 * k - 1)) * D := Nat.mul_le_mul_right D this
+    _ = 3 * ((2 * k - 1) * D) := by rw [Nat.mul_assoc]
+
 #print axioms descartes_square
+#print axioms descartes_abundancy
 #print axioms descartes_deficiency

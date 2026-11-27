@@ -1,5 +1,11 @@
 # Değişiklik günlüğü / Changelog
 
+## v2.5.0 — 28 Kasım 2026
+
+- **Descartes sayıları: n > 10²⁴** (önceki sürümde 10²², Tóth 2021'de 10¹²).
+- Yeni teoremler, Lean'de (`lean/Descartes.lean`): 2n − σ(n) ∣ n; x ≡ 1 (mod 4), x ≥ 5 ve σ(n)/n ≥ 5/3.
+- Teorem 4 (∏ p/(p−1) > 5/3) üzerine kurulu **çekirdek taraması** (`code/spoof/descartes_cores.c`): tek m'lerin yaklaşık %14'ünü tarıyor, 7 kat hızlı. Kapsama testi ve iki programın tutarlılığı doğrulandı.
+
 ## v2.4.0 — 27 Kasım 2026
 
 - **Descartes sayıları için yeni alt sınır** (`docs/18-descartes-sayilari.md`, `code/spoof/descartes_squares.c`). Mod 4 argümanından n tam kare olmak zorunda. Bu sayede m < 10¹¹ için n = m² tarandı ve Descartes örneğinden başka çözüm çıkmadı. Sonuç: başka bir Descartes sayısı varsa **n > 10²²** (Tóth 2021: n > 10¹²).

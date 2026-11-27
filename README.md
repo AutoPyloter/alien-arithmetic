@@ -6,7 +6,7 @@
 [![OEIS A003961](https://img.shields.io/badge/OEIS-A003961-orange.svg)](https://oeis.org/A003961)
 
 **Yazar / Author:** Abdulkadir Özcan · ORCID [0000-0001-6599-7751](https://orcid.org/0000-0001-6599-7751)
-**Başlangıç / Started:** 26 Kasım 2026 · **Son sürüm / Latest:** v2.4 (28 Kasım 2026, ayrıntı: [CHANGELOG](CHANGELOG.md))
+**Başlangıç / Started:** 26 Kasım 2026 · **Son sürüm / Latest:** v2.5 (28 Kasım 2026, ayrıntı: [CHANGELOG](CHANGELOG.md))
 
 > Bu çalışmayı kullanırsanız lütfen kaynak gösterin (bkz. *Atıf*).
 > If you use this work, please cite it (see *How to cite*).
@@ -42,7 +42,7 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 12 | σ(n)/n ortalaması ≈ 4,128; d{σ(n) > 2n} ≈ 0,536 | Hesap / sezgisel |
 | 13 | σ₁ için Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4); Touchard: n ≡ 1 (mod 12) veya 9 (mod 36); en az 4 farklı asal (Peirce 1832) — *bilinen, yeniden ispat* | Lean (Mathlib yok) |
 | 14 | Tek mükemmel sayının en az 7 farklı asal çarpanı var (Pomerance 1974) — *bilinen, yeniden ispat* | Lean: doğrulanmış zorlama motoru + native_decide (Mathlib yok) |
-| 15 | **Yeni:** Descartes sayısı n·x (σ₁(n)(x+1) = 2nx) için n tam kare ve 2n − σ₁(n) ∣ n; Descartes örneği dışında biri varsa n > 10²² (önceki sınır 10¹², Tóth 2021) | Yapı lemmaları Lean'de ([Descartes.lean](lean/Descartes.lean)); tarama C (128 bit, bağımsız kontrol) |
+| 15 | **Yeni:** Descartes sayısı n·x (σ₁(n)(x+1) = 2nx) için n tam kare ve 2n − σ₁(n) ∣ n; σ₁(n)/n ≥ 5/3; Descartes örneği dışında biri varsa n > 10²⁴ (önceki sınır 10¹², Tóth 2021) | Yapı lemmaları Lean'de ([Descartes.lean](lean/Descartes.lean)); tarama C (128 bit, iki bağımsız program) |
 
 Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.pdf) (English) and [`notes/uzayli_defteri.md`](notes/uzayli_defteri.md) (Turkish research notebook).
 
@@ -90,7 +90,7 @@ Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.p
 | [13. Kesir-merdiveni ve yol](docs/13-kesir-yol.md) | Sürekli kesirler, Stern–Brocot (Lean), Zaremba, kübik sayıların katsayıları |
 | [14. Harmoni](docs/14-harmoni.md) | Asallar frekans olarak, zeta sıfırlarından asal sayma, Euler'in uyum ölçüsü, Collatz = koma |
 | [15. Geometri](docs/15-geometri.md) | Pergel–cetvel makinesi, 17-gen, açı üçlemenin imkânsızlığı (Lean), origami, Fermat asalları |
-| [18. Descartes sayıları](docs/18-descartes-sayilari.md) | n'nin kare olması gözlemiyle Tóth'un 10¹² sınırı 10²²'ye çıkarıldı |
+| [18. Descartes sayıları](docs/18-descartes-sayilari.md) | n'nin kare olması ve bolluk ≥ 5/3 teoremleriyle Tóth'un 10¹² sınırı 10²⁴'e çıkarıldı |
 | [17. Zorlama motoru](docs/17-zorlama-motoru.md) | Tek mükemmel sayı için ω ≥ 5 ve ω ≥ 6 bilgisayar ispatı; motor bilinen mükemmel ve 3-mükemmel sayılarla doğrulandı |
 | [16. Tek mükemmel sayı](docs/16-tek-mukemmel.md) | Euler teoremi Lean'de, en az 3 asal, neredeyse mükemmel tek sayılar, Descartes'ın sahtesi |
 | [English notes (PDF)](notes/prime_shift.pdf) | 4-page English write-up with proofs |
