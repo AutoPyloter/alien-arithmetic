@@ -6,7 +6,7 @@
 [![OEIS A003961](https://img.shields.io/badge/OEIS-A003961-orange.svg)](https://oeis.org/A003961)
 
 **Yazar / Author:** Abdulkadir Özcan · ORCID [0000-0001-6599-7751](https://orcid.org/0000-0001-6599-7751)
-**Tarih / Date:** 26 Kasım 2026
+**Başlangıç / Started:** 26 Kasım 2026 · **Son sürüm / Latest:** v2.4 (28 Kasım 2026, ayrıntı: [CHANGELOG](CHANGELOG.md))
 
 > Bu çalışmayı kullanırsanız lütfen kaynak gösterin (bkz. *Atıf*).
 > If you use this work, please cite it (see *How to cite*).
@@ -22,6 +22,10 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 
 ## Ana sonuçlar / Main results
 
+> **Gösterim / Notation.** 1–12. satırlarda σ, **asal kaydırma** fonksiyonudur (A003961). 13–15. satırlarda σ₁, **klasik bölen toplamıdır** (σ₁(n) = n'nin bölenlerinin toplamı). İkisi farklı fonksiyonlar.
+>
+> **Yenilik / Novelty.** 13. ve 14. satırlar bilinen sonuçların (Euler, Touchard, Peirce, Sylvester, Gradstein, Pomerance) Mathlib'siz Lean ile yeniden ispatıdır; matematiksel olarak yeni değildir. 15. satır, bildiğimiz kadarıyla yayımlanmış sınırı aşan yeni bir sonuçtur. 1–12. satırların literatürdeki özgünlüğü ayrıca kontrol edilmedi; 5–8. satırların analitik ispatları bağımsız incelemeyi bekliyor.
+
 | # | Sonuç / Result | Durum / Status |
 |---|---|---|
 | 1 | σ(n) her zaman tek; 3 ∣ σ(n) ⇔ 2 ∣ n; q ∣ σ(n) ⇔ p ∣ n (q = sonraki asal) | İspat + Lean |
@@ -36,9 +40,9 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 10 | s(n) = σ(n) − n: sabit nokta ve 2-döngü yok, her döngü çift uzunlukta | İspat + Lean |
 | 11 | 10⁷'ye kadar yalnız iki döngü: (12, 33, 32, 211) ve bir 12-döngü | Hesap |
 | 12 | σ(n)/n ortalaması ≈ 4,128; d{σ(n) > 2n} ≈ 0,536 | Hesap / sezgisel |
-| 13 | Klasik σ₁ için Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4); Touchard: n ≡ 1 (mod 12) veya 9 (mod 36); en az 4 farklı asal (Peirce 1832) | Lean (Mathlib yok) |
-| 14 | Tek mükemmel sayının en az 7 farklı asal çarpanı var | Lean: doğrulanmış zorlama motoru + native_decide (Mathlib yok) |
-| 15 | **Yeni:** Descartes örneği dışındaki bir Descartes sayısı n·x için n > 10²² (önceki sınır 10¹², Tóth 2021) | Hesap (C, 128 bit, bağımsız kontrol) |
+| 13 | σ₁ için Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4); Touchard: n ≡ 1 (mod 12) veya 9 (mod 36); en az 4 farklı asal (Peirce 1832) — *bilinen, yeniden ispat* | Lean (Mathlib yok) |
+| 14 | Tek mükemmel sayının en az 7 farklı asal çarpanı var (Pomerance 1974) — *bilinen, yeniden ispat* | Lean: doğrulanmış zorlama motoru + native_decide (Mathlib yok) |
+| 15 | **Yeni:** Descartes sayısı n·x (σ₁(n)(x+1) = 2nx) için n tam kare ve 2n − σ₁(n) ∣ n; Descartes örneği dışında biri varsa n > 10²² (önceki sınır 10¹², Tóth 2021) | Yapı lemmaları Lean'de ([Descartes.lean](lean/Descartes.lean)); tarama C (128 bit, bağımsız kontrol) |
 
 Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.pdf) (English) and [`notes/uzayli_defteri.md`](notes/uzayli_defteri.md) (Turkish research notebook).
 
