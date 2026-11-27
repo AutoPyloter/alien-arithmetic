@@ -1,5 +1,11 @@
 # Değişiklik günlüğü / Changelog
 
+## v2.3.0 — 27 Kasım 2026
+
+- **Lean: ω ≥ 7** (`lean/OPN6.lean`, `no_odd_perfect_omega6`): tek mükemmel sayının en az 7 farklı asal çarpanı var (Pomerance 1974), doğrulanmış motorla 27 dakikada.
+- Motora eklenen ve ispatlanan kurallar: son yuva kuralı, q alt sınırı (`qmin_global`), sınırlı küçük bölen arama. Ayrıca "ucuz sabitleme" politikası. K=5'in süresi 7,5 saniyeye indi.
+- `lean/Main.lean`: makine koduna derlenmiş hızlı sürüm.
+
 ## v2.2.0 — 27 Kasım 2026
 
 - **Uyarlanır dallanma politikası** (`code/oddperfect/engine_adaptive.py`): "neredeyse sahte" ailelerde son asalın penceresini üsleri büyüterek daraltıyor.

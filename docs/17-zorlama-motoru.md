@@ -86,15 +86,16 @@ Motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı. Mathlib kullanılm
   6. L-genişletme ve üs dallanması.
   7. **Son yuva kuralı** (`last_sound`): tek bilinmeyen asal q kaldıysa ve tüm üsler sabitse dal kapanır. Gerekçe: q, σ(n) = 2n'yi bölmeli ama hiçbir harf toplamını bölemez.
   8. **q alt sınırı** (`qmin_global`): bilinmeyen her asal p için loA·(p+1) ≤ 2·loB·p. Bu, q döngüsünü uzaktaki dar pencereden başlatmayı sağlıyor.
-  9. **Uyarlanır politika** (yalnızca dallanma seçimi, doğruluğu etkilemez).
+  9. **Uyarlanır politika** (yalnızca dallanma seçimi, doğruluğu etkilemez). Tek yuva kaldıysa yalnızca "ucuz" üsler (p^e ≤ 10¹⁰) sabitleniyor; böylece kofaktörler Lean'in deneme bölmesiyle ayrıştırılabilecek boyutta kalıyor. Büyük kofaktörler için 10⁵'e kadar sınırlı deneme bölmesi yapılıyor.
+  10. `lean/Main.lean`: aynı motorun makine koduna derlenmiş sürümü (hızlı ön kontrol; K=6 yaklaşık 40 s).
 - **Güven tabanı:** Çarpan adaylarını üreten fonksiyon (`minFacFast`) ispatsız bir öneri gibi kullanılıyor; her aday ayrıca kontrol ediliyor. Hesap `native_decide` ile yapıldığından `Lean.ofReduceBool` aksiyomu (Lean derleyicisine güven) ekleniyor.
 
 | Teorem (`lean/OPNResult.lean`) | İçerik | Süre |
 |---|---|---|
 | `no_odd_perfect_omega3` | ω = 3 olan tek mükemmel sayı yok | < 1 s |
 | `no_odd_perfect_omega4` | ω = 4 olan tek mükemmel sayı yok ⇒ **ω ≥ 5** (Sylvester 1888) | < 1 s |
-| `no_odd_perfect_omega5` (`lean/OPN5.lean`) | ω = 5 olan tek mükemmel sayı yok ⇒ **ω ≥ 6** (Gradstein 1925) | 86 s |
-| `no_odd_perfect_omega6` (`lean/OPN6.lean`) | ω = 6 — 27 Kasım gecesi 2 saat 45 dakikada bitmedi; daha uzun bir çalıştırma gerekiyor | > 2 sa 45 dk |
+| `no_odd_perfect_omega5` (`lean/OPN5.lean`) | ω = 5 olan tek mükemmel sayı yok ⇒ **ω ≥ 6** (Gradstein 1925) | 7,5 s |
+| `no_odd_perfect_omega6` (`lean/OPN6.lean`) | ω = 6 olan tek mükemmel sayı yok ⇒ **ω ≥ 7** (Pomerance 1974) | 27 dk |
 
 ## Güvenilirlik
 
@@ -110,5 +111,6 @@ Motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı. Mathlib kullanılm
 ## Açık iş (27 Kasım sabahı)
 
 - **ω = 7 araması (Python):** 3 saat 15 dakikada 210 milyon düğüme ulaştı, bitmedi. Bu arama "ω ≥ 8" sonucunu (Chein, Hagis 1979) yeniden elde etmeyi hedefliyor.
-- **Lean ω = 6:** Uyarlanır motor K=5'i 86 saniyede kapatıyor; K=6 için birkaç saat ya da daha hızlı bir asallık/çarpanlama gerekiyor.
+- **Lean ω = 6:** tamamlandı (27 dk).
+- **Lean ω = 7:** makine kodu sürümüyle deneniyor.
 - **Hızlandırma fikri:** Lean yorumlayıcısı Python'dan yaklaşık 10 kat yavaş. C'ye derlenmiş kütüphaneyi yüklemek (`--load-dynlib`) `native_decide` için hız kazandırmadı.

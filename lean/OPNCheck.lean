@@ -600,6 +600,11 @@ def cofactor (m : Nat) : List Nat → Nat
   | [] => m
   | q :: qs => cofactor (strip q 200 m) qs
 
+/-- Doğrulanmamış küçük bölen arayıcı (3, 5, 7, … ≤ 2·f + 3): sonuç actT'de ayrıca kontrol edilir. -/
+def smallFac (m : Nat) : Nat → Nat → Option Nat
+  | _, 0 => none
+  | d, f + 1 => if d * d > m then none else if m % d = 0 then some d else smallFac m (d + 2) f
+
 /-- Sabit üslü harf p için eylem: önce bilinen asallar ve 2 ayıklanır.
     Kofaktör > 1 ve boş yuva yoksa budanır (yeni asal zorunlu ama yer yok);
     yuva varsa en küçük asal böleni aday olarak denenir. -/
@@ -608,7 +613,10 @@ def actP (st : St) (p : Nat) : Act :=
   let m := cofactor N (2 :: st.K)
   if 1 < m && (2 :: st.K).all (fun q => m % q != 0) then
     (if st.k2 == 0 then Act.prune
-     else if m ≤ 10000000000 then actT st N (minFacFast m) else Act.none)
+     else if m ≤ 10000000000 then actT st N (minFacFast m)
+     else match smallFac m 3 50000 with
+       | some d => actT st N d
+       | none => Act.none)
   else Act.none
 
 def actK (st : St) : List Nat → Act
@@ -691,10 +699,13 @@ def winWide (st : St) : Bool :=
   let LD := loB st
   decide (2000 * (2 * HD - HN) * (2 * LD - LN) < HN * (2 * LD - LN) - LN * (2 * HD - HN))
 
-def lowNone (st : St) (free : Option Nat) : Bool :=
-  match free with
-  | none => true
-  | some q => decide (16 < (st.I q).emin)
+/-- Tek yuva kaldıysa "ucuz" sabitleme adayı: p^emin ≤ 10¹⁰ olan, p^emin'i en küçük serbest harf. -/
+def cheap (st : St) : Option Nat :=
+  match pickPow st st.K with
+  | none => none
+  | some q => if q ^ (st.I q).emin ≤ 10000000000 then some q else none
+
+def lowNone (st : St) (_free : Option Nat) : Bool := (cheap st).isNone
 
 def wide (st : St) (free : Option Nat) : Bool :=
   st.k2 == 1 && free.isSome && lowNone st free && hiKB st && winWide st
@@ -704,7 +715,8 @@ def extCond (st : St) (free : Option Nat) : Bool :=
   (hiKB st || free.isNone) && (st.k2 != 1 || lowNone st free) && !(wide st free)
 
 def chooseExpo (st : St) (free : Option Nat) : Option Nat :=
-  if wide st free then pickPow st st.K else free
+  if st.k2 == 1 && (cheap st).isSome then cheap st
+  else if wide st free then pickPow st st.K else free
 
 def qStart (st : St) : Nat :=
   max (st.L + 1) (if loA st < 2 * loB st then loA st / (2 * loB st - loA st) else 0)
@@ -822,10 +834,8 @@ theorem actP_cases (st : St) (p : Nat) :
     (actP st p = Act.prune →
       1 < cofactor (geo p (st.I p).fx) (2 :: st.K) ∧
       (∀ q ∈ 2 :: st.K, cofactor (geo p (st.I p).fx) (2 :: st.K) % q ≠ 0) ∧
-      (st.k2 = 0 ∨ actT st (geo p (st.I p).fx) (minFacFast (cofactor (geo p (st.I p).fx) (2 :: st.K)))
-        = Act.prune)) ∧
-    (∀ u, actP st p = Act.add u →
-      actT st (geo p (st.I p).fx) (minFacFast (cofactor (geo p (st.I p).fx) (2 :: st.K))) = Act.add u) := by
+      (st.k2 = 0 ∨ ∃ t, actT st (geo p (st.I p).fx) t = Act.prune)) ∧
+    (∀ u, actP st p = Act.add u → ∃ t, actT st (geo p (st.I p).fx) t = Act.add u) := by
   unfold actP
   simp only
   by_cases hc : (1 < cofactor (geo p (st.I p).fx) (2 :: st.K) &&
@@ -838,8 +848,11 @@ theorem actP_cases (st : St) (p : Nat) :
       exact ⟨fun _ => ⟨hc'.1, hc'.2, Or.inl (by simpa using hk)⟩, fun u h => (by cases h)⟩
     · rw [if_neg hk]
       split
-      · exact ⟨fun h => ⟨hc'.1, hc'.2, Or.inr h⟩, fun u h => h⟩
-      · exact ⟨fun h => (by cases h), fun u h => (by cases h)⟩
+      · exact ⟨fun h => ⟨hc'.1, hc'.2, Or.inr ⟨_, h⟩⟩, fun u h => ⟨_, h⟩⟩
+      · split
+        · rename_i d _
+          exact ⟨fun h => ⟨hc'.1, hc'.2, Or.inr ⟨d, h⟩⟩, fun u h => ⟨d, h⟩⟩
+        · exact ⟨fun h => (by cases h), fun u h => (by cases h)⟩
   · rw [if_neg hc]; exact ⟨fun h => (by cases h), fun u h => (by cases h)⟩
 
 theorem actK_cases (st : St) : ∀ l : List Nat,
@@ -902,14 +915,15 @@ theorem force_sound {ps e} (H : Perfect ps e) : ∀ f st, Consistent st ps e →
         have htps := H.mem_of_dvd hC.1 ht ht2 htN
         have htK := C.covers H hk0 t htps
         exact hmK t (List.mem_cons_of_mem _ htK) (Nat.mod_eq_zero_of_dvd htm)
-      · obtain ⟨h1, h2, h3, h4, h5⟩ := (actT_cases st _ _).1 hact
+      · obtain ⟨t0, hact⟩ := hact
+        obtain ⟨h1, h2, h3, h4, h5⟩ := (actT_cases st _ _).1 hact
         have htps := forced_mem H C hp hf h1 h2 h3
         rcases h5 with h5 | h5
         · exact h4 (C.2.2.2.1 _ htps h5)
         · exact h4 (C.covers H h5 _ htps)
     | add u =>
       obtain ⟨p, hp, hf, hpa⟩ := hK.2 u ha
-      have hu := (actP_cases st p).2 u hpa
+      obtain ⟨t0, hu⟩ := (actP_cases st p).2 u hpa
       obtain ⟨hut, h1, h2, h3, h4, h5⟩ := (actT_cases st _ _).2 u hu
       rw [← hut] at h1 h2 h3 h4
       have hups := forced_mem H C hp hf h1 h2 h3
@@ -1212,8 +1226,18 @@ theorem chooseExpo_spec (st : St) (p : Nat) (h : chooseExpo st (pickFree st st.K
     p ∈ st.K ∧ (st.I p).fx = 0 := by
   unfold chooseExpo at h
   split at h
-  · exact pickPow_spec st st.K p h
-  · exact pickFree_spec st st.K p h
+  · unfold cheap at h
+    cases hq : pickPow st st.K with
+    | none => rw [hq] at h; cases h
+    | some q =>
+      rw [hq] at h
+      simp only at h
+      split at h
+      · cases h; exact pickPow_spec st st.K p hq
+      · cases h
+  · split at h
+    · exact pickPow_spec st st.K p h
+    · exact pickFree_spec st st.K p h
 
 theorem expo_sound {st ps e} (C : Consistent st ps e) {p : Nat} (hp : p ∈ st.K) (hfx : (st.I p).fx = 0)
     (r : St → Bool) (hr : ∀ st', r st' = true → Consistent st' ps e → False)

@@ -5,6 +5,7 @@ import sys, time
 
 class P2(Fast):
     ET = 4
+    PB = 0
     W = 2000
     def dfs(self, L, known, k2):
         self.nodes += 1
@@ -33,7 +34,7 @@ class P2(Fast):
             return
         if k2 == 1 and allfixed: return
         free = [(v[1], p) for p, v in known.items() if v[2] is None]
-        low = [x for x in free if x[0] <= self.ET] if k2 == 1 else []
+        low = [x for x in free if (x[1] ** x[0] <= self.PB if self.PB else x[0] <= self.ET)] if k2 == 1 else []
         if k2 == 1 and not low and free and hik < T:
             # pencere genişliği tahmini: q ∈ [1/(T/lo − 1), hik/(T − hik)]
             lok = F(1)

@@ -174,6 +174,7 @@ Derleme: `lean -o OddPerfect.olean OddPerfect.lean` (Sigma.olean gerekli). Ayrı
 | `no_odd_perfect_of_run` | `run N (init K) = true` ⇒ tam K farklı tek asallı mükemmel sayı yok |
 | `no_odd_perfect_omega4` (OPNResult.lean) | ω = 4 yok (Sylvester) |
 | `no_odd_perfect_omega5` (OPN5.lean) | ω = 5 yok (Gradstein) ⇒ ω ≥ 6 |
+| `no_odd_perfect_omega6` (OPN6.lean) | ω = 6 yok (Pomerance) ⇒ ω ≥ 7 (≈ 27 dk) |
 
 Derleme sırası: OddPerfect → OddPerfect3 → OPNCheck (`-o OPNCheck.olean`) → OPNResult / OPN5. OPN5 yaklaşık 70 saniye sürüyor.
 
