@@ -38,6 +38,7 @@ Imagine numbers written with prime "letters" (a = 2, b = 3, c = 5, …). In this
 | 12 | σ(n)/n ortalaması ≈ 4,128; d{σ(n) > 2n} ≈ 0,536 | Hesap / sezgisel |
 | 13 | Klasik σ₁ için Euler: tek mükemmel n = p^k·m², p ≡ k ≡ 1 (mod 4); Touchard: n ≡ 1 (mod 12) veya 9 (mod 36); en az 4 farklı asal (Peirce 1832) | Lean (Mathlib yok) |
 | 14 | Tek mükemmel sayının en az 6 farklı asal çarpanı var | Lean: doğrulanmış zorlama motoru + native_decide (Mathlib yok) |
+| 15 | … en az 7 farklı asal çarpanı var | Bilgisayar ispatı (Python, kesin aritmetik, BPSW asallık) |
 
 Details, proofs and open problems: [`notes/prime_shift.pdf`](notes/prime_shift.pdf) (English) and [`notes/uzayli_defteri.md`](notes/uzayli_defteri.md) (Turkish research notebook).
 

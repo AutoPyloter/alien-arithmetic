@@ -1,5 +1,11 @@
 # Değişiklik günlüğü / Changelog
 
+## v2.2.0 — 27 Kasım 2026
+
+- **Uyarlanır dallanma politikası** (`code/oddperfect/engine_adaptive.py`): "neredeyse sahte" ailelerde son asalın penceresini üsleri büyüterek daraltıyor.
+- **ω = 6 durumu kapatıldı** (48,3 milyon düğüm, 29 dk): tek mükemmel sayının en az 7 farklı asal çarpanı var (Pomerance 1974'ün bilgisayarla yeniden elde edilmesi; BPSW asallık testiyle).
+- Lean motorunun uyarlanır sürümü taslak olarak eklendi (`lean/OPNCheck_adaptive.lean.txt`).
+
 ## v2.1.0 — 27 Kasım 2026
 
 - **Doğrulanmış zorlama motoru** (`lean/OPNCheck.lean`, yaklaşık 1050 satır, Mathlib yok): motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı (`run_sound`). Euler sınıfları, oran sınırları, siklotomik zorlama, kofaktör kuralı, L-genişletme ve üs dallanması kurallarının hepsi ispatlı.

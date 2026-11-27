@@ -1,0 +1,3 @@
+  .. nodes=47000000 L=19559 t=1706s
+  .. nodes=48000000 L=34019 t=1736s
+DONE K=6 ET=8 nodes=48292205 maxL=4294967291 maxe=36 unresolved=0 t=1745.2s

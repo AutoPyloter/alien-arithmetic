@@ -41,8 +41,22 @@ Dallanma iki türlü:
 | 3 | 16 | 13 | 2 | <0,1 s | çözüm yok |
 | 4 | 1 325 | 251 | 6 | <0,1 s | çözüm yok ⇒ **ω ≥ 5** (Sylvester) |
 | 5 | 772 061 | 65 521 | 16 | 18 s | çözüm yok ⇒ **ω ≥ 6** (Gradstein) |
+| 6 | 48 292 205 | 4 294 967 291 | 36 | 29 dk | çözüm yok ⇒ **ω ≥ 7** (Pomerance) — uyarlanır politika ile |
 
 Hiçbir dal "çözülemedi" olarak kalmadı: üs sınırına ya da düğüm sınırına takılan dal yok.
+
+### Uyarlanır politika ve "neredeyse sahte" aileler
+
+K=6'da eski politikayla ağacın %99,98'i, tek yuvası kalan birkaç yüz düğümün son asal q için açtığı milyonlarca çocuktan oluşuyordu. Bu düğümlerin ortak noktası, bilinen harflerin üst sınırının 2'ye alttan çok yakın olması. Örnek: {3, 5⁶, 17, 137, 18503} ailesi, 2'nin 10⁻⁸ kadar altında kalıyor. Bunlar Descartes'ın sahte sayısına benzeyen "neredeyse sahte" aileler.
+
+q'nun penceresi, serbest üslerin büyüklüğüyle üstel olarak daralıyor. Bu yüzden `engine_adaptive.py` şöyle çalışıyor:
+- Tek yuva kaldıysa önce küçük üsleri (≤ 8) sabitliyor.
+- Pencere hâlâ 2000 adaydan genişse, p^e'si en küçük serbest harfin üssünü büyütüyor.
+- Pencere daralınca q'ları tek tek deniyor.
+
+Bu kural K=5'i 771 bin düğümden 17–20 bine indirdi, K=6'yı da 29 dakikada kapattı.
+
+**Uyarı:** Python motoru büyük sayılar için BPSW asallık testi (gmpy2) kullanıyor. Pratikte güvenilir, ama ispatlı değil. Lean motoru yalnızca deneme bölmesiyle doğrulanmış asallık kullanıyor.
 
 ## Motorun doğrulanması
 
