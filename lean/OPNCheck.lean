@@ -76,6 +76,14 @@ theorem dvd_sv (e : Nat → Nat) {p : Nat} : ∀ ps : List Nat, p ∈ ps → geo
     · subst h; exact Nat.dvd_mul_right _ _
     · exact Nat.dvd_trans (dvd_sv e ps h) (Nat.dvd_mul_left _ _)
 
+theorem pow_dvd_pv (e : Nat → Nat) {p : Nat} : ∀ ps : List Nat, p ∈ ps → p ^ e p ∣ pv e ps
+  | [], h => absurd h (List.not_mem_nil _)
+  | q :: ps, h => by
+    show p ^ e p ∣ q ^ e q * pv e ps
+    rcases List.mem_cons.1 h with h | h
+    · subst h; exact Nat.dvd_mul_right _ _
+    · exact Nat.dvd_trans (pow_dvd_pv e ps h) (Nat.dvd_mul_left _ _)
+
 theorem dvd_sv2 (e : Nat → Nat) {p q : Nat} (hpq : p ≠ q) :
     ∀ ps : List Nat, p ∈ ps → q ∈ ps → geo p (e p) * geo q (e q) ∣ sv e ps
   | [], h, _ => absurd h (List.not_mem_nil _)
@@ -426,6 +434,78 @@ theorem lo_global (st : St) (ps : List Nat) (e : Nat → Nat) (H : Perfect ps e)
     rw [k1, k2] at this
     exact Nat.lt_of_mul_lt_mul_right this
 
+theorem pow_succ_left (p n : Nat) : p ^ (n + 1) = p * p ^ n := by rw [Nat.pow_succ, Nat.mul_comm]
+
+theorem geo_ge2 (p : Nat) : ∀ k, p ^ (k + 1) + p ^ k ≤ geo p (k + 1)
+  | 0 => by simp [geo]
+  | k + 1 => by
+    have ih := geo_ge2 p k
+    show p ^ (k + 1 + 1) + p ^ (k + 1) ≤ p * geo p (k + 1) + 1
+    have h := Nat.mul_le_mul_left p ih
+    rw [Nat.mul_add, ← pow_succ_left, ← pow_succ_left] at h
+    omega
+
+theorem unk_lo2 (p x : Nat) (hx : 1 ≤ x) : (p + 1) * p ^ x ≤ p * geo p x := by
+  obtain ⟨k, rfl⟩ : ∃ k, x = k + 1 := ⟨x - 1, by omega⟩
+  have h := Nat.mul_le_mul_left p (geo_ge2 p k)
+  rw [Nat.mul_add, ← pow_succ_left p k] at h
+  rw [Nat.add_mul, Nat.one_mul]
+  omega
+
+/-- Bilinmeyen her asal p için loA·(p+1) ≤ 2·loB·p. -/
+theorem qmin_global (st : St) (ps : List Nat) (e : Nat → Nat) (H : Perfect ps e) (C : Consistent st ps e)
+    {q : Nat} (hq : q ∈ ps) (hqK : q ∉ st.K) :
+    prodL (fun p => loN p (st.I p)) st.K * (q + 1) ≤ 2 * (prodL (fun p => loD p (st.I p)) st.K * q) := by
+  let gN := fun p => if p ∈ st.K then loN p (st.I p) else if p = q then q + 1 else 1
+  let gD := fun p => if p ∈ st.K then loD p (st.I p) else if p = q then q else 1
+  have hp2 : ∀ p ∈ ps, 2 ≤ p := fun p hp => (H.good.2 p hp).1.1
+  have hu : ∀ p ∈ ps, gN p * p ^ e p ≤ gD p * geo p (e p) := by
+    intro p hp
+    by_cases hK : p ∈ st.K
+    · simp only [gN, gD, if_pos hK]; exact lo_ok p (C.2.2.1 p hK).2
+    · by_cases hpq : p = q
+      · subst hpq; simp only [gN, gD, if_neg hK, if_pos rfl]
+        exact unk_lo2 p (e p) (H.good.2 p hp).2.2
+      · simp only [gN, gD, if_neg hK, if_neg hpq, Nat.one_mul]; exact geo_ge_pow p (e p)
+  have hK' : (q :: st.K).Nodup := List.nodup_cons.2 ⟨hqK, C.2.1⟩
+  have hs' : ∀ x ∈ q :: st.K, x ∈ ps := by
+    intro x hx; rcases List.mem_cons.1 hx with h | h
+    · rw [h]; exact hq
+    · exact C.sub x h
+  have off : ∀ (g : Nat → Nat), (∀ p ∈ ps, p ∉ q :: st.K → g p = 1) →
+      prodL g ps = g q * prodL g st.K := by
+    intro g hg
+    rw [prodL_split g 1 ps (q :: st.K) H.good.1 hK' hs' hg, Nat.one_pow, Nat.mul_one]; rfl
+  have sN : prodL gN ps = (q + 1) * prodL (fun p => loN p (st.I p)) st.K := by
+    rw [off gN (fun p _ hp => by
+      have h1 : p ∉ st.K := fun h => hp (List.mem_cons_of_mem _ h)
+      have h2 : p ≠ q := fun h => hp (h ▸ List.mem_cons_self _ _)
+      simp [gN, h1, h2])]
+    simp only [gN, if_neg hqK, if_pos rfl]
+    congr 1; exact prodL_congr _ (fun p hp => by simp [gN, hp])
+  have sD : prodL gD ps = q * prodL (fun p => loD p (st.I p)) st.K := by
+    rw [off gD (fun p _ hp => by
+      have h1 : p ∉ st.K := fun h => hp (List.mem_cons_of_mem _ h)
+      have h2 : p ≠ q := fun h => hp (h ▸ List.mem_cons_self _ _)
+      simp [gD, h1, h2])]
+    simp only [gD, if_neg hqK, if_pos rfl]
+    congr 1; exact prodL_congr _ (fun p hp => by simp [gD, hp])
+  have hpv := pv_pos e ps hp2
+  have := prodL_le ps hu
+  rw [prodL_mul, prodL_mul, sN, sD] at this
+  have h2 : q * prodL (fun p => loD p (st.I p)) st.K * sv e ps =
+      (2 * (prodL (fun p => loD p (st.I p)) st.K * q)) * pv e ps := by
+    rw [H.eq, Nat.mul_comm q, ← Nat.mul_assoc, Nat.mul_comm _ 2, Nat.mul_assoc 2]
+  have h1 : (q + 1) * prodL (fun p => loN p (st.I p)) st.K * pv e ps =
+      (prodL (fun p => loN p (st.I p)) st.K * (q + 1)) * pv e ps := by rw [Nat.mul_comm (q + 1)]
+  show prodL (fun p => loN p (st.I p)) st.K * (q + 1) ≤ _
+  have h3 : prodL (fun p => loN p (st.I p)) st.K * (q + 1) * pv e ps ≤
+      2 * (prodL (fun p => loD p (st.I p)) st.K * q) * pv e ps := by
+    have h4 : (q + 1) * prodL (fun p => loN p (st.I p)) st.K * prodL (fun p => p ^ e p) ps ≤
+        q * prodL (fun p => loD p (st.I p)) st.K * prodL (fun p => geo p (e p)) ps := this
+    rw [← h1, ← h2]; exact h4
+  exact Nat.le_of_mul_le_mul_left (by rw [Nat.mul_comm (pv e ps), Nat.mul_comm (pv e ps)]; exact h3) hpv
+
 theorem hi_global (st : St) (ps : List Nat) (e : Nat → Nat) (H : Perfect ps e) (C : Consistent st ps e)
     (c : Nat) (hc : 2 ≤ c) (hunk : ∀ p ∈ ps, p ∉ st.K → c ≤ p) :
     2 * (prodL (fun p => hiD p (st.I p)) st.K * (c - 1) ^ st.k2) ≤
@@ -527,7 +607,8 @@ def actP (st : St) (p : Nat) : Act :=
   let N := geo p (st.I p).fx
   let m := cofactor N (2 :: st.K)
   if 1 < m && (2 :: st.K).all (fun q => m % q != 0) then
-    (if st.k2 == 0 then Act.prune else actT st N (minFacFast m))
+    (if st.k2 == 0 then Act.prune
+     else if m ≤ 10000000000 then actT st N (minFacFast m) else Act.none)
   else Act.none
 
 def actK (st : St) : List Nat → Act
@@ -558,6 +639,9 @@ def eulerPrune (st : St) : Bool :=
   decide (2 ≤ (st.K.filter (fun p => isEvenG p (st.I p))).length) ||
   (st.k2 == 0 && st.K.all (fun p => isEvenE (st.I p)))
 
+def lastPrune (st : St) : Bool :=
+  st.k2 == 1 && st.K.all (fun p => (st.I p).fx != 0 && cofactor (geo p (st.I p).fx) (2 :: st.K) == 1)
+
 def loA (st : St) : Nat := prodL (fun p => loN p (st.I p)) st.K
 def loB (st : St) : Nat := prodL (fun p => loD p (st.I p)) st.K
 def hiA (st : St) (c : Nat) : Nat := prodL (fun p => hiN p (st.I p)) st.K * c ^ st.k2
@@ -587,19 +671,56 @@ def pickFree (st : St) : List Nat → Option Nat
       | some q => if (st.I q).emin < (st.I p).emin then some q else some p
     else pickFree st ps
 
+def pickPow (st : St) : List Nat → Option Nat
+  | [] => none
+  | p :: ps =>
+    if (st.I p).fx == 0 then
+      match pickPow st ps with
+      | none => some p
+      | some q => if q ^ (st.I q).emin < p ^ (st.I p).emin then some q else some p
+    else pickPow st ps
+
+def hiKB (st : St) : Bool :=
+  decide (prodL (fun p => hiN p (st.I p)) st.K < 2 * prodL (fun p => hiD p (st.I p)) st.K)
+
+/-- q penceresi geniş mi: hik/(2−hik) − lo/(2−lo) > 2000 (tamsayı biçimi). -/
+def winWide (st : St) : Bool :=
+  let HN := prodL (fun p => hiN p (st.I p)) st.K
+  let HD := prodL (fun p => hiD p (st.I p)) st.K
+  let LN := loA st
+  let LD := loB st
+  decide (2000 * (2 * HD - HN) * (2 * LD - LN) < HN * (2 * LD - LN) - LN * (2 * HD - HN))
+
+def lowNone (st : St) (free : Option Nat) : Bool :=
+  match free with
+  | none => true
+  | some q => decide (16 < (st.I q).emin)
+
+def wide (st : St) (free : Option Nat) : Bool :=
+  st.k2 == 1 && free.isSome && lowNone st free && hiKB st && winWide st
+
+/-- Dallanma politikası (doğruluğu etkilemez). -/
+def extCond (st : St) (free : Option Nat) : Bool :=
+  (hiKB st || free.isNone) && (st.k2 != 1 || lowNone st free) && !(wide st free)
+
+def chooseExpo (st : St) (free : Option Nat) : Option Nat :=
+  if wide st free then pickPow st st.K else free
+
+def qStart (st : St) : Nat :=
+  max (st.L + 1) (if loA st < 2 * loB st then loA st / (2 * loB st - loA st) else 0)
+
 def run : Nat → St → Bool
   | 0, _ => false
   | n + 1, st0 =>
     match force 1000 st0 with
     | none => true
     | some st =>
-      if eulerPrune st || boundPrune st then true
+      if eulerPrune st || boundPrune st || lastPrune st then true
       else
         let free := pickFree st st.K
-        if st.k2 != 0 && (decide (prodL (fun p => hiN p (st.I p)) st.K <
-              2 * prodL (fun p => hiD p (st.I p)) st.K) || free.isNone) then
-          extLoop (run n) st 100000000 (st.L + 1)
-        else match free with
+        if st.k2 != 0 && extCond st free then
+          extLoop (run n) st 100000000 (qStart st)
+        else match chooseExpo st free with
           | none => false
           | some p =>
             let i := st.I p
@@ -716,7 +837,9 @@ theorem actP_cases (st : St) (p : Nat) :
     · rw [if_pos hk]
       exact ⟨fun _ => ⟨hc'.1, hc'.2, Or.inl (by simpa using hk)⟩, fun u h => (by cases h)⟩
     · rw [if_neg hk]
-      exact ⟨fun h => ⟨hc'.1, hc'.2, Or.inr h⟩, fun u h => h⟩
+      split
+      · exact ⟨fun h => ⟨hc'.1, hc'.2, Or.inr h⟩, fun u h => h⟩
+      · exact ⟨fun h => (by cases h), fun u h => (by cases h)⟩
   · rw [if_neg hc]; exact ⟨fun h => (by cases h), fun u h => (by cases h)⟩
 
 theorem actK_cases (st : St) : ∀ l : List Nat,
@@ -791,6 +914,100 @@ theorem force_sound {ps e} (H : Perfect ps e) : ∀ f st, Consistent st ps e →
       rw [← hut] at h1 h2 h3 h4
       have hups := forced_mem H C hp hf h1 h2 h3
       exact force_sound H f (addPrime st u) (consistent_add H C hups h4 h5)
+
+/-! ## 7b. Son yuva kuralı -/
+
+theorem strip_keep (q : Nat) (hq : Prime q) {t : Nat} (ht : Prime t) (htq : t ≠ q) :
+    ∀ f m, t ∣ m → t ∣ strip q f m
+  | 0, m, h => h
+  | f + 1, m, h => by
+    simp only [strip]
+    split
+    · rename_i hc
+      apply strip_keep q hq ht htq f
+      obtain ⟨k, hk⟩ := Nat.dvd_of_mod_eq_zero hc.2.2
+      have hq0 : 0 < q := by have := hq.1; omega
+      rw [hk, Nat.mul_div_cancel_left k hq0]
+      rw [hk] at h
+      rcases euclid ht h with h1 | h1
+      · exact absurd (prime_dvd_prime ht hq h1) htq
+      · exact h1
+    · exact h
+
+theorem cofactor_keep {t : Nat} (ht : Prime t) : ∀ (qs : List Nat) (m : Nat), (∀ q ∈ qs, Prime q) →
+    t ∉ qs → t ∣ m → t ∣ cofactor m qs
+  | [], m, _, _, h => h
+  | q :: qs, m, hq, htq, h => by
+    show t ∣ cofactor (strip q 200 m) qs
+    have hne : t ≠ q := fun e => htq (e ▸ List.mem_cons_self _ _)
+    exact cofactor_keep ht qs _ (fun r hr => hq r (List.mem_cons_of_mem _ hr))
+      (fun hm => htq (List.mem_cons_of_mem _ hm)) (strip_keep q (hq q (List.mem_cons_self _ _)) ht hne 200 m h)
+
+theorem prime_dvd_prodL {t : Nat} (ht : Prime t) (g : Nat → Nat) :
+    ∀ ps : List Nat, t ∣ prodL g ps → ∃ p ∈ ps, t ∣ g p
+  | [], h => by simp [prodL] at h; have := ht.1; omega
+  | p :: ps, h => by
+    simp only [prodL] at h
+    rcases euclid ht h with h1 | h1
+    · exact ⟨p, List.mem_cons_self _ _, h1⟩
+    · obtain ⟨r, hr, h2⟩ := prime_dvd_prodL ht g ps h1
+      exact ⟨r, List.mem_cons_of_mem _ hr, h2⟩
+
+theorem geo_mod_self (q : Nat) (hq : 2 ≤ q) : ∀ x, geo q x % q = 1
+  | 0 => by show 1 % q = 1; exact Nat.mod_eq_of_lt (by omega)
+  | x + 1 => by
+    simp only [geo]
+    rw [Nat.add_mod, Nat.mul_mod_right, Nat.zero_add, Nat.mod_mod, Nat.mod_eq_of_lt (by omega)]
+
+theorem Consistent.unique_unk {st ps e} (H : Perfect ps e) (C : Consistent st ps e) (hk : st.k2 = 1)
+    {q r : Nat} (hq : q ∈ ps) (hqK : q ∉ st.K) (hr : r ∈ ps) (hrK : r ∉ st.K) : q = r := by
+  refine Classical.byContradiction fun hqr => ?_
+  have hs : ∀ x ∈ st.K, x ∈ (ps.erase q).erase r := by
+    intro x hx
+    have hxr : x ≠ r := fun h => hrK (h ▸ hx)
+    have hxq : x ≠ q := fun h => hqK (h ▸ hx)
+    exact (List.mem_erase_of_ne hxr).2 ((List.mem_erase_of_ne hxq).2 (C.sub x hx))
+  have h1 := len_le_of_subset st.K _ C.2.1 hs
+  have hr' : r ∈ ps.erase q := (List.mem_erase_of_ne (fun h => hqr h.symm)).2 hr
+  have hpos : 0 < (ps.erase q).length := List.length_pos.2 (List.ne_nil_of_mem hr')
+  rw [List.length_erase_of_mem hr'] at h1
+  rw [List.length_erase_of_mem hq] at h1 hpos
+  rw [C.2.2.2.2, hk] at h1 hpos
+  omega
+
+theorem last_sound {st ps e} (H : Perfect ps e) (C : Consistent st ps e) (h : lastPrune st = true) : False := by
+  simp only [lastPrune, Bool.and_eq_true, beq_iff_eq, List.all_eq_true, bne_iff_ne, ne_eq] at h
+  obtain ⟨hk, hall⟩ := h
+  obtain ⟨q, hq, hqK⟩ := C.exists_unk H (by omega)
+  have hqp := (H.good.2 q hq).1
+  have hq2 := (H.good.2 q hq).2.1
+  have hqpv : q ∣ pv e ps := by
+    obtain ⟨k, hk'⟩ : ∃ k, e q = k + 1 := ⟨e q - 1, by have := (H.good.2 q hq).2.2; omega⟩
+    have h1 : q ∣ q ^ e q := by rw [hk', Nat.pow_succ]; exact Nat.dvd_mul_left _ _
+    exact Nat.dvd_trans h1 (pow_dvd_pv e ps hq)
+  have hqsv : q ∣ sv e ps := by rw [H.eq]; exact Nat.dvd_trans hqpv (Nat.dvd_mul_left _ 2)
+  obtain ⟨r, hr, hqr⟩ := prime_dvd_prodL hqp _ ps hqsv
+  by_cases hrK : r ∈ st.K
+  · obtain ⟨hfx, hcof⟩ := hall r hrK
+    have hep : e r = (st.I r).fx := (C.2.2.1 r hrK).2.1 hfx
+    have hprimes : ∀ x ∈ 2 :: st.K, Prime x := by
+      intro x hx
+      rcases List.mem_cons.1 hx with h | h
+      · rw [h]; exact prime_two
+      · exact (H.good.2 x (C.sub x h)).1
+    have hq2K : q ∉ 2 :: st.K := by
+      intro hm
+      rcases List.mem_cons.1 hm with h | h
+      · omega
+      · exact hqK h
+    have := cofactor_keep hqp (2 :: st.K) _ hprimes hq2K (hep ▸ hqr)
+    rw [hcof] at this
+    have := Nat.le_of_dvd (by decide) this; have := hqp.1; omega
+  · have hrq := C.unique_unk H (by omega) hr hrK hq hqK
+    subst hrq
+    have := geo_mod_self r hqp.1 (e r)
+    have := Nat.mod_eq_zero_of_dvd hqr
+    omega
 
 /-! ## 8. Doğruluk: Euler ve oran budamaları -/
 
@@ -971,6 +1188,33 @@ theorem pickFree_spec (st : St) : ∀ l p, pickFree st l = some p → p ∈ l �
       have ih := pickFree_spec st l p h
       exact ⟨List.mem_cons_of_mem _ ih.1, ih.2⟩
 
+theorem pickPow_spec (st : St) : ∀ l p, pickPow st l = some p → p ∈ l ∧ (st.I p).fx = 0
+  | [], p, h => by cases h
+  | q :: l, p, h => by
+    simp only [pickPow] at h
+    by_cases hq : ((st.I q).fx == 0) = true
+    · rw [if_pos hq] at h
+      have hq' : (st.I q).fx = 0 := by simpa using hq
+      cases hr : pickPow st l with
+      | none => rw [hr] at h; cases h; exact ⟨List.mem_cons_self _ _, hq'⟩
+      | some r =>
+        rw [hr] at h
+        have ih := pickPow_spec st l r hr
+        simp only at h
+        split at h
+        · cases h; exact ⟨List.mem_cons_of_mem _ ih.1, ih.2⟩
+        · cases h; exact ⟨List.mem_cons_self _ _, hq'⟩
+    · rw [if_neg hq] at h
+      have ih := pickPow_spec st l p h
+      exact ⟨List.mem_cons_of_mem _ ih.1, ih.2⟩
+
+theorem chooseExpo_spec (st : St) (p : Nat) (h : chooseExpo st (pickFree st st.K) = some p) :
+    p ∈ st.K ∧ (st.I p).fx = 0 := by
+  unfold chooseExpo at h
+  split at h
+  · exact pickPow_spec st st.K p h
+  · exact pickFree_spec st st.K p h
+
 theorem expo_sound {st ps e} (C : Consistent st ps e) {p : Nat} (hp : p ∈ st.K) (hfx : (st.I p).fx = 0)
     (r : St → Bool) (hr : ∀ st', r st' = true → Consistent st' ps e → False)
     (h : (r ⟨st.L, st.K, upd st.I p ⟨if (st.I p).cls == 2 then
@@ -1005,6 +1249,26 @@ theorem expo_sound {st ps e} (C : Consistent st ps e) {p : Nat} (hp : p ∈ st.K
     apply hcons
     exact ⟨fun h0 => absurd rfl h0, ge_nextValid (by omega) hc.2.2.1, hc.2.2.1, hc.2.2.2⟩
 
+theorem qStart_le {st ps e} (H : Perfect ps e) (C : Consistent st ps e) {p : Nat} (hp : p ∈ ps)
+    (hpK : p ∉ st.K) : qStart st ≤ p := by
+  unfold qStart
+  have h1 := C.unk_gt hp hpK
+  refine Nat.max_le.2 ⟨h1, ?_⟩
+  split
+  · rename_i hlt
+    have hq := qmin_global st ps e H C hp hpK
+    simp only [loA, loB] at hlt ⊢
+    generalize prodL (fun p => loN p (st.I p)) st.K = A at *
+    generalize prodL (fun p => loD p (st.I p)) st.K = B at *
+    apply Nat.div_le_of_le_mul
+    obtain ⟨D, hD⟩ : ∃ D, 2 * B = A + D := ⟨2 * B - A, by omega⟩
+    have e1 : 2 * B - A = D := by omega
+    rw [e1]
+    have e2 : 2 * (B * p) = A * p + D * p := by rw [← Nat.mul_assoc, hD, Nat.add_mul]
+    rw [e2, Nat.mul_add, Nat.mul_one] at hq
+    omega
+  · exact Nat.zero_le _
+
 theorem run_sound {ps e} (H : Perfect ps e) : ∀ n st, run n st = true → Consistent st ps e → False
   | 0, _, h, _ => by cases h
   | n + 1, st0, h, C0 => by
@@ -1016,23 +1280,24 @@ theorem run_sound {ps e} (H : Perfect ps e) : ∀ n st, run n st = true → Cons
       rw [hf] at h
       have C := hF.2 st hf
       simp only at h
-      by_cases hpr : (eulerPrune st || boundPrune st) = true
+      by_cases hpr : (eulerPrune st || boundPrune st || lastPrune st) = true
       · simp only [Bool.or_eq_true] at hpr
-        rcases hpr with hpr | hpr
+        rcases hpr with (hpr | hpr) | hpr
         · exact euler_sound H C hpr
         · exact bound_sound H C hpr
+        · exact last_sound H C hpr
       · rw [if_neg hpr] at h
         have hrec : ∀ st', run n st' = true → Consistent st' ps e → False :=
           fun st' h' C' => run_sound H n st' h' C'
         split at h
         · rename_i hcond
           simp only [Bool.and_eq_true, bne_iff_ne, ne_eq] at hcond
-          exact extLoop_sound H (run n) hrec st C (by omega) _ (st.L + 1) (by have := C.1; omega)
-            (fun p hp hpK => C.unk_gt hp hpK) h
+          exact extLoop_sound H (run n) hrec st C (by omega) _ (qStart st)
+            (by unfold qStart; have := C.1; omega) (fun p hp hpK => qStart_le H C hp hpK) h
         · split at h
           · cases h
           · rename_i p hpf
-            obtain ⟨hpK, hfx⟩ := pickFree_spec st st.K p hpf
+            obtain ⟨hpK, hfx⟩ := chooseExpo_spec st p hpf
             exact expo_sound C hpK hfx (run n) hrec h
 
 /-! ## 11. Sonuç -/

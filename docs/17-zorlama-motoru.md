@@ -84,13 +84,17 @@ Motorun kendisi Lean'de yazıldı ve doğruluğu ispatlandı. Mathlib kullanılm
   4. Kofaktör kuralı: yuva kalmadıysa ve kofaktör > 1 ise dal kapanıyor.
   5. 2'nin üssü tam 1.
   6. L-genişletme ve üs dallanması.
+  7. **Son yuva kuralı** (`last_sound`): tek bilinmeyen asal q kaldıysa ve tüm üsler sabitse dal kapanır. Gerekçe: q, σ(n) = 2n'yi bölmeli ama hiçbir harf toplamını bölemez.
+  8. **q alt sınırı** (`qmin_global`): bilinmeyen her asal p için loA·(p+1) ≤ 2·loB·p. Bu, q döngüsünü uzaktaki dar pencereden başlatmayı sağlıyor.
+  9. **Uyarlanır politika** (yalnızca dallanma seçimi, doğruluğu etkilemez).
 - **Güven tabanı:** Çarpan adaylarını üreten fonksiyon (`minFacFast`) ispatsız bir öneri gibi kullanılıyor; her aday ayrıca kontrol ediliyor. Hesap `native_decide` ile yapıldığından `Lean.ofReduceBool` aksiyomu (Lean derleyicisine güven) ekleniyor.
 
 | Teorem (`lean/OPNResult.lean`) | İçerik | Süre |
 |---|---|---|
 | `no_odd_perfect_omega3` | ω = 3 olan tek mükemmel sayı yok | < 1 s |
 | `no_odd_perfect_omega4` | ω = 4 olan tek mükemmel sayı yok ⇒ **ω ≥ 5** (Sylvester 1888) | < 1 s |
-| `no_odd_perfect_omega5` (`lean/OPN5.lean`) | ω = 5 olan tek mükemmel sayı yok ⇒ **ω ≥ 6** (Gradstein 1925) | 70 s |
+| `no_odd_perfect_omega5` (`lean/OPN5.lean`) | ω = 5 olan tek mükemmel sayı yok ⇒ **ω ≥ 6** (Gradstein 1925) | 86 s |
+| `no_odd_perfect_omega6` (`lean/OPN6.lean`) | ω = 6 — çalışıyor (sonuç bekleniyor) | — |
 
 ## Güvenilirlik
 
