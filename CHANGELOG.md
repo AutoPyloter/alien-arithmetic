@@ -1,5 +1,13 @@
 # Değişiklik günlüğü / Changelog
 
+## v2.6.0 — 28 Kasım 2026
+
+- **Descartes sayıları: n > 10²⁶.**
+- Yeni teoremler, Lean'de (`lean/DescartesCore.lean`):
+  - Teorem 3': x asal değilse x ≥ 9 ve σ(n)/n ≥ 9/5.
+  - Teorem 4 ve 4': ∏ p/(p−1) > 5/3 ve, x asal değilken, > 9/5.
+- Çekirdek taraması 9/5 eşiğiyle 1,6 kat daha hızlı. 10¹² ≤ m < 10¹³ aralığı iki çekirdekte 3 saat 27 dakikada tarandı, çözüm bulunmadı.
+
 ## v2.5.0 — 28 Kasım 2026
 
 - **Descartes sayıları: n > 10²⁴** (önceki sürümde 10²², Tóth 2021'de 10¹²).

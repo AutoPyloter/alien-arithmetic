@@ -1,9 +1,9 @@
 {
   "title": "Alien Arithmetic: prime-letter notation, the prime shift map, odd perfect numbers and Descartes numbers",
   "creators": [{"name": "Özcan, Abdulkadir", "orcid": "0000-0001-6599-7751"}],
-  "description": "Research notes, code, data and Lean 4 proofs (no Mathlib) built around writing integers as vectors of prime exponents ('alien' notation). Contents: (1) the prime shift map sigma (OEIS A003961): structural theorems, density of sigma(n+1) > sigma(n), equidistribution mod q, shift twins up to 10^11, aliquot-type dynamics; (2) odd perfect numbers: Euler's and Touchard's theorems in core Lean and a verified forcing-chain engine proving in Lean that an odd perfect number has at least 7 distinct prime factors (re-proofs of known results); (3) Descartes (spoof odd perfect) numbers n*x with sigma(n)(x+1) = 2nx: Lean proofs that n is a perfect square 2n - sigma(n) divides n and sigma(n)/n >= 5/3, and an exhaustive search showing that any Descartes number other than Descartes' 1638 example has n > 10^24 (previous published bound 10^12, Toth 2021).",
+  "description": "Research notes, code, data and Lean 4 proofs (no Mathlib) built around writing integers as vectors of prime exponents ('alien' notation). Contents: (1) the prime shift map sigma (OEIS A003961): structural theorems, density of sigma(n+1) > sigma(n), equidistribution mod q, shift twins up to 10^11, aliquot-type dynamics; (2) odd perfect numbers: Euler's and Touchard's theorems in core Lean and a verified forcing-chain engine proving in Lean that an odd perfect number has at least 7 distinct prime factors (re-proofs of known results); (3) Descartes (spoof odd perfect) numbers n*x with sigma(n)(x+1) = 2nx: Lean proofs that n is a perfect square 2n - sigma(n) divides n and sigma(n)/n >= 9/5, and an exhaustive search showing that any Descartes number other than Descartes' 1638 example has n > 10^26 (previous published bound 10^12, Toth 2021).",
   "upload_type": "software",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "license": "MIT",
   "keywords": ["number theory", "prime shift", "A003961", "aliquot sequences", "odd perfect numbers", "Descartes numbers", "spoof perfect numbers", "Lean 4", "formal verification"],
   "language": "eng"

@@ -73,9 +73,12 @@ Böylece taramanın dayandığı bütün matematik (n kare, d ∣ n, bolluk ≥ 
 | m ≤ 10⁹ (n ≤ 10¹⁸) | 26 s | yalnızca Descartes |
 | m < 10¹¹ (n < 10²²) | yaklaşık 47 dk | yalnızca Descartes |
 | m < 10¹¹, çekirdek taraması (yeniden) | 3 dk | yalnızca Descartes (düz taramayla aynı) |
-| 10¹¹ ≤ m < 10¹² (n < 10²⁴), çekirdek taraması | 25 dk | yok |
+| 10¹¹ ≤ m < 10¹² (n < 10²⁴), çekirdek taraması (eşik 5/3) | 25 dk | yok |
+| 10¹² ≤ m < 10¹³ (n < 10²⁶), çekirdek taraması (eşik 9/5) | 3 sa 27 dk | yok |
 
-**Yeni sınır:** Descartes örneği dışında bir Descartes sayısı D = n·x varsa **n > 10²⁴**. Bu, Tóth'un 10¹² sınırının 10¹² kat büyütülmesi. Ham çıktılar: `data/descartes_squares_m_1e11.txt` ve `data/descartes_cores_m_1e12.txt`.
+**Yeni sınır:** Descartes örneği dışında bir Descartes sayısı D = n·x varsa **n > 10²⁶**. Bu, Tóth'un 10¹² sınırının 10¹⁴ kat büyütülmesi. Ham çıktılar: `data/descartes_squares_m_1e11.txt`, `data/descartes_cores_m_1e12.txt`, `data/descartes_cores_m_1e13.txt`.
+
+(m < 10¹² aralığı eşik 5/3 ile tarandı; bu, x asal olan durumları da kapsıyor. 10¹² ≤ m < 10¹³ aralığı eşik 9/5 ile tarandı; bu, Tóth'un tanımındaki gibi x'in asal olmadığı durumu kapsıyor.)
 
 ## Notlar
 
